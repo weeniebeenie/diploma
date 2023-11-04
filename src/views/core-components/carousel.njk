@@ -1,0 +1,43 @@
+{%- from 'views/core-components/button.njk' import Button -%}
+
+{#
+    Insert carousel element navigation.
+    @param {string} wrapperClassName - carousel element class name (parent).
+#}
+{%- macro CarouselNavigation(wrapperClassName) -%}
+    {%- call Button(
+        className = wrapperClassName + '__control is-prev js-swiper-control',
+        icon = 'fas fa-arrow-left',
+        attrs = {
+            'title': 'Предыдущая статья'
+        }
+    ) %}
+        <span class="ghost">Предыдущая статья</span>
+    {% endcall %}
+    {%- call Button(
+        className = wrapperClassName + '__control is-next js-swiper-control',
+        icon = 'fas fa-arrow-right',
+        attrs = {
+            'title': 'Следующая статья'
+        }
+    ) %}
+        <span class="ghost">Следующая статья</span>
+    {% endcall %}
+{%- endmacro -%}
+
+{#
+    Insert carousel element.
+    @param {string} wrapperClassName - carousel element class name (parent).
+#}
+{%- macro CarouselWrapper(wrapperClassName) -%}
+    <div class="{{ wrapperClassName }}" role="group" aria-roledescription="carousel">
+        <div class="{{ wrapperClassName }}__navigation">
+            {{ CarouselNavigation(wrapperClassName) }}
+        </div>
+        <div class="{{ wrapperClassName }}__container swiper js-swiper">
+            <ul class="{{ wrapperClassName }}__wrapper swiper-wrapper">
+                {{ caller() }}
+            </ul>
+        </div>
+    </div>
+{%- endmacro -%}

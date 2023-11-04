@@ -1,0 +1,62 @@
+{% from 'views/core-components/image.njk' import Image %}
+{%- from 'views/core-components/section.njk' import Section -%}
+{%- import 'views/core-components/title.njk' as Title -%}
+
+{#
+    DirectionItem template.
+#}
+{%- macro DirectionItem(
+    imageSizes = ['365x472?767', '449x490'],
+    title
+) -%}
+    <article class="direction-item">
+        <div class="direction-item__content">
+            <h3 class="item-title direction-item__title">
+                <a href="#" class="direction-item__title-link">
+                    <span class="underline">{{ title }}</span>
+                </a>
+            </h3>
+            <p class="direction-item__quantity">15 экскурсий</p>
+        </div>
+        {{ Image({
+            className: 'direction-item__image',
+            sizes: imageSizes,
+            type: 'no-image' if (range(5, 20) | random) > 15 else 'default',
+            serviceID: range(50) | random
+        }) }}
+    </article>
+{%- endmacro -%}
+
+{#
+    DirectionsList template.
+    @param {number} count - items count.
+#}
+{%- macro DirectionsList(
+    itemsParams = [ 'Дубай', 'Стамбул', 'Санкт-Петербург', 'Карелия', 'Калининград', 'Мурманск' ]
+) -%}
+    <ul class="directions-list">
+        {% for title in itemsParams %}
+            <li class="directions-list__item">
+                {{ DirectionItem(title) }}
+            </li>
+        {% endfor %}
+    </ul>
+{%- endmacro -%}
+
+{#
+    DirectionsHome template.
+    Template for directions on home page.
+#}
+{%- macro DirectionsHome() -%}
+    {% call Section(className = 'directions-home', container = 'directions-home__container') %}
+        <div class="section__title">
+            {{ Title.TitleDefault(
+                text = 'Популярные направления',
+                description = 'Проводим индивидуальные и групповые экскурсии на русском языке'
+            ) }}
+        </div>
+        <div class="section__content">
+            {{ DirectionsList() }}
+        </div>
+    {% endcall %}
+{%- endmacro -%}

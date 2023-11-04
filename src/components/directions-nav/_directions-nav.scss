@@ -1,0 +1,77 @@
+.directions-nav {
+    $this: &;
+
+    &__toggle {
+        @include font(null, 1.5rem, $semibold);
+        @include trs();
+        align-content: center;
+        align-items: center;
+        background-color: $color-1--1;
+        border: 0;
+        border-radius: 25px;
+        color: $color-3--5;
+        display: flex;
+        padding: 14px 26px;
+
+        @include on-event {
+            background-color: $color-3--5;
+            color: $color-white;
+        }
+    }
+
+    &__toggle-icon {
+        font-size: 1rem;
+        margin-left: 15px;
+    }
+
+    &__block {
+        background-color: $color-white;
+        border-radius: 15px;
+        padding: 20px 0 15px;
+        width: 206px;
+        z-index: 10;
+    }
+
+    &__menu {
+        @include font(null, 1.5rem, $medium);
+        color: $color-black;
+    }
+
+    &__item {
+        position: relative;
+
+        + #{$this}__item:not(:first-child) {
+            &::before {
+                @include absolute(0, null, null, 50%);
+                @include size(calc(100% - 56px), 1px);
+                background-color: $color-3--14;
+                content: '';
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    &__link {
+        @include trs();
+        align-items: flex-start;
+        display: flex;
+        line-height: 1;
+        padding: 12.5px 28px;
+        text-decoration: none;
+
+        @include on-event {
+            background-color: $color-1--1;
+        }
+    }
+
+    &.is-open {
+        #{$this}__toggle {
+            background-color: $color-1--1;
+            color: $color-3--5;
+        }
+
+        #{$this}__toggle-icon {
+            transform: rotateX(-180deg);
+        }
+    }
+}

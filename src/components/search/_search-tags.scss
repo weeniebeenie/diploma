@@ -1,0 +1,44 @@
+.search-tags {
+    align-items: center;
+    display: flex;
+
+    @include breakpoint(small down) {
+        flex-direction: column;
+    }
+
+    &__caption {
+        @include font($typo-1, 1.4rem, $medium);
+        color: $color-3--5;
+        flex-shrink: 0;
+        margin-right: 10px;
+
+        @include breakpoint(small down) {
+            margin: 0 0 6px;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__item {
+        padding: 6px 7px;
+    }
+
+    &__tag {
+        @include font($typo-1, 1.4rem, $medium);
+        @include trs();
+        background-color: rgba($color-3--5, 0.15);
+        border-radius: 27px;
+        color: $color-white;
+        display: inline-flex;
+        padding: 5.5px 15px;
+        text-decoration: none;
+
+        @include on-event() {
+            background-color: $color-3--5;
+        }
+    }
+}

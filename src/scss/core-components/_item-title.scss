@@ -1,0 +1,4 @@
+.item-title {
+    @include font($typo-1, 1.6rem, $medium);
+    line-height: 1.25;
+}

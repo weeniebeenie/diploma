@@ -1,0 +1,17 @@
+.cover-search {
+    background-color: $color-white;
+    border-radius: 67px;
+    box-shadow: 0 42px 80px 0 rgba($color-black, 0.25);
+    padding: 10px;
+
+    @include breakpoint(small down) {
+        border-radius: 20px;
+        padding: 5px 23px 15px;
+    }
+
+    &__btn {
+        @include breakpoint(small down) {
+            width: 100%;
+        }
+    }
+}

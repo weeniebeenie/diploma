@@ -1,0 +1,26 @@
+{%- from 'views/utils/utils.njk' import wrapper -%}
+
+{#
+    Logo template.
+#}
+{%- macro Logo(
+    isHome = false,
+    siteName = 'Tenloc',
+    logoSrc = 'images/logos/logo.svg'
+) -%}
+    {% call wrapper(
+        className = 'logo',
+        tag = 'h1' if isHome,
+        href = '' if isHome else '#',
+        attrs = {} if isHome else { title: siteName + ' (вернуться на главную страницу)' }
+    ) %}
+        <span class="logo__image">
+            <img
+                src="{{ logoSrc }}"
+                alt="{{ siteName if isHome else siteName + ' (вернуться на главную страницу)' }}"
+                height="37"
+                width="128"
+            >
+        </span>
+    {% endcall %}
+{%- endmacro -%}

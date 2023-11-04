@@ -1,0 +1,31 @@
+{%- from 'views/core-components/section.njk' import Section -%}
+{%- from 'views/core-components/image.njk' import Image -%}
+{%- from 'components/social-networks/social-networks.njk' import SocialNetworks -%}
+
+{#
+    Subscribe template.
+#}
+{%- macro Subscribe(
+    imageSizes = ['439x691?479', '727x1144?767', '1279x468?1279', '1440x527'],
+    title = 'Подпишитесь <br>на нашу рассылку',
+    teaser = 'Подписывайтесь на удобный для Вас мессенджер'
+) -%}
+    {% call Section(className = 'subscribe', container = 'subscribe__container') %}
+        <div class="subscribe__wrapper">
+            <div class="subscribe__info">
+                <h2 class="subscribe__title">{{ title | safe }}</h2>
+                <p class="subscribe__teaser">{{ teaser }}</p>
+                <div class="subscribe__links">
+                    {{ SocialNetworks(modifier = 'has-shadow') }}
+                </div>
+            </div>
+            <div class="subscribe__image-wrapper">
+                {{ Image({
+                    sizes: imageSizes,
+                    className: 'subscribe__image',
+                    serviceID: 798
+                }) }}
+            </div>
+        </div>
+    {% endcall %}
+{%- endmacro -%}

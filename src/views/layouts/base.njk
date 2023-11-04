@@ -1,0 +1,84 @@
+{%- from 'components/header/header.njk' import Header -%}
+{%- from 'components/footer/footer.njk' import Footer -%}
+
+{% set preloadFonts = [
+    'fonts/Montserrat/Montserrat-Regular.woff2',
+    'fonts/Montserrat/Montserrat-Medium.woff2',
+    'fonts/Montserrat/Montserrat-SemiBold.woff2',
+    'fonts/Montserrat/Montserrat-Bold.woff2',
+    'fonts/Montserrat/Montserrat-ExtraBold.woff2',
+    'fonts/Montserrat/Montserrat-Black.woff2'
+] %}
+{% set stylesPath = 'css/main.min.css' %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    {%- if preloadFonts -%}
+        {%- for font in preloadFonts -%}
+            <link rel="preload" href="{{ font }}" as="font" crossorigin>
+        {%- endfor -%}
+    {%- endif -%}
+
+    {# Site styles #}
+    <link rel="stylesheet" href="{{ stylesPath }}" />
+
+    {# Site meta #}
+    <title>{{ title if title else 'Default page title' }}</title>
+    <meta name="description" content="{{ description if description else 'Template default description' }}">
+</head>
+<body {{ 'class=' + bodyClass if bodyClass }}>
+{%- block body -%}
+    <div class="site-wrapper">
+        <div class="site-wrapper__inner">
+            <div class="site-wrapper__header">
+                {%- block header -%}
+                    {{ Header(isHome = isHome) }}
+                {%- endblock -%}
+            </div>
+            <div class="site-wrapper__main">
+                <main role="main" class="site-content" id="main">
+                    {% block main %}
+                        <div class="site-content__inner">
+{#                            {%- block navbar -%}#}
+{#                                <div class="site-content__navbar">#}
+{#                                    {%- block navbarInner -%}#}
+{#                                        {{ Navbar() }}#}
+{#                                    {%- endblock -%}#}
+{#                                </div>#}
+{#                            {%- endblock -%}#}
+                            {%- block contentTop -%}
+                                <div class="site-content__top">
+                                    {%- block heading -%}{%- endblock -%}
+                                </div>
+                            {%- endblock -%}
+                            <div class="site-content__wrapper">
+                                <div class="site-content__main">
+                                    {%- block content -%}{%- endblock -%}
+                                </div>
+                            </div>
+{#                            {%- block contentBottom -%}#}
+{#                                <div class="site-content__bottom">{%- block contentAppend %}{% endblock -%}</div>#}
+{#                            {%- endblock -%}#}
+                        </div>
+                    {% endblock %}
+                </main>
+            </div>
+            <div class="site-wrapper__footer">
+                {%- block footer -%}
+                    {{ Footer(isHome) }}
+                {%- endblock -%}
+            </div>
+        </div>
+    </div>
+
+    {# Site scripts #}
+    <script src="js/core.bundle.js"></script>
+{%- endblock -%}
+</body>
+</html>

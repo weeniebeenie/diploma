@@ -1,0 +1,50 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background: $color-white;
+    color: $color-black;
+    font-family: $typo-1;
+    font-size: 1.8rem;
+    margin: 0;
+    overflow-x: hidden;
+
+    &.is-overflow-hidden {
+        overflow: hidden;
+    }
+
+    &.is-transparent {
+        background: transparent;
+    }
+
+    &.is-center-content {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+a,
+button,
+input,
+select,
+textarea {
+    @include focus-outline();
+}
+
+a {
+    color: inherit;
+}
+
+button {
+    margin: 0;
+}
+
+b {
+    font-weight: $bold;
+}
+
+span[class*="fa-"] {
+    pointer-events: none;
+}

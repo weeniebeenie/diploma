@@ -1,0 +1,63 @@
+.header-nav {
+    $this: &;
+
+    height: 100%;
+    padding: 0 0 0 35px;
+
+    &__list {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    &__item.is-open {
+        #{$this}__link {
+            background-color: $color-1--1;
+            color: $color-3--5;
+        }
+
+        #{$this}__link-icon {
+            transform: rotateX(-180deg);
+        }
+    }
+
+    &__link {
+        @include font(null, 1.5rem, $normal);
+        @include trs();
+        align-items: center;
+        background: none;
+        border: 0;
+        border-radius: 25px;
+        color: $color-3--5;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        padding: 14px 27px;
+        position: relative;
+        text-decoration: none;
+
+        @include on-event {
+            background-color: $color-1--1;
+            color: $color-3--5;
+        }
+
+        &[aria-current="page"] {
+            background-color: $color-1--1;
+            color: $color-3--5;
+        }
+    }
+
+    &__link-icon {
+        font-size: 1rem;
+        margin-left: 15px;
+    }
+
+    &__dropdown {
+        background-color: $color-white;
+        border-radius: 15px;
+        min-width: 206px;
+        padding: 20px 0 15px;
+        z-index: 10;
+    }
+}

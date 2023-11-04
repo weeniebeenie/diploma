@@ -1,0 +1,59 @@
+{%- from 'components/logo/logo.njk' import Logo -%}
+{%- from 'views/core-components/button.njk' import Button -%}
+{%- from 'components/directions-nav/directions-nav.njk' import DirectionsNav -%}
+{%- from 'views/core-components/link.njk' import Link -%}
+{% from 'components/search/search.njk' import SearchNav %}
+{%- from 'components/contact-info/contact-info.njk' import ContactInfo -%}
+
+{% set mainMenuLinks = ['О сервисе', 'Блог', 'Партнерская программа'] %}
+
+{% macro MainMenu(
+    isHome = false,
+    menuLinks = mainMenuLinks
+) %}
+    <div class="main-menu js-main-menu" role="dialog" aria-label="Основная навигация" aria-modal="true">
+        <div class="main-menu__container">
+            <div class="main-menu__top-components">
+                <div class="main-menu__close-wrap">
+                    {% call Button(
+                        className = 'main-menu__close-btn js-main-menu-close',
+                        icon = 'fas fa-times',
+                        attrs = {
+                            'title': 'Закрыть меню',
+                            'aria-haspopup': 'true'
+                        }
+                    ) %}
+                        <span class="ghost">Закрыть меню</span>
+                    {% endcall %}
+                </div>
+                <div class="main-menu__logo">
+                    {{ Logo(isHome) }}
+                </div>
+            </div>
+            <div class="main-menu__actions">
+                {{ DirectionsNav() }}
+                {{ Link(
+                    href = '#',
+                    text = 'Войти',
+                    className = 'main-menu__link is-login',
+                    icon = false
+                ) }}
+            </div>
+            <div class="main-menu__search">
+                {{ SearchNav(btnClassName = 'search-nav__btn') }}
+            </div>
+            <div class="main-menu__nav">
+                <ul class="main-menu__list">
+                    {% for link in menuLinks %}
+                        <li class="main-menu__item">
+                            <a href="#" class="main-menu__item-link">{{ link }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="main-menu__contact-info">
+                {{ ContactInfo() }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

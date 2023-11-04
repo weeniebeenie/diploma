@@ -1,0 +1,211 @@
+%icons-font-aliasing {
+    display: inline-block;
+    font-family: var(--font-awesome-typo);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: var(--fw-normal);
+    //vertical-align: -0.125em;
+}
+
+// Add styles for :hover/:focus state
+@mixin on-event {
+    &:hover,
+    &:focus {
+        @content;
+    }
+}
+
+// Clear thread after float;
+@mixin clear {
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+}
+
+// Set width and height for element
+@mixin size($width, $height: $width) {
+    height: $height;
+    width: $width;
+}
+
+// Set max-width and max-height for element
+@mixin max-size($width, $height: $width) {
+    max-height: $height;
+    max-width: $width;
+}
+
+// Set min-width and min-height for element
+@mixin min-size($width, $height: $width) {
+    min-height: $height;
+    min-width: $width;
+}
+
+// Set transition for element with settings
+@mixin trs($prop: all, $duration: 250ms, $easing: ease-in-out, $delay: 0ms) {
+    transition: $prop $duration $easing $delay;
+}
+
+// Set object fit property include polyfill values
+// @param {string} $fit - object-fit value
+// @param {string} $position - object-fit-position value
+@mixin object-fit($fit: "cover", $position: "center") {
+    font-family: "object-fit: #{$fit}; object-position: #{$position};";
+    object-fit: unquote($fit);
+}
+
+// Add styles for multiline underline
+@mixin multiline-underline($size: 1px, $color: $color-black) {
+    @include trs($duration: 300ms);
+    background-image: linear-gradient(transparent calc(100% - #{$size}), #{$color} #{$size});
+    background-repeat: no-repeat;
+    background-size: 0 100%;
+    text-decoration: none;
+    width: calc(100%);
+}
+
+// Set absolute position with settings
+@mixin absolute($params...) {
+    position: absolute;
+
+    @if length($params) > 0 {
+        $params: if(length($params) == 1, nth($params, 1), $params);
+        $props: (top, right, bottom, left);
+
+        @for $index from 1 through length($params) {
+            #{nth($props, $index)}: nth($params, $index);
+        }
+    }
+}
+
+// Set fixed position with settings
+@mixin fixed($params...) {
+    position: fixed;
+
+    @if length($params) > 0 {
+        $params: if(length($params) == 1, nth($params, 1), $params);
+        $props: (top, right, bottom, left);
+
+        @for $index from 1 through length($params) {
+            #{nth($props, $index)}: nth($params, $index);
+        }
+    }
+}
+
+// Set relative position with settings
+@mixin relative($params...) {
+    position: relative;
+
+    @if length($params) > 0 {
+        $params: if(length($params) == 1, nth($params, 1), $params);
+        $props: (top, right, bottom, left);
+
+        @for $index from 1 through length($params) {
+            #{nth($props, $index)}: nth($params, $index);
+        }
+    }
+}
+
+// Reset position to static
+@mixin reset-position {
+    bottom: auto;
+    left: auto;
+    position: static;
+    right: auto;
+    top: auto;
+}
+
+// Hide text without icon (old-version)
+@mixin hide-text {
+    overflow: hidden;
+    text-align: left;
+    text-indent: -9999px;
+    white-space: nowrap;
+}
+
+// Set font styles
+// @param {string|list} $params - list of font params font-family, font-size, font-weight, font-style
+@mixin font($params...) {
+    @if length($params) > 0 {
+        $params: if(length($params) == 1, nth($params, 1), $params);
+        $props: (font-family, font-size, font-weight, font-style);
+
+        @for $index from 1 through length($params) {
+            #{nth($props, $index)}: nth($params, $index);
+        }
+    }
+}
+
+// FontFace mixin for inserting custom fonts
+@mixin fontFace($fontname, $fontfile, $fontweight: normal, $fontstyle: normal) {
+    @font-face {
+        font-family: "#{$fontname}";
+        font-style: $fontstyle;
+        font-weight: $fontweight;
+        src:
+            url("#{$assets-fonts}#{$fontfile}.woff") format("woff"),
+            url("#{$assets-fonts}#{$fontfile}.woff2") format("woff2");
+    }
+}
+
+// Add inline icon before
+@mixin icon($position, $icon, $ff: null, $va: null, $fw: null) {
+    &::#{$position} {
+        @extend %icons-font-aliasing;
+        content: if(str-index($icon, "attr") or str-index($icon, "var"), $icon, unquote('"#{ $icon }"'));
+        font-family: $ff;
+        font-weight: $fw;
+        vertical-align: $va;
+    }
+}
+
+// Add styles for font-awesome icon inside block
+@mixin fa-icon-style($pseudo: true) {
+    span[class*="fa-"] {
+        @if $pseudo == true {
+            &::before {
+                @content;
+            }
+        }
+
+        @else {
+            @content;
+        }
+    }
+}
+
+// Add inverted styles for element
+@mixin add-inverted-styles {
+    .inverted &,
+    .is-inverted &,
+    &.is-inverted {
+        @content;
+    }
+}
+
+// Add vissually hidden pattern styles inside @media
+@mixin styles-visually-hidden {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px !important;
+    left: -9999px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    top: auto !important;
+    width: 1px !important;
+}
+
+@mixin focus-outline($color: #1e90ff) {
+    &:focus {
+        box-shadow: 0 0 6px 0 $color;
+        outline: 1px solid rgba($color, 0.5);
+        outline-offset: 0;
+    }
+}

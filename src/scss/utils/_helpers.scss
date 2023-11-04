@@ -1,0 +1,76 @@
+// Helper for hidding element
+.ghost,
+.sr-only,
+.invisible {
+    @extend %visually-hidden;
+}
+
+%underline-context {
+    text-decoration: none;
+
+    @include on-event {
+        outline: none !important;
+
+        [class*="underline"] {
+            background-size: 100% 100% !important;
+        }
+    }
+}
+
+%underline {
+    @include multiline-underline();
+}
+
+%link-block-context {
+    position: relative;
+
+    picture {
+        display: flex;
+
+        img {
+            @include size(100%, auto);
+            display: block;
+            max-width: 100%;
+        }
+    }
+}
+
+%link-block {
+    text-decoration: none;
+
+    &::after {
+        @include absolute(0, 0);
+        @include size(100%);
+        @include trs();
+        content: '';
+        display: block;
+        z-index: 3;
+    }
+
+    &:focus {
+        &::after {
+            outline: 1px dashed currentColor;
+            outline-offset: -2px;
+        }
+    }
+}
+
+.underline-context {
+    @extend %underline-context;
+}
+
+.underline {
+    @extend %underline;
+}
+
+a.underline {
+    @extend %link-block;
+}
+
+.link-block-context {
+    @extend %link-block-context;
+}
+
+.link-block {
+    @extend %link-block;
+}

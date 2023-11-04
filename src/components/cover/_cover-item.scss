@@ -1,0 +1,118 @@
+.cover-item {
+    position: relative;
+
+    &__media {
+        background-color: $color-black;
+        border-radius: 20px;
+        height: 639px;
+        overflow: hidden;
+        position: relative;
+
+        @include breakpoint(small down) {
+            height: 639px;
+        }
+    }
+
+    &__picture {
+        display: block;
+        height: 100%;
+
+        img {
+            @include object-fit;
+            @include size(100%);
+        }
+    }
+
+    &__content {
+        @include absolute(0, 0, null, 0);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-top: 122px;
+
+        @include breakpoint(small down) {
+            padding-top: 45px;
+        }
+    }
+
+    &__container {
+        @extend %container;
+        max-width: 820px;
+
+        @include breakpoint(small down) {
+            padding: 0 23px;
+        }
+    }
+
+    &__text {
+        @extend %link-block-context;
+        @include size(100%, auto);
+        text-align: center;
+    }
+
+    &__title {
+        @include font($typo-1, 4.2rem, $black);
+        color: $color-3--5;
+        line-height: 1.2;
+        padding-bottom: 41px;
+        position: relative;
+
+        @include breakpoint(small down) {
+            font-size: 2.2rem;
+            line-height: 1.45;
+            padding-bottom: 30px;
+        }
+
+        &::after {
+            @include absolute(null, null, 0, 50%);
+            @include size(228px, 41px);
+            background: {
+                image: url('../images/decor/title-decor.png');
+                position: center;
+                repeat: no-repeat;
+                size: cover;
+            }
+            content: '';
+            transform: translateX(-50%);
+
+            @include breakpoint(small down) {
+                @include size(138px, 25px);
+            }
+        }
+    }
+
+    &__title-link {
+        @extend %link-block;
+    }
+
+    &__teaser {
+        @include font($typo-1, 1.6rem, $normal);
+        color: $color-3--5;
+        line-height: 1.25;
+        margin-top: 13px;
+
+        @include breakpoint(small down) {
+            font-size: 1.4rem;
+            line-height: 1.55;
+            margin-top: 5px;
+        }
+    }
+
+    &__search {
+        margin-top: 47px;
+
+        @include breakpoint(small down) {
+            margin-top: 23px;
+        }
+    }
+
+    &__tags {
+        display: flex;
+        justify-content: center;
+        margin-top: 120px;
+
+        @include breakpoint(small down) {
+            margin-top: 79px;
+        }
+    }
+}

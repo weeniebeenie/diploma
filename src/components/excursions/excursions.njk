@@ -1,0 +1,130 @@
+{%- from 'views/core-components/image.njk' import Image -%}
+{%- from 'views/core-components/button.njk' import Button -%}
+{%- from 'views/core-components/section.njk' import Section -%}
+{%- import 'views/core-components/title.njk' as Title -%}
+{%- from 'views/core-components/link.njk' import Link -%}
+
+{% set itemsParams = [
+    ['Коллекция Эрмитажа и парадная жизнь Зимнего дворца', 'Двухчасовая экскурсия по Эрмитажу в мини-группе — история Зимнего дворца и шедевры мастеров Западной Европы.', false],
+    ['По дюнам на квадроциклах, катание на верблюдах и ужин в пустыне', 'Двухчасовая экскурсия по Эрмитажу в мини-группе — история Зимнего дворца и шедевры мастеров Западной Европы.', true],
+    ['Весь Калининград с земли и воды: экскурсия на автобусе и кораблике', 'Двухчасовая экскурсия по Эрмитажу в мини-группе — история Зимнего дворца и шедевры мастеров Западной Европы.', false],
+    ['Must-visit: экскурсия по великому Босфору на пароме с аудиогидом', 'Двухчасовая экскурсия по Эрмитажу в мини-группе — история Зимнего дворца и шедевры мастеров Западной Европы.', true],
+    ['Из Дубаи в Фуджейру: снорклинг, Индийский океан, барбекю', 'Двухчасовая экскурсия по Эрмитажу в мини-группе — история Зимнего дворца и шедевры мастеров Западной Европы.', false],
+    ['Обзорная экскурсия по Казани с посещением Казанского Кремля', 'Двухчасовая экскурсия по Эрмитажу в мини-группе — история Зимнего дворца и шедевры мастеров Западной Европы.', true],
+    ['Териберка — путешествие на край севера с выходом в Баренцево море', 'Двухчасовая экскурсия по Эрмитажу в мини-группе — история Зимнего дворца и шедевры мастеров Западной Европы.', false],
+    ['«Жемчужина Карелии» — тур в Рускеалу из Петрозаводска', 'Двухчасовая экскурсия по Эрмитажу в мини-группе — история Зимнего дворца и шедевры мастеров Западной Европы.', true]
+] %}
+
+{#
+    ExcursionItem template.
+#}
+{%- macro ExcursionItem(
+    imageSizes = ['334x226'],
+    title,
+    teaser,
+    time,
+    index
+) -%}
+    <article class="excursion-item">
+        <div class="excursion-item__content">
+            <h3 class="item-title excursion-item__title">
+                <a href="#" class="excursion-item__title-link">
+                    <span class="underline">{{ title }}</span>
+                </a>
+            </h3>
+            <p class="excursion-item__teaser">{{ teaser }}</p>
+            <div class="excursion-item__info">
+                <p class="excursion-item__price">
+                    <span>от 2750 ₽</span> / с чел
+                </p>
+                {% if time %}
+                    <p class="excursion-item__time">
+                        <span class="ghost">Время:</span>
+                        <span>с</span>
+                        <time datetime="10:00">10:00</time>
+                        <span>до</span>
+                        <time datetime="16:00">16:00</time>
+                    </p>
+                {% else %}
+                    <div class="excursion-item__time-select">
+                        <label class="ghost" for="time-select-{{ index }}">Выбрать время</label>
+                        <select id="time-select-{{ index }}">
+                            <option>Выбрать время</option>
+                            <option>10:00</option>
+                            <option>13:00</option>
+                            <option>16:00</option>
+                        </select>
+                    </div>
+                {% endif %}
+                {%- call Button(
+                    className = 'excursion-item__favorite',
+                    icon = 'far fa-heart',
+                    attrs = {
+                        'title': 'Добавить в избранное'
+                    }
+                ) %}
+                    <span class="ghost">Добавить в избранное</span>
+                {% endcall %}
+                {%- call Button(
+                    className = 'excursion-item__add',
+                    icon = 'fas fa-plus',
+                    attrs = {
+                        'title': 'Добавить в заказ'
+                    }
+                ) %}
+                    <span class="btn__text">Добавить в заказ</span>
+                {% endcall %}
+            </div>
+        </div>
+        {{ Image({
+            className: 'excursion-item__image',
+            sizes: imageSizes,
+            type: 'no-image' if (range(5, 20) | random) > 15 else 'default',
+            serviceID: range(50) | random
+        }) }}
+    </article>
+{%- endmacro -%}
+
+{#
+    ExcursionsList template.
+    @param {number} count - items count.
+#}
+{%- macro ExcursionsList() -%}
+    <ul class="excursions-list">
+        {% for title, teaser, time in itemsParams %}
+            <li class="excursions-list__item">
+                {{ ExcursionItem(title, teaser, time, index = loop.index) }}
+            </li>
+        {% endfor %}
+    </ul>
+{%- endmacro -%}
+
+{#
+    ExcursionsHome template.
+    Template for excursions on home page.
+#}
+{%- macro ExcursionsHome(
+    titleText = 'Экскурсии',
+    moreButton = true
+) -%}
+    {% call Section(className = 'excursions-home', container = 'excursions-home__container') %}
+        <div class="section__title">
+            {{ Title.TitleDefault(
+                text = titleText
+            ) }}
+        </div>
+        <div class="section__content">
+            {{ ExcursionsList() }}
+        </div>
+        {% if moreButton %}
+            <div class="section__more-links">
+                {{ Link(
+                    href = '#',
+                    text = 'Все экскурсии',
+                    className = 'btn is-primary',
+                    icon = false
+                ) }}
+            </div>
+        {% endif %}
+    {% endcall %}
+{%- endmacro -%}

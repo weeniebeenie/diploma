@@ -1,0 +1,145 @@
+$color-telegram: #20a0e1;
+$color-vkontakte: #5181bb;
+
+.social-networks {
+    $this: &;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #{$this}__link {
+        @include font(null, 1.5rem, $normal, normal);
+        @include trs();
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        min-width: 160px;
+        text-decoration: none;
+
+        @include fa-icon-style(false) {
+            font-size: 2.2rem;
+        }
+    }
+
+    &__link-text {
+        margin-left: 10px;
+        pointer-events: none;
+    }
+
+    &.is-colorful {
+        margin: 0 -7px;
+
+        #{$this}__item {
+            padding: 7px;
+        }
+
+        #{$this}__link {
+            border-radius: 25px;
+            color: $color-white;
+            font-size: 1.4rem;
+            padding: 14px 0;
+
+            &.is-telegram {
+                background-color: $color-telegram;
+            }
+
+            &.is-vkontakte {
+                background-color: $color-vkontakte;
+            }
+
+            @include on-event() {
+                background-color: $color-3--5;
+            }
+        }
+    }
+
+    &.has-shadow {
+        margin: 0 -9px;
+
+        @include breakpoint(medium down) {
+            margin: 0 -6px;
+        }
+
+        #{$this}__item {
+            padding: 9px;
+
+            @include breakpoint(medium down) {
+                padding: 6px;
+            }
+        }
+
+        #{$this}__link {
+            background-color: $color-white;
+            border-radius: 9px;
+            box-shadow: 0 4px 5px 2px rgba($color-3--5, 0.1), inset 0 4px 5px 4px rgba($color-3--5, 0);
+            min-width: 161px;
+            padding: 19px 25px;
+
+            @include breakpoint(medium down) {
+                @include size(45px);
+                min-width: initial;
+                padding: 0;
+            }
+
+            @include on-event() {
+                box-shadow: 0 4px 5px 2px rgba($color-3--5, 0), inset 0 4px 5px 4px rgba($color-3--5, 0.1);
+                color: inherit;
+            }
+
+            &.is-telegram {
+                @include fa-icon-style(false) {
+                    color: $color-telegram;
+                }
+            }
+
+            &.is-vkontakte {
+                @include fa-icon-style(false) {
+                    color: $color-vkontakte;
+                }
+            }
+        }
+
+        #{$this}__link-text {
+            @include breakpoint(medium down) {
+                @include styles-visually-hidden();
+            }
+        }
+    }
+
+    &.has-no-text {
+        margin: 0 -6.5px;
+
+        #{$this}__item {
+            padding: 0 6.5px;
+        }
+
+        #{$this}__link {
+            @include size(40px);
+            border: 1px solid $color-3--15;
+            border-radius: 5px;
+            min-width: initial;
+
+            &.is-telegram {
+                color: $color-telegram;
+
+                @include on-event() {
+                    background-color: $color-telegram;
+                    border-color: $color-telegram;
+                    color: $color-white;
+                }
+            }
+
+            &.is-vkontakte {
+                color: $color-vkontakte;
+
+                @include on-event() {
+                    background-color: $color-vkontakte;
+                    border-color: $color-vkontakte;
+                    color: $color-white;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+.logo {
+    display: inline-block;
+
+    &__image {
+        align-content: center;
+        align-items: center;
+        display: flex;
+
+        img {
+            max-height: 100%;
+        }
+
+        .header & {
+            height: 37px;
+
+            @include breakpoint(medium down) {
+                @include size(100px, 30px);
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+/*
+ * Dropdown component.
+ */
+
+.js-dropdown {
+    position: relative;
+}
+
+.js-dropdown-toggle {
+    cursor: pointer;
+}
+
+.js-dropdown-block {
+    @include absolute(calc(100% + 6px), null, null, 0);
+    list-style: none;
+    min-width: 100%;
+    opacity: 0;
+    padding: 10px;
+    transform: translateY(-10px);
+    transition: visibility 200ms ease-in-out, transform 350ms ease-in-out, opacity 200ms ease-in-out;
+    visibility: hidden;
+    width: auto;
+    z-index: 5;
+
+    .is-open > & {
+        box-shadow: 0 7px 100px 0 rgba($color-black, 0.15);
+        opacity: 1;
+        transform: translateY(-1px);
+        transition: visibility 200ms ease-in-out, transform 200ms ease-in-out, opacity 350ms ease-in-out;
+        visibility: visible;
+    }
+}

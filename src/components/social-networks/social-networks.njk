@@ -1,0 +1,39 @@
+{% from 'views/core-components/icon.njk' import Icon with context %}
+
+{#
+    Insert SocialNetworks block.
+    @param {string} modifier - custom class name modifier.
+    @param {object[]} links - links array.
+#}
+{% macro SocialNetworks(
+    modifier,
+    links = [
+        {
+            title: 'telegram',
+            icon: 'fab fa-telegram-plane'
+        },
+        {
+            title: 'vkontakte',
+            icon: 'fab fa-vk'
+        }
+    ]
+) %}
+    <div class="social-networks {{ modifier if modifier }}">
+        <ul class="social-networks__list">
+            {% for link in links %}
+                <li class="social-networks__item">
+                    <a href="#" class="social-networks__link {{ 'is-' + link.title }}"
+                       title="Наш {{ link.title }}"
+                       target="_blank"
+                       rel="noopener"
+                    >
+                        {{ Icon(link.icon) }}
+                        <span class="social-networks__link-text {{ 'ghost' if modifier === 'has-no-text' }}">
+                            {{ link.title | capitalize }}
+                        </span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}

@@ -1,0 +1,110 @@
+/*
+ * Form component.
+ */
+
+// Reset some styles for all fieldsets.
+fieldset {
+    background: transparent;
+    border: 0;
+    margin: 0;
+    min-width: inherit; // trick for chrome
+    padding: 0;
+}
+
+// Style form component.
+.form {
+    $this: &;
+
+    display: block;
+
+    &__fieldset {
+        margin: 0;
+        padding: 0;
+
+        &.is-inline {
+            display: flex;
+            margin: 0 -15px;
+
+            @include breakpoint(small down) {
+                display: block;
+            }
+        }
+    }
+
+    &__wrapper-inner {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+
+        @include breakpoint(small down) {
+            align-items: initial;
+            flex-direction: column;
+        }
+    }
+
+    &__fields {
+        flex-grow: 1;
+        width: 1%;
+
+        @include breakpoint(small down) {
+            width: 100%;
+        }
+    }
+
+    &__fields-group {
+        box-sizing: border-box;
+        display: flex;
+        flex: 0 1 auto;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+
+        @include breakpoint(small down) {
+            margin: 0 -23px;
+        }
+    }
+
+    &__field-wrapper {
+        flex: 0 0 auto;
+        padding: 0 23px;
+        position: relative;
+        width: auto;
+
+        @include breakpoint(small down) {
+            padding: 4px 20px;
+        }
+
+        &.is-inline {
+            align-items: center;
+            display: flex;
+
+            #{$this}__label {
+                flex-shrink: 0;
+                margin: 0 5px 0 0;
+            }
+        }
+
+        &.col-md-6 {
+            width: 50%;
+
+            @include breakpoint(small down) {
+                width: 100%;
+            }
+        }
+
+        + #{$this}__field-wrapper {
+            &::before {
+                @include absolute(0, null, null, 20px);
+                @include size(calc(100% - 40px), 1px);
+                background-color: $color-3--1;
+
+                @include breakpoint(small down) {
+                    content: '';
+                }
+            }
+        }
+    }
+
+    &__buttons {
+        display: flex;
+    }
+}

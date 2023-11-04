@@ -1,0 +1,14 @@
+.footer-info {
+    &__logo {
+        @include size(128px, auto);
+        margin-bottom: 45px;
+
+        @include breakpoint(medium down) {
+            margin: 0 auto 45px;
+        }
+
+        img {
+            @include size(100%, auto)
+        }
+    }
+}

@@ -1,0 +1,103 @@
+{% from 'views/core-components/image.njk' import Image %}
+{%- from 'views/core-components/carousel.njk' import CarouselWrapper -%}
+{%- from 'views/core-components/button.njk' import Button -%}
+{% from 'views/core-components/icon.njk' import Icon with context %}
+{%- from 'views/core-components/section.njk' import Section -%}
+{%- import 'views/core-components/title.njk' as Title -%}
+{%- from 'views/core-components/link.njk' import Link -%}
+
+{#
+    BlogItem template.
+#}
+{%- macro BlogItem(
+    imageSizes = ['323x228'],
+    title = 'Default title text'
+) -%}
+    <article class="blog-item">
+        <div class="blog-item__content">
+            <h3 class="item-title blog-item__title">
+                <a href="#" class="blog-item__title-link">
+                    <span class="underline">{{ title }}</span>
+                </a>
+            </h3>
+            <p class="blog-item__read-more">
+                Читать
+                {{ Icon('fas fa-ellipsis-h') }}
+            </p>
+            <p class="blog-item__publication">
+                {{ Icon('far fa-calendar-alt', title='Время') }}
+                <span class="ghost">Дата публикации:</span>
+                <time datetime="2023-10-30">Сегодня</time>
+                <span class="ghost">в</span>
+                <time datetime="15:25">15:25</time>
+            </p>
+        </div>
+        {{ Image({
+            className: 'blog-item__image',
+            sizes: imageSizes,
+            type: 'no-image' if (range(5, 20) | random) > 15 else 'default',
+            serviceID: range(50) | random
+        }) }}
+    </article>
+{%- endmacro -%}
+
+{#
+    BlogList template.
+    @param {number} count - items count.
+#}
+{%- macro BlogList() -%}
+    <ul class="blog-list">
+        {% for item in range(4) %}
+            <li class="blog-list__item">
+                {{ BlogItem() }}
+            </li>
+        {% endfor %}
+    </ul>
+{%- endmacro -%}
+
+{#
+    BlogCarousel template.
+#}
+{%- macro BlogCarousel(
+    count = 10
+) -%}
+    {% call CarouselWrapper('blog-carousel') %}
+        {% for item in range(count) %}
+            <li class="blog-carousel__item swiper-slide">
+                {{ BlogItem(title = 'Resource ' + loop.index) }}
+            </li>
+        {% endfor %}
+    {% endcall %}
+{%- endmacro -%}
+
+{#
+    BlogHome template.
+    Template for blog on home page.
+#}
+{%- macro BlogHome(
+    title = 'Блог',
+    isCarousel = false
+) -%}
+    {% call Section(className = 'blog', container = 'blog__container') %}
+        <div class="section__title">
+            {{ Title.TitleDefault(
+                text = title
+            ) }}
+            {% if isCarousel %}
+                {{ Link(
+                    href = '#',
+                    text = 'В блог',
+                    className = 'btn is-inverted is-small',
+                    icon = false
+                ) }}
+            {% endif %}
+        </div>
+        <div class="section__content">
+            {% if isCarousel %}
+                {{ BlogCarousel() }}
+            {% else %}
+                {{ BlogList() }}
+            {% endif %}
+        </div>
+    {% endcall %}
+{%- endmacro -%}

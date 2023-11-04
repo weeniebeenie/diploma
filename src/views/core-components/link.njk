@@ -1,0 +1,38 @@
+{% from 'views/utils/utils.njk' import setAttr, setAttributes %}
+{% from 'views/core-components/icon.njk' import Icon %}
+
+{#
+    Insert link.
+    @param {string} text - link inner text.
+    @param {string} href - link href attribute.
+    @param {string} className - link class.
+    @param {string} icon - icon class.getPartial
+    @param {string} tooltip - add link tooltip text.
+    @param {string} disabled - disable link.
+    @param {object} attrs - object with attributes.
+#}
+{% macro Link(
+    text = 'link',
+    href = '#',
+    className = 'btn',
+    icon = 'far fa-check',
+    iconTitle = '',
+    tooltip = '',
+    disabled = false,
+    attrs = {}
+) %}
+    <a
+        href="{{ href }}"
+        class="{{ className }}{{ ' js-tooltip' if tooltip }}"
+        {{ setAttr('data-content', tooltip) }}
+        {{ setAttr('aria-disabled', disabled) }}
+        {{ setAttributes(attrs) }}
+    >
+        {{ Icon(className = icon, title = iconTitle if iconTitle) if icon }}
+        {% if caller %}
+            {{ caller() }}
+        {% else %}
+            <span class="btn__text">{{ text }}</span>
+        {% endif %}
+    </a>
+{% endmacro %}

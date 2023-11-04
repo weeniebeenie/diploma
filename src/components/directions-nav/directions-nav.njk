@@ -1,0 +1,33 @@
+{%- from 'views/core-components/icon.njk' import Icon -%}
+
+{% set directionsNavLinks = [
+    'Санкт-Петербург',
+    'Дубай',
+    'Стамбул',
+    'Карелия',
+    'Калининград',
+    'Мурманск'
+] %}
+
+{%- macro DirectionsNav(
+    opened = false,
+    links = directionsNavLinks
+) -%}
+    <div class="directions-nav {{ 'js-dropdown' if not opened }}">
+        <button type="button" class="directions-nav__toggle {{ 'js-dropdown-toggle' if not opened }}">
+            <span class="directions-nav__toggle-text">Направления</span>
+            {{ Icon('directions-nav__toggle-icon fas fa-angle-down') }}
+        </button>
+        <div class="directions-nav__block {{ 'js-dropdown-block' if not opened }}">
+            <nav class="directions-nav__menu">
+                <ul class="directions-nav__menu-links">
+                    {% for link in links %}
+                        <li class="directions-nav__item">
+                            <a href="#" class="directions-nav__link">{{ link }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{%- endmacro -%}

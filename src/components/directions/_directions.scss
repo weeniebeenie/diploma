@@ -1,0 +1,37 @@
+.directions-home {
+    margin: 95px 0 65px;
+
+    @include breakpoint(small down) {
+        margin: 60px 0 65px;
+    }
+
+    &__container {
+        @extend %container;
+    }
+
+    .directions-list {
+        margin: 0 -23px;
+
+        @include breakpoint(medium down) {
+            margin: 0 -10px;
+        }
+    }
+}
+
+.directions-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &__item {
+        margin-bottom: 45px;
+        padding: 0 23px;
+        width: 33.3333%;
+
+        @include breakpoint(medium down) {
+            margin-bottom: 20px;
+            padding: 0 10px;
+            width: 50%;
+        }
+    }
+}

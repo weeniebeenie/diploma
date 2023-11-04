@@ -1,0 +1,35 @@
+.header-dropdown {
+    $this: &;
+
+    &__list {
+        @include font(null, 1.5rem, $medium);
+        color: $color-black;
+    }
+
+    &__item {
+        position: relative;
+
+        + #{$this}__item:not(:first-child) {
+            &::before {
+                @include absolute(0, null, null, 50%);
+                @include size(calc(100% - 56px), 1px);
+                background-color: $color-3--14;
+                content: '';
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    &__link {
+        @include trs();
+        align-items: flex-start;
+        display: flex;
+        line-height: 1;
+        padding: 12.5px 28px;
+        text-decoration: none;
+
+        @include on-event {
+            background-color: $color-1--1;
+        }
+    }
+}

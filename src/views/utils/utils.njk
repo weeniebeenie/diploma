@@ -1,0 +1,50 @@
+{#
+    Set attribute if value was provided.
+    @param {string} attrName - attribute name.
+    @param {string} attrValue - attribute value.
+#}
+{% macro setAttr(attrName, attrValue) %}
+    {% set str %}{{ attrName }}="{{ attrValue }}"{% endset %}
+    {%- if attrName and attrValue -%}
+        {%- if attrName === 'checked' or attrName === 'disabled' or attrName === 'required' or attrName === 'hidden' -%}
+            {{ attrName }}
+        {% else %}
+            {{ str | safe }}
+        {%- endif -%}
+    {%- endif -%}
+{% endmacro %}
+
+{#
+    Set attributes to tag.
+    @param {object} attributes - attributes object
+    @example <a {{ setAttributes({ href: '#', title: 'test link' }) }}>link</a>
+#}
+{% macro setAttributes(attributes = {}) %}
+    {% set str = '' %}
+    {%- for attr, value in attributes -%}
+        {%- if value and attr -%}
+            {% set str = str + ' ' + setAttr(attr, value).val %}
+        {%- endif -%}
+    {%- endfor -%}
+    {{ str | safe }}
+{% endmacro %}
+
+{#
+    Wrap element with link or other tag.
+    @param {string} className - link class
+    @param {string} href - link url
+    @param {string} tag - tag name.
+#}
+{% macro wrapper(className = '', href = '', tag = 'div', attrs = {}) %}
+    {% if href %}
+        <a href="{{ href }}" {{ setAttr('class', className) }} {{ setAttributes(attrs) }}>
+            {{ caller() }}
+        </a>
+    {% elif className %}
+        <{{ tag }} {{ setAttr('class', className) }} {{ setAttributes(attrs) }}>
+            {{ caller() }}
+        </{{ tag }}>
+    {% else %}
+        {{ caller() }}
+    {% endif %}
+{% endmacro %}

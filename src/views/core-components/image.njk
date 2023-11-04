@@ -1,0 +1,134 @@
+{%- from 'views/utils/utils.njk' import setAttr -%}
+
+{#
+    Get image from image folder (local).
+    @param {string} file - file path inside image folder.
+#}
+{%- macro getImagePath(filePath = '') -%}
+    {{ imagesPath +  filePath }}
+{%- endmacro -%}
+
+{#
+    Get image from picsum service.
+    @param {string} size - image dimensions.
+    @param {string} id - image id to get from picsum service.
+#}
+{%- macro picsumImage(size = '300x200', id = '1') -%}
+    {{ '//picsum.photos/' + size | replace('x', '/') + '?image=' + id }}
+{%- endmacro -%}
+
+{#
+    Get image from satyr.io service.
+    @param {string} size - image dimensions.
+    @param {string} id - image id to get from picsum service.
+#}
+{%- macro satyrImage(size = '300x200', color = 'lightgrey') -%}
+    {{ '//satyr.io/' + size + '/' + color }}
+{%- endmacro -%}
+
+{#
+    Get image from service url or local.
+    @param {string} service - service type // picsum|satyr|false (for local)
+    @param {string} params - can be a filename for local image or size for other services.
+    @param {string} id - image id for service.
+#}
+{%- macro imageService(service = 'picsum', params = '300x200', id = '1') %}
+    {%- if service === 'picsum' -%}
+        {{ picsumImage(size = params, id = id) }}
+    {%- elif service === 'satyr' -%}
+        {{ satyrImage(size = params) }}
+    {%- else -%}
+        {{ getImagePath(params) }}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#
+    Generate picsum id.
+    @param {number} rangeMax - max range for random.
+    @param {number} rangeMin - min range for random.
+#}
+{% macro getPicsumId(rangeMax = 40, rangeMin = 0) %}
+    {{- range(rangeMin, rangeMax) | random -}}
+{% endmacro %}
+
+{#
+    sizes - array of image dimentions.
+    size prop explanation:
+        - 480x300?490:
+            480 - image width.
+            300 - image height.
+            ?490 - source media with.
+
+    service - picsum/satyr
+#}
+
+{% set imageDefaults = {
+    sizes: [
+        '480x300?490',
+        '768x480?790',
+        '992x520',
+        '1280x560',
+        '1920x840'
+    ],
+    service: 'picsum',
+    image: '',
+    className: 'image',
+    dataItems: '',
+    serviceID: '1',
+    type: 'default',
+    id: '',
+    alt: ''
+} %}
+
+{#
+    Insert image placeholder or lowquality image if provided.
+    @param {string} width - placeholder width.
+    @param {string} height - placeholder height.
+    @param {string} image - lowquality image url.
+#}
+{%- macro ImageExpander(width = '220', height = '150', image = '') -%}
+    {%- set placeholder = 'data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22'+width+'%22%20height=%22'+height+'%22%20viewBox=%220%200%20'+width+'%20'+height+'%22%20/%3E' -%}
+    {{- image or placeholder -}}
+{%- endmacro -%}
+
+{#
+    Extract media with from string.
+    @param {string} size - size string
+    @param {string} separator - split size string by separator
+#}
+{% macro getMediaWidth(size = '', separator = '?') -%}
+    {%- set mediaWidth = Helpers.split(size, separator) -%}
+    {%- set mediaWidth = mediaWidth[1] if mediaWidth | length > 1 else '' -%}
+    {{- mediaWidth -}}
+{% endmacro %}
+
+{#
+    Insert generated picture tag.
+    @param {object} settings - image settings.
+#}
+{%- macro Image(settings = {}) -%}
+    {%- set settings = Helpers.merge(imageDefaults, settings) -%}
+
+    <picture {{ setAttr('class', settings.className)}} {{ setAttr('id', settings.id)}} {{ setAttr('data-items', settings.dataItems) }}>
+        {%- for size in settings.sizes -%}
+            {%- set mediaWidth = getMediaWidth(size).val -%}
+            {%- set size = size | replace('?' + mediaWidth, '') if mediaWidth else size -%}
+            {%- set dimensions = Helpers.split(size, 'x') -%}
+            {%- set localImagePath = Helpers.split(settings.image, '.') if settings.image else '' -%}
+            {%- set imageUrl = imageService(localImagePath or settings.service, localImagePath[0] + ('_' if size) + size + '.' + localImagePath[1] if localImagePath else size, settings.serviceID or getPicsumId().val) -%}
+
+            {%- if settings.type === 'no-image' -%}
+                {% if loop.last %}
+                    <img data-src='{{ ImageExpander(dimensions[0], dimensions[1]) }}' src='{{ ImageExpander(dimensions[0], dimensions[1]) }}' alt="{{ settings.alt or 'Lorem ipsum dolor sit amet' }}" class='lazy'>
+                {% endif %}
+            {%- else -%}
+                {% set expanderOrImage = ImageExpander(dimensions[0], dimensions[1], imageUrl if settings.image else '') %}
+                {%- if not loop.last -%}
+                    <source data-srcset='{{ imageUrl }}' srcset='{{ expanderOrImage }}' media='(max-width: {{ mediaWidth or dimensions[0] }}px)'>
+                {%- else -%}
+                    <img data-src='{{ imageUrl }}' src='{{ expanderOrImage }}' alt="{{ settings.alt or 'Lorem ipsum dolor sit amet' }}" class='lazy lazyload'>
+                {%- endif -%}
+            {%- endif -%}
+        {%- endfor -%}
+    </picture>
+{%- endmacro -%}

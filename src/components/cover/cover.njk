@@ -1,0 +1,98 @@
+{% from 'views/core-components/icon.njk' import Icon %}
+{%- from 'views/core-components/button.njk' import Button -%}
+{% from 'views/core-components/image.njk' import Image %}
+{% from 'components/search/search.njk' import SearchTags %}
+{%- from 'views/core-components/section.njk' import Section -%}
+
+{#
+    CoverSearchForm template.
+#}
+{%- macro CoverSearchForm() -%}
+    <form class="form" action="/">
+        <fieldset class="form__fieldset">
+            <legend class="form__legend ghost">Форма поиска</legend>
+            <div class="form__wrapper-inner">
+                <div class="form__fields">
+                    <div class="form__fields-group">
+                        <div class="form__field-wrapper is-inline col-md-6">
+                            <label for="field-place" class="form__label">
+                                {{ Icon('fas fa-map-marker-alt', title="Направление") }}
+                                <span class="ghost">Направление</span>
+                            </label>
+                            <input name="field-place" id="field-place" type="text" class="form__field" placeholder="Выберите направление" autocomplete="address-level2">
+                        </div>
+                        <div class="form__field-wrapper is-inline col-md-6">
+                            <label for="field-date" class="form__label">
+                                {{ Icon('far fa-calendar', title="Дата") }}
+                                <span class="ghost">Дата</span>
+                            </label>
+                            <input name="field-date" id="field-date" type="date" class="form__field" title="дд/мм/гггг" min="1000-01-01" max="3000-01-01">
+                        </div>
+                    </div>
+                </div>
+                <div class="form__buttons">
+                    {{ Button(
+                        type = 'submit',
+                        className = 'btn is-primary cover-search__btn',
+                        icon = 'fas fa-search',
+                        text = 'Найти'
+                    ) }}
+                </div>
+            </div>
+        </fieldset>
+    </form>
+{%- endmacro -%}
+
+{#
+    CoverItem template.
+#}
+{%- macro CoverItem(
+    imageSizes = [
+        '480x916?479',
+        '768x1465?767',
+        '1280x1083?1279',
+        '1440x639'
+    ],
+    title = 'Поиск и бронирование экскурсий',
+    teaser = 'Экскурсии и частные гиды в России и за рубежом'
+) -%}
+    <div class="cover-item">
+        <div class="cover-item__media">
+            {{ Image({
+                className: 'cover-item__picture',
+                sizes: imageSizes,
+                serviceID: '368'
+            }) }}
+        </div>
+        <div class="cover-item__content">
+            <div class="cover-item__container">
+                <div class="cover-item__text">
+                    <h3 class="cover-item__title">{{ title }}</h3>
+                    <p class="cover-item__teaser">{{ teaser }}</p>
+                </div>
+                <div class="cover-item__search">
+                    <div class="cover-search" role="search">
+                        {{ CoverSearchForm() }}
+                    </div>
+                    <div class="cover-item__tags">
+                        {{ SearchTags() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro -%}
+
+{#
+    CoverHome template.
+#}
+{%- macro CoverHome(
+    type = false
+) -%}
+    {% call Section(className = 'cover', container = 'cover__container') %}
+        <div class="section__content">
+            <h2 class="ghost">Обложка сайта</h2>
+            {{ CoverItem() }}
+        </div>
+    {% endcall %}
+{%- endmacro -%}

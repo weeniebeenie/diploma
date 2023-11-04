@@ -1,0 +1,20 @@
+{%- macro DownloadLinks(
+    listLinks = [
+        ['AppStore', 'images/app-store.png'],
+        ['Google Play', 'images/google-play.png']
+    ]
+) -%}
+    <div class="download-links">
+        <p class="download-links__title">Скачайте &#32;<br>наше приложение</p>
+        <ul class="download-links__list">
+            {% for title, src in listLinks %}
+                <li class="download-links__item">
+                    <a href="#" class="download-links__item-link" target="_blank" rel="noopener">
+                        <img src="{{ src }}" alt="{{ title }}">
+                        <span class="ghost">{{ title }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{%- endmacro -%}

@@ -1,0 +1,274 @@
+//  Button settings.
+$btn-min-width: auto;
+$btn-height-large: 60px;
+$btn-height-default: 55px;
+$btn-height-small: 50px;
+
+// Disabled button styles
+@mixin btn-disabled-style {
+    &.is-disabled,
+    &[disabled],
+    &[aria-disabled='true'] {
+        @content;
+    }
+
+    // Only for links
+    @at-root {
+        a#{&}.is-disabled,
+        a#{&}[aria-disabled='true'] {
+            pointer-events: none;
+
+            @include on-event {
+                box-shadow: none;
+                outline: 0;
+            }
+        }
+    }
+}
+
+// Only icon button styles
+@mixin btn-only-icon-style {
+    @include size($btn-height-default);
+    min-width: 0;
+    padding: 0;
+
+    @include fa-icon-style(false) {
+        margin: 0;
+    }
+
+    > * + *:not(.ghost) {
+        margin-left: 0;
+    }
+
+    svg {
+        margin: 0;
+    }
+
+    &.is-small {
+        @include size($btn-height-small);
+        min-height: $btn-height-small;
+    }
+
+    &.is-large {
+        @include size($btn-height-large);
+        min-height: $btn-height-large;
+    }
+}
+
+$default-padding: (1.1em 2.6em);
+$small-padding: (1em 1.4em 0.9em 1.4em);
+$large-padding: (1.2em 1.1em);
+
+//
+// Basic styles for buttons.
+//
+// https://habr.com/ru/company/ruvds/blog/489820/
+// https://ishadeed.com/article/styling-the-good-old-button/
+%button {
+    @include focus-outline;
+    @include font($typo-1, 1.5rem, $medium, normal);
+    @include min-size($btn-min-width, $btn-height-default);
+    @include trs();
+    align-items: center;
+    appearance: none;
+    background-color: $color-3--10;
+    border: none;
+    border-radius: 27px;
+    color: $color-3--5;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    line-height: 1.2;
+    margin: 0;
+    padding: $default-padding;
+    position: relative;
+    text-decoration: none;
+
+    > * + *:not(.ghost) {
+        margin-left: 12px;
+    }
+
+    @include fa-icon-style(false) {
+        @include trs($prop: transform);
+        color: inherit;
+        margin-bottom: -2px;
+        pointer-events: none;
+
+        &::before {
+            color: inherit;
+            line-height: 1;
+        }
+    }
+
+    svg {
+        @include size(1em);
+        color: inherit;
+        fill: currentColor;
+    }
+
+    svg,
+    span {
+        pointer-events: none;
+    }
+
+    @include on-event {
+        background-color: $color-3--5;
+        color: $color-white;
+    }
+
+    @include btn-disabled-style {
+        cursor: not-allowed;
+        opacity: 0.5;
+
+        &::after {
+            content: none;
+        }
+
+        @include on-event {
+            background-color: $color-3--10;
+            color: $color-3--5;
+            transform: none;
+        }
+    }
+}
+
+@mixin button-size-small {
+    font-size: 1.6rem;
+    min-height: $btn-height-small;
+    padding: $small-padding;
+
+    @include fa-icon-style(false) {
+        margin-top: 0;
+    }
+}
+
+@mixin button-size-large {
+    @include min-size(60px, $btn-height-large);
+    font-size: 1.6rem;
+    padding: $large-padding;
+}
+
+// Small button styles, only size
+%button-size-small {
+    @include button-size-small;
+}
+
+// Large button styles, only size
+%button-size-large {
+    @include button-size-large;
+}
+
+// Styles for buttons with icon only
+%button-style-only-icon {
+    @include btn-only-icon-style;
+}
+
+// Styles for only icon circle buttons.
+%button-style-circle {
+    border-radius: 50%;
+
+    .btn__text {
+        @include styles-visually-hidden();
+    }
+
+    &::after {
+        border-radius: 50%;
+    }
+}
+
+// Styles for primary buttons, only colors
+%button-style-primary {
+    background-color: $color-1--1;
+    color: $color-black;
+
+    @include on-event {
+        background-color: $color-3--5;
+        color: $color-white;
+    }
+
+    @include btn-disabled-style {
+        @include on-event {
+            background-color: $color-1--1;
+            color: $color-black;
+        }
+    }
+}
+
+// Inverted styles, only colors
+%button-style-inverted {
+    background-color: $color-white !important;
+    color: $color-3--11 !important;
+
+    @include on-event {
+        background-color: $color-3--5 !important;
+        color: $color-white !important;
+    }
+
+    @include btn-disabled-style {
+        @include on-event {
+            background-color: $color-white !important;
+            color: $color-3--11 !important;
+        }
+    }
+}
+
+.btn {
+    @extend %button;
+
+    &.is-circle {
+        @extend %button-style-circle;
+    }
+
+    &.is-only-icon {
+        @extend %button-style-only-icon;
+    }
+
+    &.is-large {
+        @extend %button-size-large;
+    }
+
+    &.is-small {
+        @extend %button-size-small;
+    }
+
+    &.is-primary {
+        @extend %button-style-primary;
+    }
+
+    @include add-inverted-styles {
+        @extend %button-style-inverted;
+    }
+}
+
+/**
+ * Buttons/Links group component.
+ */
+%button-links-group {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -5px;
+
+    > button,
+    > a,
+    > .btn {
+        margin: 5px;
+    }
+
+    &.is-center {
+        justify-content: center;
+    }
+
+    &.is-left {
+        justify-content: flex-start;
+    }
+
+    &.is-right {
+        justify-content: flex-end;
+    }
+}
+
+.links-group,
+.buttons-group {
+    @extend %button-links-group;
+}

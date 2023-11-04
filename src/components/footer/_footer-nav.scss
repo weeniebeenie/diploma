@@ -1,0 +1,30 @@
+.footer-nav {
+    max-width: 284px;
+    padding: 0 10px;
+
+    @include breakpoint(small down) {
+        max-width: initial;
+        padding: 15px 0;
+    }
+
+    &__title {
+        @include font(null, 1.6rem, $semibold);
+        color: $color-3--5;
+        margin-bottom: 20px;
+    }
+
+    &__list-item {
+        line-height: 1.25;
+        padding: 6px 0;
+    }
+
+    &__list-link {
+        @include font(null, 1.4rem, $normal);
+        color: $color-3--5;
+        text-decoration: none;
+
+        @include on-event() {
+            text-decoration: underline;
+        }
+    }
+}

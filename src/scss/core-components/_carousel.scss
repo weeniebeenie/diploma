@@ -1,0 +1,20 @@
+.js-swiper-control {
+    @include font(null, 1.9rem);
+    @include trs();
+    border: 2px solid $color-3--12;
+    border-radius: 50%;
+    cursor: pointer;
+    color: $color-3--5;
+    padding: 7px 13px;
+
+    @include on-event() {
+        background-color: $color-3--5;
+        border-color: $color-3--5;
+        color: $color-white;
+    }
+
+    &.swiper-button-disabled {
+        opacity: 0.1;
+        pointer-events: none;
+    }
+}

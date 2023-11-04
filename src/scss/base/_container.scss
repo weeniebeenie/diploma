@@ -1,0 +1,43 @@
+%container {
+    @extend %clear-fix;
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 1480px;
+    padding: 0 20px;
+    width: 100%;
+}
+
+%container-lg {
+    max-width: 1260px;
+}
+
+%container-sm {
+    max-width: 980px;
+}
+
+%container-fluid {
+    max-width: 2048px;
+    padding: 0;
+}
+
+%container-horizontal-home {
+    @include breakpoint(medium down) {
+        padding: 0;
+    }
+}
+
+.container {
+    @extend %container;
+
+    &.is-fluid {
+        @extend %container-fluid;
+    }
+
+    &.is-lg {
+        @extend %container-lg;
+    }
+
+    &.is-sm {
+        @extend %container-sm;
+    }
+}

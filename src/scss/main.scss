@@ -1,0 +1,96 @@
+@use 'sass:math';
+
+// import main configuration
+//@import 'utils/functions';
+@import 'utils/config';
+// Import utilities
+//@import 'utils/functions-helpers';
+@import 'utils/mixins';
+@import 'utils/breakpoints';
+@import 'utils/helpers';
+@import 'utils/placeholders';
+@import 'utils/animations';
+
+// Import modern reset
+@import 'base/reset';
+
+// import site base styles
+@import 'base/base';
+@import 'base/container';
+@import 'base/typography';
+
+// Import Libs
+@import '../../node_modules/swiper/swiper.scss';
+
+// Import fontawesome
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/brands';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/regular';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/solid';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+
+// import core helpers styles
+@import 'core-components/carousel';
+@import 'core-components/form';
+@import 'core-components/form-label';
+@import 'core-components/form-input';
+@import 'core-components/button';
+@import 'core-components/image';
+@import 'core-components/section';
+@import 'core-components/title';
+@import 'core-components/item-title';
+@import 'core-components/dropdown';
+
+// import site layouts styles
+@import 'layouts/site-wrapper';
+@import 'layouts/site-content';
+
+// BASE COMPONENTS
+@import '../components/social-networks/social-networks';
+@import '../components/contact-info/contact-info';
+//@import '../components/navbar/navbar';
+//@import '../components/menu-skip/menu-skip';
+//@import '../components/error-block/error-block';
+
+//SEARCH COMPONENTS
+@import '../components/search/search-nav';
+@import '../components/search/search-tags';
+
+// HEADER COMPONENTS
+@import '../components/header/header';
+@import '../components/logo/logo';
+@import '../components/header/header-nav';
+@import '../components/header/header-dropdown';
+@import '../components/directions-nav/directions-nav';
+@import '../components/main-menu-toggle/main-menu-toggle';
+@import '../components/main-menu/main-menu';
+
+
+// HEADING
+//@import '../components/heading/heading';
+
+// COVER COMPONENTS
+@import '../components/cover/cover';
+@import '../components/cover/cover-item';
+@import '../components/cover/cover-search';
+
+// POPULAR COMPONENTS
+@import '../components/directions/directions';
+@import '../components/directions/direction-item';
+
+// EXCURSIONS COMPONENTS
+@import '../components/excursions/excursions';
+@import '../components/excursions/excursion-item';
+
+// BLOG COMPONENTS
+@import '../components/blog/blog';
+@import '../components/blog/blog-item';
+
+// SUBSCRIBE COMPONENTS
+@import '../components/subscribe/subscribe';
+
+// FOOTER COMPONENTS
+@import '../components/footer/footer';
+@import '../components/footer/footer-info';
+@import '../components/footer/footer-nav';
+@import '../components/footer/footer-contacts';
+@import '../components/download-links/download-links';

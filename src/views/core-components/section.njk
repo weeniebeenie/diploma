@@ -1,0 +1,24 @@
+{%- from 'views/utils/utils.njk' import wrapper as _wrapper with context -%}
+{%- from 'views/utils/utils.njk' import setAttributes -%}
+
+{#
+    Insert section.
+    @param {string} className - section class modifier.
+    @param {string} wrapper - wrapper class.
+    @param {string} container - container class.
+#}
+{% macro Section(
+    className = '',
+    wrapper = '',
+    container = 'container',
+    attrs = {},
+    tag = 'section'
+) %}
+    <{{ tag }} class="section {{ className }}" {{ setAttributes(attrs) }}>
+        {% call _wrapper(className = wrapper) %}
+            {% call _wrapper(className = container) %}
+                {{ caller() }}
+            {% endcall %}
+        {% endcall %}
+    </{{ tag }}>
+{% endmacro %}

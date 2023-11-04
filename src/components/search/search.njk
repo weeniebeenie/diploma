@@ -1,0 +1,49 @@
+{% from 'views/core-components/icon.njk' import Icon %}
+{%- from 'views/core-components/button.njk' import Button -%}
+
+{#
+    SearchTags template.
+#}
+{% macro SearchTags(
+    caption = 'Часто ищут:',
+    tags = ['Дубай', 'Стамбул', 'Санкт-Петербург', 'Казань']
+) %}
+    <{{ 'figure' if caption else 'div' }} class="search-tags">
+        {% if caption  %}
+            <figcaption class="search-tags__caption">{{ caption }}</figcaption>
+        {% endif %}
+        <ul class="search-tags__list" aria-roledescription="Список ярлыков">
+            {% for tag in tags %}
+                <li class="search-tags__item">
+                    <a href="#" class="search-tags__tag">{{ tag }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </{{ 'figure' if caption else 'div' }}>
+{% endmacro %}
+
+{#
+    SearchNav template.
+#}
+{%- macro SearchNav(
+    btnClassName
+) -%}
+    <form class="form search-nav" action="/">
+        <fieldset class="form__fieldset">
+            <legend class="form__legend ghost">Форма поиска</legend>
+            <div class="form__wrapper-inner">
+                <div class="form__field-wrapper">
+                    <label for="field-search" class="form__label ghost">Поиск</label>
+                    <input name="field-place" id="field-search" type="text" class="form__field" placeholder="Поиск" autocomplete="off">
+                </div>
+                {% call Button(
+                    type = 'submit',
+                    className = btnClassName,
+                    icon = 'fas fa-search'
+                ) %}
+                    <span class="ghost">Найти</span>
+                {% endcall %}
+            </div>
+        </fieldset>
+    </form>
+{%- endmacro -%}

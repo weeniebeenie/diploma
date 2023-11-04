@@ -1,0 +1,108 @@
+// Footer styles
+
+.footer {
+    background-color: $color-3--6;
+    position: relative;
+
+    @include breakpoint(medium down) {
+        background-color: $color-white;
+    }
+
+    &::before {
+        @include absolute(0, null, null, 0);
+        @include size(100%, 50px);
+        background-color: $color-white;
+        border-radius: 0 0 50px 50px;
+        content: '';
+        pointer-events: none;
+        z-index: 2;
+
+        @include breakpoint(medium down) {
+            content: none;
+        }
+    }
+
+    &__container {
+        @extend %container;
+    }
+
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 133px 0 83px;
+
+        @include breakpoint(medium down) {
+            flex-direction: column;
+            padding: 33px 0;
+        }
+    }
+
+    &__column {
+        &.is-first {
+            flex-grow: 2;
+            flex-shrink: 0;
+            width: 1%;
+
+            @include breakpoint(medium down) {
+                width: 100%;
+            }
+        }
+
+        &.is-middle {
+            display: flex;
+            justify-content: space-between;
+            width: 53%;
+
+            @include breakpoint(medium down) {
+                display: none;
+                flex-direction: column;
+                margin: 0 -15px;
+                width: 100%;
+            }
+        }
+
+        &.is-last {
+            padding-left: 70px;
+            width: 25.5%;
+
+            @include breakpoint(medium down) {
+                border-top: 1px solid $color-3--7;
+                margin: 25px 0 0;
+                padding: 25px 0 0;
+                width: 100%;
+            }
+        }
+    }
+
+    &__bottom {
+        @include font(null, 1.3rem, $normal);
+        align-items: center;
+        border-top: 1px solid $color-3--7;
+        color: $color-3--5;
+        display: flex;
+        justify-content: space-between;
+        padding: 25px 0;
+
+        @include breakpoint(small down) {
+            flex-direction: column;
+        }
+    }
+
+    &__author {
+        align-items: center;
+        display: flex;
+        flex-shrink: 0;
+
+        @include breakpoint(small down) {
+            margin-top: 13px;
+        }
+
+        img {
+            @include size(132px, auto);
+        }
+    }
+
+    &__author-link {
+        margin-left: 15px;
+    }
+}

@@ -1,0 +1,13 @@
+.cover {
+    &.section {
+        margin: 113px 0 0;
+
+        @include breakpoint(medium down) {
+            margin: 83px 0 0;
+        }
+    }
+
+    &__container {
+        @extend %container;
+    }
+}

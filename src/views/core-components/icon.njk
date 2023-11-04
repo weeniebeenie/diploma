@@ -1,0 +1,11 @@
+{%- from 'views/utils/utils.njk' import setAttr %}
+
+{#
+    Insert icon.
+    @param {string} className - icon class
+    @param {boolean} hidden - aria-hidden attribute value.
+    @param {string} title - title attribute value.
+#}
+{% macro Icon(className = 'far fa-times', hidden = true, title = '') %}
+    <span {{ setAttr('aria-hidden', hidden) }} class="{{ className }}" {{ setAttr('title', title) }}></span>
+{% endmacro %}

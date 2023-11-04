@@ -1,0 +1,39 @@
+// Visually hidden pattern
+%visually-hidden {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px !important;
+    left: -9999px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    top: auto !important;
+    width: 1px !important;
+}
+
+// Inherit font styles
+%font-inherit {
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+
+// Clear default styles for ul/ol elements
+%clear-list-styles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+// Default extender for clear-fix;
+%clear-fix {
+    &::after {
+        clear: both;
+        content: '';
+        display: block;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+}

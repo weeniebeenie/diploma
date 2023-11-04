@@ -1,0 +1,20 @@
+{%- from 'components/cover/cover.njk' import CoverHome -%}
+{%- from 'components/directions/directions.njk' import DirectionsHome -%}
+{%- from 'components/excursions/excursions.njk' import ExcursionsHome -%}
+{%- from 'components/blog/blog.njk' import BlogHome -%}
+{%- from 'components/subscribe/subscribe.njk' import Subscribe -%}
+
+{% set title = 'Домашняя страница' %}
+{% set bodyClass = 'home-page' %}
+{% set isHome = true %}
+
+{% extends 'views/layouts/base.njk' %}
+
+{% block main %}
+    {{ CoverHome() }}
+    {{ DirectionsHome() }}
+    {{ ExcursionsHome() }}
+    {{ BlogHome(isCarousel = true) }}
+{#    {{ BlogHome(title = 'Похожие статьи') }}#}
+    {{ Subscribe() }}
+{% endblock %}

@@ -1,0 +1,20 @@
+{%- from 'views/core-components/button.njk' import Button -%}
+
+{% macro MainMenuToggle() %}
+    {% call Button(
+        className = 'main-menu-toggle js-main-menu-toggle',
+        icon = false,
+        attrs = {
+            'title': 'Открыть меню',
+            'aria-haspopup': 'true',
+            'aria-expanded': 'false'
+        }
+    ) %}
+        <span class="main-menu-toggle__bars" aria-hidden="true">
+            <span class="main-menu-toggle__bar"></span>
+            <span class="main-menu-toggle__bar"></span>
+            <span class="main-menu-toggle__bar"></span>
+        </span>
+        <span class="ghost">Открыть меню</span>
+    {% endcall %}
+{% endmacro %}

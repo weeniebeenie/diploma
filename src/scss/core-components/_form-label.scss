@@ -1,0 +1,55 @@
+/*
+ * Base styles for legend component.
+ */
+
+.legend,
+legend {
+    @include font($typo-1, 2rem, $medium);
+    color: $color-3--5;
+    display: block;
+    padding: 0;
+    text-align: left;
+    white-space: normal;
+    width: 100%;
+}
+
+/**
+ * Base styles for label component.
+ */
+%label {
+    @include font($typo-1, 1.5rem, $medium);
+    color: $color-3--5;
+    cursor: pointer;
+    display: block;
+    line-height: 1.25;
+    position: relative;
+
+    @include fa-icon-style(false) {
+        @include size(36px);
+        align-items: center;
+        border: 1px solid $color-3--3;
+        border-radius: 50%;
+        display: flex;
+        font-size: 1.4rem;
+        justify-content: center;
+    }
+
+    &.is-inline {
+        > * {
+            display: inline-block;
+        }
+    }
+
+    a {
+        text-decoration: underline;
+
+        @include on-event {
+            text-decoration: none;
+        }
+    }
+}
+
+.label,
+label {
+    @extend %label;
+}

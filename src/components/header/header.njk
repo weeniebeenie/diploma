@@ -1,0 +1,123 @@
+{%- from 'views/core-components/icon.njk' import Icon -%}
+{%- from 'components/contact-info/contact-info.njk' import ContactInfo -%}
+{%- from 'components/logo/logo.njk' import Logo -%}
+{%- from 'components/main-menu-toggle/main-menu-toggle.njk' import MainMenuToggle -%}
+{%- from 'components/main-menu/main-menu.njk' import MainMenu -%}
+{%- from 'views/core-components/link.njk' import Link -%}
+
+{% set mainNav = [
+    {
+        text: 'Направления',
+        dropdown: [
+            { text: 'Санкт-Петербург' },
+            { text: 'Дубай' },
+            { text: 'Стамбул' },
+            { text: 'Карелия' },
+            { text: 'Калининград' },
+            { text: 'Мурманск' }
+        ]
+    },
+    { text: 'О сервисе' },
+    { text: 'Блог' },
+    {
+        text: 'Помощь клиентам',
+        dropdown: 'contacts-info'
+    }
+] %}
+
+{#
+    HeaderNav template
+#}
+{%- macro HeaderNav() -%}
+    <nav class="header-nav" role="navigation" aria-label="Основная навигация">
+        <ul class="header-nav__list">
+            {% for item in mainNav %}
+                <li class="header-nav__item {{ 'js-dropdown' if item.dropdown }}">
+                    {% if item.dropdown %}
+                        <button
+                            type="button"
+                            class="header-nav__link js-dropdown-toggle"
+                            data-index="{{ loop.index }}"
+                            aria-haspopup="true"
+                        >
+                            <span class="header-nav__link-text">{{ item.text }}</span>
+                            {{ Icon('header-nav__link-icon fas fa-angle-down') }}
+                        </button>
+                        <div class="header-nav__dropdown js-dropdown-block">
+                            {% if item.dropdown === 'contacts-info' %}
+                                {{ ContactInfo() }}
+                            {% else %}
+                                <ul class="header-dropdown__list">
+                                    {% for link in item.dropdown %}
+                                        <li class="header-dropdown__item">
+                                            <a href="#" class="header-dropdown__link">{{ link.text }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <a class="header-nav__link" href="#">{{ item.text }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+{%- endmacro -%}
+
+{#
+    Header template.
+    @param {boolean} isHome - check if is home page
+    @param {string} menuType - menu type
+    @param {string|boolean} usePageImage - false or pageImage path
+#}
+{% macro Header(
+    isHome = false
+) %}
+    <header class="header-wrapper" role="banner">
+        <div class="header-wrapper__container">
+            <div class="header js-fixed-element">
+                <div class="header__container">
+                    <div class="header__inner">
+                        <nav class="header__nav-toggle is-lg-hide" role="navigation" aria-label="Основная навигация">
+                            {{ MainMenuToggle() }}
+                        </nav>
+                        <div class="header__logo">
+                            {{ Logo(isHome) }}
+                        </div>
+                        <div class="header__components">
+                            <div class="header__nav">
+                                {{ HeaderNav() }}
+                            </div>
+                            <div class="header__links">
+                                {% call Link(
+                                    href = '#',
+                                    className = 'header__link is-search',
+                                    icon = 'fas fa-search'
+                                ) %}
+                                    <span class="btn__text ghost">Перейти на страницу поиска</span>
+                                {% endcall %}
+                                {% call Link(
+                                    href = '#',
+                                    className = 'header__link is-favorite',
+                                    icon = 'far fa-heart'
+                                ) %}
+                                    <span class="btn__text ghost">Перейти на странницу избранного</span>
+                                {% endcall %}
+                                {{ Link(
+                                    href = '#',
+                                    text = 'Войти',
+                                    className = 'header__link is-login',
+                                    icon = false
+                                ) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-wrapper__nav">
+            {{ MainMenu(isHome) }}
+        </div>
+    </header>
+{% endmacro %}

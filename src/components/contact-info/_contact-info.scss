@@ -1,0 +1,62 @@
+.contact-info {
+    $this: &;
+
+    min-width: 388px;
+    padding: 0 23px 0 27px;
+
+    &__time {
+        @include font(null, 1.5rem, $normal, normal);
+        color: $color-black;
+
+        br {
+            display: none;
+        }
+    }
+
+    &__socials {
+        margin: 8px 0;
+    }
+
+    & &__list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+    }
+
+    &__item {
+        padding: 0 10px;
+    }
+
+    &__contact {
+        @include font(null, 1.4rem, $normal, normal);
+        color: $color-black;
+
+        @include fa-icon-style(false) {
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+
+        a {
+            @include on-event() {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .main-menu & {
+        padding: 0;
+        min-width: initial;
+
+        #{$this}__time {
+            font-size: 2rem;
+
+            br {
+                display: initial;
+            }
+        }
+
+        #{$this}__socials {
+            margin: 14px 0 12px;
+        }
+    }
+}

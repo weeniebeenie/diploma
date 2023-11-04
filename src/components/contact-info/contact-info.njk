@@ -1,0 +1,27 @@
+{% from 'views/core-components/icon.njk' import Icon %}
+{%- from 'components/social-networks/social-networks.njk' import SocialNetworks -%}
+
+{% macro ContactInfo() %}
+    <address class="contact-info">
+        <p class="contact-info__time">Мы на связи<br> с <time datetime="9:00">09:00</time> до <time datetime="21:00">21:00</time> мск</p>
+        <div class="contact-info__socials">
+            {{ SocialNetworks(modifier = 'is-colorful') }}
+        </div>
+        <ul class="contact-info__list">
+            <li class="contact-info__item">
+                <p class="contact-info__contact">
+                    {{ Icon('fas fa-phone') }}
+                    <span class="ghost">Телефон:</span>
+                    <a href="tel:0000000000" title="Позвонить менеджеру по телефону +7 (990) 000-00-00" aria-label="Позвонить менеджеру по телефону +7 (990) 000-00-00">+7 (990) 000-00-00</a>
+                </p>
+            </li>
+            <li class="contact-info__item">
+                <p class="contact-info__contact">
+                    {{ Icon('fas fa-envelope') }}
+                    <span class="ghost">E-mail:</span>
+                    <a href="mailto:hello@travelme.ru">hello@travelme.ru</a>
+                </p>
+            </li>
+        </ul>
+    </address>
+{% endmacro %}

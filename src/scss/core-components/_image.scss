@@ -1,0 +1,31 @@
+// Image styles
+
+img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.lazy {
+    @include trs($prop: opacity);
+    background: {
+        color: $color-3--6;
+        image: url('../images/logos/logo.svg') !important;
+        position: center center;
+        repeat: no-repeat;
+        size: 50% auto;
+    }
+
+    &.lazyloading {
+        animation: animatedImageLoader 2s infinite;
+    }
+
+    &.lazyloaded:not(.is-no-image) {
+        animation: fadeIn 300ms linear forwards;
+        background-image: none !important;
+    }
+
+    &.not-loaded {
+        background-image: image('placeholder-image-not-loaded.svg') !important;
+    }
+}

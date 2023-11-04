@@ -1,0 +1,76 @@
+// Box sizing rules
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Reset inner paddings
+// Remove default styles for all ul and ol which has class attribute
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+// Reset outer margins
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+// Set base settings for body tag.
+body {
+    line-height: 1.5;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+}
+
+// elements that don't have a class get default style
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+// Default image styles
+img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+// Inherit fonts for form elements
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+// Remove animation if it's disabled by user.
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

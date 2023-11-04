@@ -1,0 +1,16 @@
+// Section styles
+.section {
+    margin: 100px 0;
+
+    &__title {
+        align-items: flex-start;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__more-links {
+        @extend %button-links-group;
+        justify-content: center;
+        margin-top: 45px;
+    }
+}

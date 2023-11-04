@@ -1,0 +1,21 @@
+{#
+    Insert title element.
+    @param {string} text - title text.
+    @param {string} tag - title heading tag.
+    @param {string} className - title custom class name.
+#}
+{% macro TitleDefault(
+    text = 'Title text',
+    tag = 'h2',
+    className = '',
+    description = false
+) %}
+    <{{ tag }} class="title {{ className }}">
+        <span class="title__content">
+            <span class="title__text">{{ text }}</span>
+            {% if description %}
+                <span class="title__description">{{ description }}</span>
+            {% endif %}
+        </span>
+    </{{ tag }}>
+{% endmacro %}

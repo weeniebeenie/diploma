@@ -1,0 +1,80 @@
+.blog {
+    background-color: $color-3--10;
+    margin: 70px 0 115px;
+    padding: 145px 0 85px;
+    position: relative;
+
+    @include breakpoint(small down) {
+        margin: 0 0 60px;
+        padding: 102px 0 60px;
+    }
+
+    &::before {
+        @include absolute(0, null, null, 0);
+        @include size(100%, 50px);
+        background-color: $color-white;
+        border-radius: 0 0 50px 50px;
+        content: '';
+        pointer-events: none;
+    }
+
+    &__container {
+        @extend %container;
+        position: relative;
+    }
+
+    .blog-list {
+        margin: 0 -23px;
+    }
+
+    .blog-carousel {
+        margin: 0 -13px;
+    }
+
+    .section__title {
+        .title {
+            padding-bottom: 60px;
+        }
+    }
+}
+
+.blog-carousel {
+    @include breakpoint(small down) {
+        max-width: 282px;
+    }
+
+    &__navigation {
+        @include absolute(0, null, null, 170px);
+        z-index: 2;
+
+        @include breakpoint(small down) {
+            left: 140px;
+        }
+    }
+
+    &__container {
+        @include breakpoint(small down) {
+            overflow: visible;
+        }
+    }
+
+    &__item {
+        padding: 0 13px;
+    }
+}
+
+.blog-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &__item {
+        margin-bottom: 22px;
+        padding: 0 23px;
+        width: 25%;
+
+        @include breakpoint(medium down) {
+            width: 50%;
+        }
+    }
+}
