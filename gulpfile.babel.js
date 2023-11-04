@@ -17,6 +17,9 @@ const cleanhtml = require('gulp-cleanhtml');
 // Images
 const imagecomp = require('compress-images');
 const clean = require('gulp-clean');
+// Deploy
+const ghPages = require('gh-pages');
+const path = require('path');
 
 /**
  * Override nunjucks environment
@@ -201,6 +204,13 @@ function cleandist() {
 }
 
 /**
+ * 📝 Deploy to GitHub Pages
+ */
+function deploy(cb) {
+    ghPages.publish(path.join(process.cwd(), './dist'), cb);
+}
+
+/**
  * 📝 Watch
  */
 function startwatch() {
@@ -225,6 +235,7 @@ exports.icons = icons;
 exports.images = images;
 exports.cleanimg = cleanimg;
 exports.cleandist = cleandist;
+exports.deploy = deploy;
 exports.build = series(cleandist, scripts, styles, views, fonts, fontawesome, icons, images);
 
 exports.default = parallel(scripts, styles, views, fonts, fontawesome, icons, images, browsersync, startwatch);
