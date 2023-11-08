@@ -1,0 +1,58 @@
+.ce-gallery {
+    margin: 27px 0;
+
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -20px;
+
+        @include breakpoint(small down) {
+            flex-direction: column;
+        }
+    }
+
+    &__column {
+        padding: 20px;
+        width: 100%;
+
+        @include breakpoint(small down) {
+            padding: 10px 20px;
+        }
+
+        .is-columns-2 & {
+            width: 50%;
+
+            @include breakpoint(small down) {
+                width: 100%;
+            }
+        }
+    }
+
+    &__item {
+        border-radius: 20px;
+        display: block;
+        overflow: hidden;
+    }
+
+    &__figure {
+        @include size(100%, auto);
+        display: table;
+        margin: 0;
+    }
+
+    &__image {
+        img {
+            @include size(100%, auto);
+            display: block;
+        }
+    }
+
+    &__caption {
+        @include font($typo-1, 1.4rem, $normal, normal);
+        caption-side: bottom;
+        color: $color-3--5;
+        display: table-caption;
+        line-height: 1.6;
+        padding: 10px 0 0 20px;
+    }
+}

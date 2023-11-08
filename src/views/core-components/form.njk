@@ -1,0 +1,151 @@
+{%- from 'views/utils/utils.njk' import setAttr, setAttributes -%}
+
+{#
+    Insert input core input field with wrappers and core configuration.
+    @param {string} type - input type.
+    @param {string|boolean} label - input label text or false if label should be rendered.
+    @param {boolean} required - set input required attribute.
+    @param {boolean} disabled - set input disabled attribute.
+    @param {boolean} readonly - set input readonly attribute.
+    @param {string} placeholder - set input placeholder attribute.
+    @param {string} value - custom value.
+    @param {string} id - custom id.
+    @param {string} name - set input name attribute.
+    @param {string} wrapperModifier - add wrapper class name.
+    @param {string} labelModifier - add label class name.
+    @param {string} fieldClass - add class for input.
+    @param {object} wrapperAttrs - add attributes for wrapper element.
+    @param {object} customAttrs - add attributes for form element.
+#}
+{%- macro FormField(
+    type = 'text',
+    label = 'Field label',
+    required = false,
+    disabled = false,
+    readonly = false,
+    placeholder = '',
+    value = '',
+    title = '',
+    id = false,
+    options = [
+        {
+            value: '',
+            text: 'По умолчанию'
+        },
+        {
+            value: '1',
+            text: 'Опция 1'
+        },
+        {
+            value: '2',
+            text: 'Опция 2'
+        },
+        {
+            value: '3',
+            text: 'Опция 3'
+        }
+    ],
+    name = '',
+    wrapperModifier = '',
+    labelModifier = '',
+    fieldClass = '',
+    wrapperAttrs = {},
+    customAttrs = {}
+) -%}
+    {%- set uid = range(1000000 | random) -%}
+    {%- set fid = 'field-' + uid -%}
+    {%- set fieldName = name or 'field_' + type + '_' + uid -%}
+
+    <div class="form__field-wrapper {{ wrapperModifier }}" {{ setAttributes(wrapperAttrs) }}>
+        {%- if label !== false -%}
+            <label for="{{ id or fid }}" class="form__label {{ labelModifier }}">
+                {{ label | safe }}
+                {{- '<em class="required" aria-hidden="true">(Obligatoire)</em>' | safe if required -}}
+                {{- ('<span class="text-help">' + textHelp + '</span>') | safe if textHelp -}}
+                {{- ('<strong class="text-help is-alert">' + textAlert + '</strong>') | safe if textAlert -}}
+            </label>
+        {%- endif -%}
+
+        {%- if type === 'select' -%}
+            {# SELECT #}
+            <select
+                name="{{ fieldName }}"
+                id="{{ id or fid }}"
+                class="form__field {{ fieldClass }}"
+                {{ setAttr('value', value) }}
+                {{ setAttr('disabled', disabled) }}
+                {{ setAttr('readonly', readonly) }}
+                {{ setAttr('required', required) }}
+                {{ setAttr('title', title) }}
+                {{ setAttributes(customAttrs) }}
+            >
+                {%- if caller -%}
+                    {{ caller() }}
+                {%- else -%}
+                    {%- for option in options -%}
+                        <option value="{{ option.value }}">{{ option.text }}</option>
+                    {%- endfor -%}
+                {%- endif -%}
+            </select>
+        {%- else -%}
+            {# CUSTOM #}
+            <input
+                type="{{ type }}"
+                name="{{ fieldName }}"
+                id="{{ id or fid }}"
+                class="form__field {{ fieldClass }}"
+                {{ setAttr('placeholder', placeholder or 'Indication de saisie' if not customPlaceholder) }}
+                {{ setAttr('value', value) }}
+                {{ setAttr('disabled', disabled) }}
+                {{ setAttr('readonly', readonly) }}
+                {{ setAttr('required', required) }}
+                {{ setAttr('title', title) }}
+                {{ setAttributes(customAttrs) }}
+            >
+        {%- endif -%}
+        {{ caller() if caller }}
+    </div>
+{%- endmacro -%}
+
+{#
+    Insert form element.
+    @param {string} className - add class name for form element.
+    @param {string} legend - add legend text.
+    @param {string} legendTag - set tag name for legend element.
+    @param {string} fieldsetClassName - add class name for fieldset element.
+    @param {string} legendClassName - add class name for legend element.
+    @param {object} attrs - object with attributes.
+#}
+{% macro FormWrapper(
+    tag = 'form',
+    className = 'js-validator-form',
+    legend = 'Form legend',
+    legendTag = 'legend',
+    fieldsetClassName = '',
+    legendClassName = '',
+    id = '',
+    attrs = {},
+    method = 'POST',
+    action = '/'
+) %}
+
+    {% set fieldsetTag = 'fieldset' if legendTag === 'legend' else 'div' %}
+    {% set role = 'group' if legendTag !== 'legend' %}
+    {% set uid = range(10000000) | random %}
+    {% set described = 'generated-' + uid if legendTag !== 'legend' %}
+
+    <{{tag}} class="form {{ className }}" {%- if tag == 'form' -%} {{ setAttr('method', method) }} action="{{ action }}" enctype="multipart/form-data" {%- endif -%} {{ setAttr('id', id) }} {{ setAttributes(attrs) }}>
+        {%- if legend -%}
+            <{{ fieldsetTag }}
+                class="form__fieldset {{ fieldsetClassName }}"
+                {{ setAttr('role', role) }}
+                {{ setAttr('aria-describedby', described) }}
+            >
+                <{{ legendTag }} class="legend form__legend {{ legendClassName }}" {{ setAttr('id', described) }}>{{ legend | safe }}</{{ legendTag }}>
+                {{ caller() if caller }}
+            </{{ fieldsetTag }}>
+        {%- else -%}
+            {{ caller() if caller }}
+        {%- endif -%}
+    </{{tag}}>
+{% endmacro %}

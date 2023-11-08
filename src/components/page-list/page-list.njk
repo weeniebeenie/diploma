@@ -1,0 +1,26 @@
+{%- from 'views/core-components/pager.njk' import Pager -%}
+
+{#
+    PageList template.
+    Renders default structure for list template.
+    @param {number} itemsCount - count of list items, passed to numberArticles
+    @param {function|string} list - list template or macro
+#}
+{%- macro PageList(
+    itemsCount = 8,
+    list = false,
+    pagerType = 'default'
+) -%}
+    <div class="list-wrapper">
+        <p class="list-wrapper__heading ghost" aria-live="polite" aria-atomic="true" role="heading" aria-level="2">
+            Показаны с
+            <span class="js-ajax-info-items">1</span>
+            по
+            <span class="js-ajax-info-count">{{ itemsCount }}</span>
+            из
+            <span class="js-ajax-info-total">37</span> всего
+        </p>
+        {{ (list.val or list) | safe }}
+        {{ Pager(type = pagerType) }}
+    </div>
+{%- endmacro -%}

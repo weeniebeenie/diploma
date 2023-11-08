@@ -92,7 +92,7 @@
 {%- macro ExcursionsList() -%}
     <ul class="excursions-list">
         {% for title, teaser, time in itemsParams %}
-            <li class="excursions-list__item">
+            <li class="excursions-list__item appearance-animation from-bottom">
                 {{ ExcursionItem(title, teaser, time, index = loop.index) }}
             </li>
         {% endfor %}
@@ -108,7 +108,7 @@
     moreButton = true
 ) -%}
     {% call Section(className = 'excursions-home', container = 'excursions-home__container') %}
-        <div class="section__title">
+        <div class="section__title appearance-animation flip-up">
             {{ Title.TitleDefault(
                 text = titleText
             ) }}
@@ -117,7 +117,7 @@
             {{ ExcursionsList() }}
         </div>
         {% if moreButton %}
-            <div class="section__more-links">
+            <div class="section__more-links appearance-animation from-bottom">
                 {{ Link(
                     href = '#',
                     text = 'Все экскурсии',

@@ -119,14 +119,14 @@
 
             {%- if settings.type === 'no-image' -%}
                 {% if loop.last %}
-                    <img data-src='{{ ImageExpander(dimensions[0], dimensions[1]) }}' src='{{ ImageExpander(dimensions[0], dimensions[1]) }}' alt="{{ settings.alt or 'Lorem ipsum dolor sit amet' }}" class='lazy'>
+                    <img data-src='{{ ImageExpander(dimensions[0], dimensions[1]) }}' src='{{ ImageExpander(dimensions[0], dimensions[1]) }}' alt="{{ settings.alt or lorem(1) }}" class='lazy'>
                 {% endif %}
             {%- else -%}
                 {% set expanderOrImage = ImageExpander(dimensions[0], dimensions[1], imageUrl if settings.image else '') %}
                 {%- if not loop.last -%}
                     <source data-srcset='{{ imageUrl }}' srcset='{{ expanderOrImage }}' media='(max-width: {{ mediaWidth or dimensions[0] }}px)'>
                 {%- else -%}
-                    <img data-src='{{ imageUrl }}' src='{{ expanderOrImage }}' alt="{{ settings.alt or 'Lorem ipsum dolor sit amet' }}" class='lazy lazyload'>
+                    <img data-src='{{ imageUrl }}' src='{{ expanderOrImage }}' alt="{{ settings.alt or lorem(1) }}" class='lazy lazyload'>
                 {%- endif -%}
             {%- endif -%}
         {%- endfor -%}

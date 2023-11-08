@@ -11,7 +11,7 @@
     {% call wrapper(
         className = 'logo',
         tag = 'h1' if isHome,
-        href = '' if isHome else '#',
+        href = '' if isHome else './index.html',
         attrs = {} if isHome else { title: siteName + ' (вернуться на главную страницу)' }
     ) %}
         <span class="logo__image">

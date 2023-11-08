@@ -14,10 +14,14 @@
 // Import modern reset
 @import 'base/reset';
 
+// Import vendors
+@import '../../node_modules/@fancyapps/ui/dist/fancybox/fancybox.css';
+
 // import site base styles
 @import 'base/base';
 @import 'base/container';
 @import 'base/typography';
+@import 'base/rte';
 
 // Import Libs
 @import '../../node_modules/swiper/swiper.scss';
@@ -29,16 +33,21 @@
 @import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
 
 // import core helpers styles
-@import 'core-components/carousel';
-@import 'core-components/form';
-@import 'core-components/form-label';
-@import 'core-components/form-input';
 @import 'core-components/button';
 @import 'core-components/image';
 @import 'core-components/section';
 @import 'core-components/title';
 @import 'core-components/item-title';
 @import 'core-components/dropdown';
+@import 'core-components/pager';
+@import 'core-components/ce-gallery';
+@import 'core-components/carousel';
+@import 'core-components/list';
+@import 'core-components/form';
+@import 'core-components/form-label';
+@import 'core-components/form-input';
+@import 'core-components/form-select';
+@import 'core-components/filter';
 
 // import site layouts styles
 @import 'layouts/site-wrapper';
@@ -47,7 +56,8 @@
 // BASE COMPONENTS
 @import '../components/social-networks/social-networks';
 @import '../components/contact-info/contact-info';
-//@import '../components/navbar/navbar';
+@import '../components/navbar/navbar';
+@import '../components/back-link/back-link';
 //@import '../components/menu-skip/menu-skip';
 //@import '../components/error-block/error-block';
 
@@ -64,9 +74,8 @@
 @import '../components/main-menu-toggle/main-menu-toggle';
 @import '../components/main-menu/main-menu';
 
-
 // HEADING
-//@import '../components/heading/heading';
+@import '../components/heading/heading';
 
 // COVER COMPONENTS
 @import '../components/cover/cover';
@@ -87,6 +96,16 @@
 
 // SUBSCRIBE COMPONENTS
 @import '../components/subscribe/subscribe';
+
+// DESCRIPTION COMPONENTS
+@import '../components/description/description';
+
+// ADVANTAGES COMPONENTS
+@import '../components/advantages/advantages';
+@import '../components/advantages/advantage-item';
+
+// STEPS COMPONENTS
+@import '../components/steps/steps';
 
 // FOOTER COMPONENTS
 @import '../components/footer/footer';

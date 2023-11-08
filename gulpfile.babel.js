@@ -28,6 +28,13 @@ const path = require('path');
 function nunjucksEnv(env) {
     const envGlobals = {
         Helpers: {
+            path: {
+                images: 'images',
+                js: 'js',
+                css: 'css',
+                fonts: 'fonts',
+            },
+
             /**
              * Merge two objects/arrays.
              * @param {object} x - object to merge (default settings).
@@ -66,7 +73,7 @@ function nunjucksEnv(env) {
          * @param {number} sentenceUpperBound - Maximum words per sentence.
          * @param {string} format - Plain text or html.
          */
-        lorem: (count = '10', units = 'sentences', makeSentence = false, sentenceLowerBound = 5, sentenceUpperBound = 15, format = 'html') => {
+        lorem: (count = '10', units = 'sentences', makeSentence = false, sentenceLowerBound = 5, sentenceUpperBound = 15, format = 'plain') => {
             const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 
             const str = loremIpsum.loremIpsum({
@@ -159,15 +166,6 @@ function fontawesome() {
 }
 
 /**
- * 📝 Icons
- */
-function icons() {
-    return src('src/icons/**/*.*')
-        .pipe(dest('dist/icons/'))
-        .pipe(browserSync.stream());
-}
-
-/**
  * 📝 Compress images
  */
 async function images() {
@@ -218,7 +216,6 @@ function startwatch() {
     watch(['src/**/*.js', '!src/**/*.bundle.js'], scripts);
     watch(['src/**/*.njk'], views);
     watch(['src/fonts/**/*'], fonts);
-    watch(['src/icons/**/*'], icons);
     watch('src/images/**/*', images);
 }
 
@@ -231,11 +228,10 @@ exports.scripts = scripts;
 exports.views = views;
 exports.fonts = fonts;
 exports.fontawesome = fontawesome;
-exports.icons = icons;
 exports.images = images;
 exports.cleanimg = cleanimg;
 exports.cleandist = cleandist;
 exports.deploy = deploy;
-exports.build = series(cleandist, scripts, styles, views, fonts, fontawesome, icons, images);
+exports.build = series(cleandist, scripts, styles, views, fonts, fontawesome, images);
 
-exports.default = parallel(scripts, styles, views, fonts, fontawesome, icons, images, browsersync, startwatch);
+exports.default = parallel(scripts, styles, views, fonts, fontawesome, images, browsersync, startwatch);

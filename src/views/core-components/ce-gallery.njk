@@ -1,0 +1,45 @@
+{%- from 'views/utils/utils.njk' import setAttr -%}
+{% from 'views/core-components/image.njk' import Image %}
+
+{% macro Gallery(
+    columns = 1,
+    uid = range(100) | random,
+    images = [
+        {
+            size: ['480x280?479', '768x448?767', '960x560'],
+            figcaption: false,
+            alt: '[IMAGE ALT]',
+            animationClass: 'appearance-animation from-bottom'
+        }
+    ]
+) %}
+    <div class="ce-gallery {{ 'is-columns-' + images.length }}">
+        <div class="ce-gallery__row">
+            {% for image in images %}
+                <div class="ce-gallery__column {{ image.animationClass }}">
+                    <figure class="ce-gallery__figure" role="figure" {{ setAttr('aria-label', image.figcaption) if image.figcaption }}>
+                        <a
+                            href="https://picsum.photos/1440/458?image=49"
+                            class="ce-gallery__item"
+                            data-fancybox="gallery-id-{{ uid }}"
+                            data-caption="{{ image.figcaption }}"
+                            aria-haspopup="dialog"
+                            role="button"
+                            target="_blank"
+                        >
+                            {{ Image({
+                                className: 'ce-gallery__image',
+                                sizes: image.size,
+                                serviceID: range(50) | random,
+                                alt: image.alt + ' - Посмотреть изображение в модальном окне'
+                            }) }}
+                        </a>
+                        {% if image.figcaption %}
+                            <figcaption class="ce-gallery__caption">{{ image.figcaption }}</figcaption>
+                        {% endif %}
+                    </figure>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

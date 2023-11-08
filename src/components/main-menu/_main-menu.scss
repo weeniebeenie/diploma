@@ -7,7 +7,6 @@
     overflow-x: hidden;
     overflow-y: auto;
     transform: translateX(120%);
-    visibility: hidden;
     will-change: transform;
     z-index: 100;
 
@@ -24,6 +23,7 @@
         border: none;
         border-radius: 50%;
         color: $color-3--13;
+        cursor: pointer;
 
         @include on-event() {
             background-color: $color-3--5;
@@ -97,6 +97,7 @@
     &__item-link {
         @include font(null, 1.8rem, $normal);
         @include trs();
+        border-radius: 25px;
         color: $color-3--5;
         display: flex;
         margin: 0 -20px;

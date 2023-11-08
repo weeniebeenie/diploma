@@ -15,3 +15,29 @@
         background-size: 50% auto;
     }
 }
+
+.appearance-animation {
+    @include trs($duration: 0.5s);
+    opacity: 0;
+
+    &.flip-up {
+        transform: perspective(2000px) rotateX(-91deg);
+    }
+
+    &.from-bottom {
+        transform: translateY(50px);
+    }
+
+    &.from-left {
+        transform: translateX(-50px);
+    }
+
+    &.from-right {
+        transform: translateX(50px);
+    }
+
+    &.is-showed {
+        opacity: 1;
+        transform: none;
+    }
+}

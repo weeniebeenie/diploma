@@ -63,24 +63,11 @@ fieldset {
         }
     }
 
-    &__field-wrapper {
-        flex: 0 0 auto;
+    &__column {
         padding: 0 23px;
-        position: relative;
-        width: auto;
 
         @include breakpoint(small down) {
             padding: 4px 20px;
-        }
-
-        &.is-inline {
-            align-items: center;
-            display: flex;
-
-            #{$this}__label {
-                flex-shrink: 0;
-                margin: 0 5px 0 0;
-            }
         }
 
         &.col-md-6 {
@@ -90,16 +77,21 @@ fieldset {
                 width: 100%;
             }
         }
+    }
 
-        + #{$this}__field-wrapper {
-            &::before {
-                @include absolute(0, null, null, 20px);
-                @include size(calc(100% - 40px), 1px);
-                background-color: $color-3--1;
+    &__field-wrapper {
+        flex: 0 0 auto;
+        margin: 0 0 15px;
+        position: relative;
+        width: auto;
 
-                @include breakpoint(small down) {
-                    content: '';
-                }
+        &.is-inline {
+            align-items: center;
+            display: flex;
+
+            #{$this}__label {
+                flex-shrink: 0;
+                margin: 0 20px 0 0;
             }
         }
     }

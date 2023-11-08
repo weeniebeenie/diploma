@@ -10,13 +10,14 @@
     BlogItem template.
 #}
 {%- macro BlogItem(
+    link = 'detail-page.html',
     imageSizes = ['323x228'],
     title = 'Default title text'
 ) -%}
     <article class="blog-item">
         <div class="blog-item__content">
             <h3 class="item-title blog-item__title">
-                <a href="#" class="blog-item__title-link">
+                <a href="{{ link }}" class="blog-item__title-link">
                     <span class="underline">{{ title }}</span>
                 </a>
             </h3>
@@ -45,10 +46,12 @@
     BlogList template.
     @param {number} count - items count.
 #}
-{%- macro BlogList() -%}
-    <ul class="blog-list">
-        {% for item in range(4) %}
-            <li class="blog-list__item">
+{%- macro BlogList(
+    count = 12
+) -%}
+    <ul class="list is-columns-4 is-columns-md-2 is-columns-sm-2">
+        {% for item in range(count) %}
+            <li class="list__item appearance-animation from-bottom">
                 {{ BlogItem() }}
             </li>
         {% endfor %}
@@ -63,7 +66,7 @@
 ) -%}
     {% call CarouselWrapper('blog-carousel') %}
         {% for item in range(count) %}
-            <li class="blog-carousel__item swiper-slide">
+            <li class="blog-carousel__item swiper-slide appearance-animation from-bottom">
                 {{ BlogItem(title = 'Resource ' + loop.index) }}
             </li>
         {% endfor %}
@@ -75,13 +78,13 @@
     Template for blog on home page.
 #}
 {%- macro BlogHome(
-    title = 'Блог',
+    titleText = 'Блог',
     isCarousel = false
 ) -%}
     {% call Section(className = 'blog', container = 'blog__container') %}
-        <div class="section__title">
+        <div class="section__title appearance-animation flip-up">
             {{ Title.TitleDefault(
-                text = title
+                text = titleText
             ) }}
             {% if isCarousel %}
                 {{ Link(
@@ -96,7 +99,7 @@
             {% if isCarousel %}
                 {{ BlogCarousel() }}
             {% else %}
-                {{ BlogList() }}
+                {{ BlogList(count = 4) }}
             {% endif %}
         </div>
     {% endcall %}

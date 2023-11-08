@@ -1,0 +1,111 @@
+/*
+ * Pager component.
+ */
+
+.pager {
+    $this: &;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    & &__list {
+        @include font($typo-1, 1.3rem, $medium);
+        background-color: $color-3--10;
+        border-radius: 25px;
+        display: flex;
+        list-style: none;
+        margin: 30px auto 10px;
+        padding: 9px 22px;
+
+        @include breakpoint(small down) {
+            padding: 9px;
+        }
+    }
+
+    &__item {
+        align-items: center;
+        display: inline-flex;
+        margin: 0 2.5px;
+
+        #{$this}__link {
+            @include font($typo-1, 1.3rem, $medium);
+            @include size(32px);
+            @include trs();
+            align-items: center;
+            border: none;
+            border-radius: 50%;
+            color: $color-3--17;
+            display: flex;
+            justify-content: center;
+            padding: 0 0.5em;
+            text-decoration: none;
+        }
+
+        a#{$this}__link {
+            &:hover,
+            &:focus {
+                background-color: $color-1--1;
+            }
+        }
+
+        span#{$this}__link {
+            background-color: $color-1--1;
+            cursor: auto;
+        }
+
+        &.is-return {
+            margin: 0;
+
+            #{$this}__link {
+                @include font($typo-1, 1.6rem, $normal);
+                @include size(auto);
+                border-radius: 0;
+                color: $color-3--5;
+                padding: 10px 0;
+                transform: translateX(-238px);
+
+                @include fa-icon-style(false) {
+                    @include size(23px);
+                    @include trs();
+                    align-items: center;
+                    border: 1.5px solid $color-3--17;
+                    border-radius: 50%;
+                    display: flex;
+                    font-size: 1.2rem;
+                    justify-content: center;
+                    margin-right: 10px;
+                }
+
+                @include on-event() {
+                    background-color: transparent;
+
+                    @include fa-icon-style(false) {
+                        transform: translateX(-5px);
+                    }
+
+                    #{$this}__text {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    &__separator {
+        @include font($typo-1, 1.3rem, $medium);
+        color: $color-3--17;
+        padding: 0 0.5em;
+    }
+
+    &.is-top {
+        justify-content: flex-start;
+        order: -1;
+
+        #{$this}__list {
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+        }
+    }
+}

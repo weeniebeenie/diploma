@@ -1,0 +1,73 @@
+{%- from 'views/utils/utils.njk' import wrapper as _wrapper with context -%}
+{%- from 'views/core-components/form.njk' import FormWrapper -%}
+
+{#
+    Insert filter fields wrapper.
+    @param {string} className - filter fields wrapper class modifier.
+#}
+{%- macro FieldsWrapper(className = '') -%}
+    <div class="filter__fields {{ className }}">
+        {{ caller() if caller }}
+    </div>
+{%- endmacro -%}
+
+{#
+    Insert filter fields group.
+    @param {string} groupClassName - set custom group class name modifier.
+#}
+{%- macro FieldsGroup(
+    groupClassName = ''
+) -%}
+    <div class="filter__fields-group {{ groupClassName }}">
+        {{ caller() if caller }}
+    </div>
+{%- endmacro -%}
+
+{#
+    Insert filter fields wrapper.
+    @param {string} className - filter fields wrapper class modifier.
+#}
+{%- macro FilterField(className = 'col-xs') -%}
+    <div class="filter__column {{ className }}">
+        {{ caller() if caller }}
+    </div>
+{%- endmacro -%}
+
+{#
+    Insert filter element.
+    @param {string} tag - set tag for form.
+    @param {string} formClassName - set class modifier for form.
+    @param {string} wrapperClassName - set custom class modifier for filter wrapper element.
+    @param {string} containerClass - set class modifier for filter container element.
+    @param {string} legendTag - set filter legend tag.
+    @param {string} legend - set filter legend text.
+#}
+{%- macro FilterWrapper(
+    tag = 'form',
+    formClassName = '',
+    wrapperClassName = '',
+    containerClass = 'filter__container',
+    legendTag = 'h2',
+    legend = 'Фильтровать по',
+    legendClassName = 'ghost'
+) -%}
+    <div class="filter-wrapper {{ wrapperClassName }} appearance-animation from-right">
+        <div class="filter">
+            {% call _wrapper(className = containerClass) %}
+                <nav role="navigation" aria-label="Фильтровать записи">
+                    {% call FormWrapper(
+                        tag = tag,
+                        className = formClassName,
+                        legendTag = legendTag,
+                        legend = legend,
+                        legendClassName = legendClassName
+                    ) %}
+                        <div class="filter__wrapper-inner">
+                            {{ caller() if caller }}
+                        </div>
+                    {% endcall %}
+                </nav>
+            {% endcall %}
+        </div>
+    </div>
+{%- endmacro -%}

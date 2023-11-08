@@ -1,0 +1,85 @@
+$list-gap-desktop: 46px;
+$list-gap-tablet: 27px;
+$list-gap-mobile: 27px;
+
+%list {
+    $this: &;
+
+    @extend %clear-list-styles;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -#{$list-gap-desktop * 0.5};
+    margin-right: -#{$list-gap-desktop * 0.5};
+
+    @include breakpoint(medium down) {
+        margin-left: -#{$list-gap-tablet * 0.5};
+        margin-right: -#{$list-gap-tablet * 0.5};
+    }
+
+    @include breakpoint(small down) {
+        margin-left: -#{$list-gap-mobile * 0.5};
+        margin-right: -#{$list-gap-mobile * 0.5};
+    }
+
+    &:empty {
+        display: none;
+    }
+}
+
+%list-item {
+    margin-bottom: 68px;
+    padding-left: #{$list-gap-desktop * 0.5};
+    padding-right: #{$list-gap-desktop * 0.5};
+    width: 100%;
+
+    @include breakpoint(medium down) {
+        padding-left: #{$list-gap-tablet * 0.5};
+        padding-right: #{$list-gap-tablet * 0.5};
+    }
+
+    @include breakpoint(small down) {
+        margin-bottom: 20px;
+        padding-left: #{$list-gap-mobile * 0.5};
+        padding-right: #{$list-gap-mobile * 0.5};
+    }
+}
+
+.list {
+    $this: &;
+
+    &[class] {
+        @extend %list;
+    }
+
+    &__item {
+        @extend %list-item;
+    }
+
+    @for $i from 1 through 6 {
+        &.is-columns-#{$i} {
+            #{$this}__item {
+                width: #{math.div(100%, $i)};
+            }
+        }
+    }
+
+    @for $i from 1 through 6 {
+        @include breakpoint(medium down) {
+            &.is-columns-md-#{$i} {
+                #{$this}__item {
+                    width: #{math.div(100%, $i)};
+                }
+            }
+        }
+    }
+
+    @for $i from 1 through 6 {
+        @include breakpoint(small down) {
+            &.is-columns-sm-#{$i} {
+                #{$this}__item {
+                    width: #{math.div(100%, $i)};
+                }
+            }
+        }
+    }
+}

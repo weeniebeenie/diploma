@@ -14,7 +14,7 @@
 
     @include on-event() {
         #{$this}__content {
-            min-height: 100%;
+            background-size: 100% 100%;
         }
     }
 
@@ -31,10 +31,15 @@
 
     &__content {
         @include absolute(null, 0, 0, 0);
-        @include size(100%, auto);
+        @include size(100%);
         @include trs();
         align-items: flex-start;
-        background-image: linear-gradient(to top, rgba($color-3--5, 79%) 0%, transparent 100%);
+        background: {
+            image: linear-gradient(to top, rgba($color-3--5, 79%) 0%, transparent 100%);
+            size: 100% 50%;
+            position: left 0 bottom 0;
+            repeat: no-repeat;
+        }
         display: flex;
         flex-direction: column;
         justify-content: flex-end;

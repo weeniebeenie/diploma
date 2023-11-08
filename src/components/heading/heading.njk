@@ -1,0 +1,31 @@
+{% from 'views/core-components/image.njk' import Image %}
+
+{% macro Heading(
+    title = 'Default title',
+    teaser = false,
+    imageSizes = false
+) %}
+    <header class="heading">
+        <div class="heading__container">
+            <div class="heading__inner">
+                <div class="heading__text">
+                    {% if title %}
+                        <h1 class="heading__title appearance-animation flip-up">{{ title }}</h1>
+                    {% endif %}
+                    {% if teaser %}
+                        <p class="heading__teaser appearance-animation from-bottom">{{ teaser }}</p>
+                    {% endif %}
+                </div>
+                {% if imageSizes %}
+                    <div class="heading__image-wrapper appearance-animation from-bottom">
+                        {{ Image({
+                            className: 'heading__image',
+                            sizes: imageSizes,
+                            serviceID: 177
+                        }) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+{% endmacro %}

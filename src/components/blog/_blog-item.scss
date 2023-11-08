@@ -4,7 +4,6 @@
     @extend %link-block-context;
     display: flex;
     flex-direction: column-reverse;
-    height: 100%;
     margin: 0 auto;
     max-width: 323px;
 
@@ -43,6 +42,7 @@
     &__title {
         @include font(null, 1.6rem, $medium);
         color: $color-3--5;
+        line-height: 1.55;
 
         + #{$this}__read-more {
             margin-top: 20px;
@@ -60,7 +60,7 @@
         border: 1px solid $color-3--7;
         border-radius: 20px;
         color: $color-3--5;
-        padding: 7px 15px;
+        padding: 7px 21px;
 
         @include fa-icon-style(false) {
             margin-left: 5px;
@@ -71,7 +71,7 @@
         @include font(null, 1.3rem, $normal);
         color: $color-3--9;
         order: -1;
-        margin-bottom: 15px;
+        margin-bottom: 18px;
 
         @include fa-icon-style(false) {
             font-size: 1.5rem;

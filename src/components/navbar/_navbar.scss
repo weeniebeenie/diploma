@@ -1,0 +1,29 @@
+.navbar {
+    min-height: 10px;
+
+    @include breakpoint(medium down) {
+        padding-top: 30px;
+    }
+
+    &__container {
+        @extend %container;
+
+        @include breakpoint(medium down) {
+            max-width: 1000px;
+        }
+    }
+
+    &__list {
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__item {
+        &.is-absolute {
+            @include breakpoint(large only) {
+                @include absolute(80px, null, null, null);
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+.back-link {
+    $this: &;
+
+    @include font($typo-1, 1.6rem, $normal);
+    align-items: center;
+    border-radius: 22px;
+    color: $color-3--5;
+    display: flex;
+    padding: 10px 5px 10px 0;
+    text-decoration: none;
+
+    &__icon {
+        @include size(23px);
+        @include trs();
+        align-items: center;
+        border: 1.5px solid $color-3--17;
+        border-radius: 50%;
+        display: flex;
+        flex-shrink: 0;
+        font-size: 1.2rem;
+        justify-content: center;
+        margin-right: 10px;
+    }
+
+    &__text {
+        @extend %underline;
+    }
+
+    @include on-event() {
+        #{$this}__text {
+            background-size: 100% 100%;
+        }
+    }
+}

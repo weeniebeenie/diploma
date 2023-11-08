@@ -101,7 +101,7 @@
             @include font(null, 1.2rem, $normal);
             background: none;
             background: {
-                image: url('../icons/arrow-down.svg');
+                image: url('../images/icons/arrow-down.svg');
                 position: right 11px top 50%;
                 repeat: no-repeat;
             }
@@ -111,6 +111,7 @@
             color: $color-3--5;
             min-height: 30px;
             padding: 5px 24px 5px 13px;
+            width: auto;
             /* for Firefox */
             -moz-appearance: none;
             /* for Chrome */
@@ -156,7 +157,7 @@
             width: 0;
         }
         cursor: pointer;
-        color: $color-3--5;
+        color: $color-black;
         z-index: 4;
 
         @include breakpoint(small down) {
@@ -170,18 +171,17 @@
             z-index: 4;
         }
 
-        @include on-event() {
-            background-color: $color-3--5;
-            color: $color-white;
-        }
-
         @include fa-icon-style(false) {
-            color: $color-black;
             font-size: 2rem;
 
             @include breakpoint(small down) {
                 display: none;
             }
+        }
+
+        @include on-event() {
+            background-color: $color-3--5;
+            color: $color-white;
         }
 
         .btn__text {

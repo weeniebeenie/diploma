@@ -2,8 +2,12 @@
     $this: &;
 
     display: block;
-    padding: 0;
+    padding: 0 0 114px;
     width: 100%;
+
+    @include breakpoint(medium down) {
+        padding-bottom: 83px;
+    }
 
     &__container {
         position: relative;

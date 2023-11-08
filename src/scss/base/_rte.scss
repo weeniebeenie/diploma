@@ -1,0 +1,58 @@
+%rte-heading {
+    @include font($typo-1, null, $bold);
+    color: $color-3--5;
+    line-height: 1.2;
+
+    a {
+        color: inherit;
+
+        &:hover,
+        &:focus {
+            color: $color-black;
+        }
+    }
+}
+
+.rte {
+    h2 {
+        @extend %rte-heading;
+        @include font($typo-1, 2.6rem, $medium);
+        margin: 38px 0 27px;
+
+        @include breakpoint(small down) {
+            font-size: 2rem;
+        }
+    }
+
+    h3 {
+        @extend %rte-heading;
+        @include font($typo-1, 2.4rem, $medium);
+        margin: 38px 0 27px;
+
+        @include breakpoint(small down) {
+            font-size: 1.8rem;
+        }
+    }
+
+    h4 {
+        @extend %rte-heading;
+        @include font($typo-1, 2.2rem, $medium);
+        margin: 38px 0 27px;
+
+        @include breakpoint(small down) {
+            font-size: 1.6rem;
+        }
+    }
+
+    p {
+        @include font($typo-1, 1.6rem, $normal, normal);
+        color: $color-3--5;
+        line-height: 1.6;
+        margin: 0 0 26px;
+        word-break: break-word;
+
+        @include breakpoint(small down) {
+            font-size: 1.4rem;
+        }
+    }
+}

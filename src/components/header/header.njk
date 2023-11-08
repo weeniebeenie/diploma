@@ -1,3 +1,4 @@
+{%- from 'views/utils/utils.njk' import setAttr -%}
 {%- from 'views/core-components/icon.njk' import Icon -%}
 {%- from 'components/contact-info/contact-info.njk' import ContactInfo -%}
 {%- from 'components/logo/logo.njk' import Logo -%}
@@ -9,16 +10,16 @@
     {
         text: 'Направления',
         dropdown: [
-            { text: 'Санкт-Петербург' },
-            { text: 'Дубай' },
-            { text: 'Стамбул' },
-            { text: 'Карелия' },
-            { text: 'Калининград' },
-            { text: 'Мурманск' }
+            { text: 'Санкт-Петербург', link: '#' },
+            { text: 'Дубай', link: '#' },
+            { text: 'Стамбул', link: '#' },
+            { text: 'Карелия', link: '#' },
+            { text: 'Калининград', link: '#' },
+            { text: 'Мурманск', link: '#' }
         ]
     },
-    { text: 'О сервисе' },
-    { text: 'Блог' },
+    { text: 'О сервисе', link: 'about.html' },
+    { text: 'Блог', link: 'list-blog.html' },
     {
         text: 'Помощь клиентам',
         dropdown: 'contacts-info'
@@ -32,7 +33,7 @@
     <nav class="header-nav" role="navigation" aria-label="Основная навигация">
         <ul class="header-nav__list">
             {% for item in mainNav %}
-                <li class="header-nav__item {{ 'js-dropdown' if item.dropdown }}">
+                <li class="header-nav__item {{ 'js-dropdown' if item.dropdown }}" {{ setAttr('aria-haspopup', 'true') }}>
                     {% if item.dropdown %}
                         <button
                             type="button"
@@ -48,16 +49,16 @@
                                 {{ ContactInfo() }}
                             {% else %}
                                 <ul class="header-dropdown__list">
-                                    {% for link in item.dropdown %}
+                                    {% for item in item.dropdown %}
                                         <li class="header-dropdown__item">
-                                            <a href="#" class="header-dropdown__link">{{ link.text }}</a>
+                                            <a href="{{ item.link }}" class="header-dropdown__link">{{ item.text }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
                             {% endif %}
                         </div>
                     {% else %}
-                        <a class="header-nav__link" href="#">{{ item.text }}</a>
+                        <a class="header-nav__link" href="{{ item.link }}">{{ item.text }}</a>
                     {% endif %}
                 </li>
             {% endfor %}

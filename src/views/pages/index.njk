@@ -14,7 +14,9 @@
     {{ CoverHome() }}
     {{ DirectionsHome() }}
     {{ ExcursionsHome() }}
-    {{ BlogHome(isCarousel = true) }}
-{#    {{ BlogHome(title = 'Похожие статьи') }}#}
-    {{ Subscribe() }}
 {% endblock %}
+
+{%- block contentBottom -%}
+    {{ BlogHome(isCarousel = true) }}
+    {{ Subscribe() }}
+{%- endblock -%}

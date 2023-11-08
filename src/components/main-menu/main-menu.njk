@@ -5,13 +5,23 @@
 {% from 'components/search/search.njk' import SearchNav %}
 {%- from 'components/contact-info/contact-info.njk' import ContactInfo -%}
 
-{% set mainMenuLinks = ['О сервисе', 'Блог', 'Партнерская программа'] %}
+{% set mainMenuLinks = [
+    {
+        text: 'О сервисе', link: 'about.html'
+    },
+    {
+        text: 'Блог', link: 'list-blog.html'
+    },
+    {
+        text: 'Партнерская программа', link: 'partners.html'
+    }
+] %}
 
 {% macro MainMenu(
     isHome = false,
     menuLinks = mainMenuLinks
 ) %}
-    <div class="main-menu js-main-menu" role="dialog" aria-label="Основная навигация" aria-modal="true">
+    <div class="main-menu js-main-menu" role="dialog" aria-label="Основная навигация" aria-modal="true" aria-hidden="true" hidden>
         <div class="main-menu__container">
             <div class="main-menu__top-components">
                 <div class="main-menu__close-wrap">
@@ -44,9 +54,9 @@
             </div>
             <div class="main-menu__nav">
                 <ul class="main-menu__list">
-                    {% for link in menuLinks %}
+                    {% for item in menuLinks %}
                         <li class="main-menu__item">
-                            <a href="#" class="main-menu__item-link">{{ link }}</a>
+                            <a href="{{ item.link }}" class="main-menu__item-link">{{ item.text }}</a>
                         </li>
                     {% endfor %}
                 </ul>

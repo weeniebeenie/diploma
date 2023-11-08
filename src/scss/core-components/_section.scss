@@ -6,6 +6,11 @@
         align-items: flex-start;
         display: flex;
         justify-content: space-between;
+        margin-bottom: 63px;
+
+        @include breakpoint(small down) {
+            margin-bottom: 38px;
+        }
     }
 
     &__more-links {

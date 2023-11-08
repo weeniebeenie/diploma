@@ -1,0 +1,130 @@
+{%- from 'views/utils/utils.njk' import setAttr -%}
+{% from 'views/core-components/icon.njk' import Icon %}
+
+{% macro PagerItem(
+    modifier,
+    isSeparator = false,
+    isActive = false,
+    count,
+    pagerIcon = false,
+    pagerText,
+    ariaLabel,
+    textIsHidden = false
+) %}
+    <li class="pager__item {{ modifier }}">
+        {% if isSeparator %}
+            <span class="pager__separator">...</span>
+        {% else %}
+            <{{ 'span' if isActive else 'a href=#' }}
+                class="pager__link"
+                {{ setAttr('aria-current', 'page') if isActive }}
+                {{ setAttr('aria-label', 'Страница ' + ariaLabel + ' из ' + count) if ariaLabel }}
+            >
+                {{ Icon('pager__icon ' + pagerIcon) if pagerIcon }}
+                <span class="pager__text {{ 'ghost' if textIsHidden }}">{{ pagerText }}</span>
+            </{{ 'span' if isActive else 'a' }}>
+        {% endif %}
+    </li>
+{% endmacro %}
+
+{#
+    Insert pager default.
+#}
+{%- macro PagerDefault(
+    count = 10,
+    prev = true,
+    next = true,
+    first = true,
+    last = true
+) -%}
+    <nav class="pager appearance-animation from-bottom" role="navigation" aria-label="Пагинация">
+        <ul class="pager__list">
+            {% if first %}
+                {{ PagerItem(
+                    count = count,
+                    pagerText = 'Перейти на первую страницу',
+                    pagerIcon = 'fas fa-angles-left',
+                    ariaLabel = 1,
+                    textIsHidden = true
+                ) }}
+            {% endif %}
+            {% if prev %}
+                {{ PagerItem(
+                    count = count,
+                    pagerText = 'Перейти на предыдущую страницу',
+                    pagerIcon = 'fas fa-angle-left',
+                    ariaLabel = 1,
+                    textIsHidden = true
+                ) }}
+            {% endif %}
+
+            {% for item in range(4) %}
+                {% if loop.index === 4 %}
+                    {{ PagerItem(isSeparator = true) }}
+                {% else %}
+                    {{ PagerItem(
+                        count = count,
+                        pagerText = loop.index,
+                        ariaLabel = loop.index,
+                        isActive = true if loop.index === 1
+                    ) }}
+                {% endif %}
+            {% endfor %}
+
+            {{ PagerItem(
+                count = count,
+                pagerText = 10,
+                ariaLabel = 10
+            ) }}
+
+            {% if next %}
+                {{ PagerItem(
+                    count = count,
+                    pagerText = 'Перейти на следующую страницу',
+                    pagerIcon = 'fas fa-angle-right',
+                    ariaLabel = 2,
+                    textIsHidden = true
+                ) }}
+            {% endif %}
+            {% if last %}
+                {{ PagerItem(
+                    count = count,
+                    pagerText = 'Перейти на последнюю страницу',
+                    pagerIcon = 'fas fa-angles-right',
+                    ariaLabel = count,
+                    textIsHidden = true
+                ) }}
+            {% endif %}
+        </ul>
+    </nav>
+{%- endmacro -%}
+
+{#
+    Insert pager detail.
+    @param {string} modifier - modifier for pager element
+#}
+{% macro PagerDetail(
+    modifier
+) %}
+    <nav class="pager {{ modifier }}" role="navigation" aria-label="Пагинация">
+        <ul class="pager__list">
+            {{ PagerItem(
+                modifier = 'is-return',
+                pagerText = 'назад',
+                pagerIcon = 'fas fa-chevron-left'
+            ) }}
+        </ul>
+    </nav>
+{% endmacro %}
+
+{#
+    Insert pager element.
+    @param {string} type - type of pager element
+#}
+{% macro Pager(type) %}
+    {% if type === 'detail' %}
+        {{ PagerDetail(modifier = 'is-top') }}
+    {% else %}
+        {{ PagerDefault() }}
+    {% endif %}
+{% endmacro %}

@@ -26,11 +26,20 @@
 
     picture {
         display: flex;
+        overflow: hidden;
 
         img {
             @include size(100%, auto);
+            @include trs();
             display: block;
             max-width: 100%;
+            transform: scale(1);
+        }
+    }
+
+    @include on-event() {
+        img {
+            transform: scale(1.1);
         }
     }
 }

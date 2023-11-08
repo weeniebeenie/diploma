@@ -1,7 +1,7 @@
 .blog {
     background-color: $color-3--10;
     margin: 70px 0 115px;
-    padding: 145px 0 85px;
+    padding: 145px 0 38px;
     position: relative;
 
     @include breakpoint(small down) {
@@ -23,32 +23,32 @@
         position: relative;
     }
 
-    .blog-list {
-        margin: 0 -23px;
-    }
-
-    .blog-carousel {
-        margin: 0 -13px;
-    }
-
     .section__title {
-        .title {
-            padding-bottom: 60px;
-        }
+        margin-bottom: 54px;
     }
 }
 
 .blog-carousel {
+    margin: 0 -23px;
+
     @include breakpoint(small down) {
+        margin: 0 -13px;
         max-width: 282px;
     }
 
     &__navigation {
         @include absolute(0, null, null, 170px);
+        display: flex;
         z-index: 2;
 
         @include breakpoint(small down) {
             left: 140px;
+        }
+    }
+
+    &__control {
+        & + & {
+            margin-left: 14px;
         }
     }
 
@@ -59,22 +59,12 @@
     }
 
     &__item {
-        padding: 0 13px;
-    }
-}
-
-.blog-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    &__item {
-        margin-bottom: 22px;
+        margin-bottom: 68px;
         padding: 0 23px;
-        width: 25%;
 
-        @include breakpoint(medium down) {
-            width: 50%;
+        @include breakpoint(small down) {
+            margin-bottom: 20px;
+            padding: 0 13px;
         }
     }
 }

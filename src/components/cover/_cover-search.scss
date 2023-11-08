@@ -9,6 +9,40 @@
         padding: 5px 23px 15px;
     }
 
+    .form {
+        &__column + .form__column {
+            position: relative;
+
+            &::before {
+                @include absolute(50%, null, null, 0);
+                @include size(1px, 37px);
+                background-color: $color-3--18;
+                content: '';
+                transform: translateY(-50%);
+
+                @include breakpoint(small down) {
+                    @include absolute(0, null, null, 20px);
+                    @include size(calc(100% - 44px), 1px);
+                }
+            }
+        }
+
+        &__field-wrapper {
+            margin-bottom: 0;
+
+            &.is-inline {
+                .form__label {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &__field {
+            background-color: $color-white;
+            padding: 0 15px;
+        }
+    }
+
     &__btn {
         @include breakpoint(small down) {
             width: 100%;

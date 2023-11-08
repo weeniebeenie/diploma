@@ -1,0 +1,39 @@
+.filter-wrapper {
+    .heading + & {
+        align-items: flex-end;
+        display: flex;
+        flex-shrink: 0;
+        margin: 20px 0 0 240px;
+        width: 309px;
+
+        @include breakpoint(medium down) {
+            margin: 20px 0 0 80px;
+        }
+
+        @include breakpoint(small down) {
+            margin: 20px 0 0;
+            width: 100%;
+        }
+    }
+}
+
+// Filter component.
+.filter {
+    width: 100%;
+
+    &__fields-group {
+        margin: 0 -23px;
+
+        @include breakpoint(small down) {
+            margin: 0 -20px;
+        }
+    }
+
+    &__column {
+        padding: 0 23px;
+
+        @include breakpoint(small down) {
+            padding: 4px 20px;
+        }
+    }
+}

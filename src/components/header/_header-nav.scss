@@ -48,6 +48,10 @@
         }
     }
 
+    &__link-text {
+        pointer-events: none;
+    }
+
     &__link-icon {
         font-size: 1rem;
         margin-left: 15px;

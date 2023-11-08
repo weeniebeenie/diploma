@@ -48,3 +48,11 @@
         {{ caller() }}
     {% endif %}
 {% endmacro %}
+
+{#
+    Insert inline svg element.
+    @param {string} path - path to svg icon in image folder.
+#}
+{% macro svg(path = '') %}
+    {% include Helpers.path.images + '/' + path + '.svg' %}
+{% endmacro %}

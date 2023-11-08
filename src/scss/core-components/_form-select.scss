@@ -1,0 +1,24 @@
+/**
+ * Select
+ */
+
+%form-select {
+    @extend %input-general-styles;
+    appearance: none !important;
+    background: {
+        image: url('../images/icons/arrow-down.svg');
+        position: right 20px top 50%;
+        repeat: no-repeat;
+    }
+    cursor: pointer;
+    padding-right: 35px;
+
+    &::-ms-expand {
+        display: none;
+    }
+}
+
+select,
+select.form__control {
+    @extend %form-select;
+}

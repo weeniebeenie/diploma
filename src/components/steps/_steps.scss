@@ -1,0 +1,129 @@
+.steps {
+    &.section {
+        background-color: $color-3--20;
+        margin: 0;
+        padding: 145px 0 36px;
+        position: relative;
+
+        @include breakpoint(small down) {
+            margin-bottom: 50px;
+        }
+
+        &::before {
+            @include absolute(0, null, null, 0);
+            @include size(100%, 50px);
+            background-color: $color-white;
+            border-radius: 0 0 50px 50px;
+            content: '';
+            pointer-events: none;
+        }
+    }
+
+    .section {
+        &__title {
+            margin-bottom: 80px;
+        }
+    }
+
+    &__container {
+        @extend %container;
+    }
+}
+
+.steps-block {
+    display: flex;
+
+    @include breakpoint(small down) {
+        flex-direction: column;
+    }
+
+    &__image-wrapper {
+        display: flex;
+        flex-shrink: 0;
+        margin: -118px 0 0;
+        width: 50%;
+
+        @include breakpoint(medium down) {
+            margin: -45px 0 0;
+            width: 320px;
+        }
+
+        @include breakpoint(small down) {
+            margin: -130px 0 0;
+            width: 100%;
+        }
+    }
+
+    &__image {
+        @include size(calc(100% + 178px), auto);
+        display: block;
+        margin-left: -145px;
+
+        @include breakpoint(medium down) {
+            margin-left: -20px;
+        }
+
+        @include breakpoint(small down) {
+            @include size(100%, auto);
+        }
+
+        img {
+            @include size(100%, auto);
+            display: block;
+            max-width: 100%;
+
+            @include breakpoint(small down) {
+                max-width: 600px;
+            }
+        }
+    }
+
+    &__item {
+        margin-bottom: 73px;
+        padding-left: 55px;
+        position: relative;
+
+        @include breakpoint(medium down) {
+            margin-bottom: 40px;
+            padding-left: 95px;
+        }
+
+        @include breakpoint(small down) {
+            padding: 50px 0 0;
+        }
+
+        &::before {
+            @include absolute(0, null, null, -40px);
+            @include font($typo-1, 1.3rem, $normal);
+            background-color: $color-1--1;
+            border-radius: 15px;
+            content: "Шаг " counter(list-item);
+            padding: 6.5px 18.5px;
+
+            @include breakpoint(medium down) {
+                left: 0;
+            }
+        }
+    }
+
+    &__title {
+        @include font($typo-1, 2.2rem, $semibold);
+        color: $color-3--5;
+
+        @include breakpoint(medium down) {
+            font-size: 2rem;
+        }
+    }
+
+    &__teaser {
+        @include font($typo-1, 1.6rem, $normal);
+        color: $color-3--11;
+        line-height: 1.6;
+        margin-top: 21px;
+
+        @include breakpoint(medium down) {
+            font-size: 1.4rem;
+            margin-top: 15px;
+        }
+    }
+}

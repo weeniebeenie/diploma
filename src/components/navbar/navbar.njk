@@ -1,0 +1,18 @@
+{%- from 'components/back-link/back-link.njk' import BackLink -%}
+
+{#
+    Navbar tempalte.
+#}
+{% macro Navbar() %}
+    <div class="navbar">
+        <div class="navbar__container">
+            <nav class="navbar__nav" role="navigation" aria-label="Вернуться к списку записей">
+                <ul class="navbar__list">
+                    <li class="navbar__item is-absolute appearance-animation from-left">
+                        {{ BackLink() }}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endmacro %}

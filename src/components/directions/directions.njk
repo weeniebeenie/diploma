@@ -36,7 +36,7 @@
 ) -%}
     <ul class="directions-list">
         {% for title in itemsParams %}
-            <li class="directions-list__item">
+            <li class="directions-list__item appearance-animation from-bottom">
                 {{ DirectionItem(title) }}
             </li>
         {% endfor %}
@@ -49,7 +49,7 @@
 #}
 {%- macro DirectionsHome() -%}
     {% call Section(className = 'directions-home', container = 'directions-home__container') %}
-        <div class="section__title">
+        <div class="section__title appearance-animation flip-up">
             {{ Title.TitleDefault(
                 text = 'Популярные направления',
                 description = 'Проводим индивидуальные и групповые экскурсии на русском языке'

@@ -12,18 +12,12 @@
 }
 
 %container-sm {
-    max-width: 980px;
+    max-width: 1000px;
 }
 
 %container-fluid {
     max-width: 2048px;
     padding: 0;
-}
-
-%container-horizontal-home {
-    @include breakpoint(medium down) {
-        padding: 0;
-    }
 }
 
 .container {

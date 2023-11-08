@@ -1,4 +1,5 @@
 {%- from 'components/header/header.njk' import Header -%}
+{%- from 'components/navbar/navbar.njk' import Navbar -%}
 {%- from 'components/footer/footer.njk' import Footer -%}
 
 {% set preloadFonts = [
@@ -45,28 +46,37 @@
                 <main role="main" class="site-content" id="main">
                     {% block main %}
                         <div class="site-content__inner">
-{#                            {%- block navbar -%}#}
-{#                                <div class="site-content__navbar">#}
-{#                                    {%- block navbarInner -%}#}
-{#                                        {{ Navbar() }}#}
-{#                                    {%- endblock -%}#}
-{#                                </div>#}
-{#                            {%- endblock -%}#}
+                            {% if bodyClass === 'is-detail' %}
+                                {%- block navbar -%}
+                                    <div class="site-content__navbar">
+                                        {%- block navbarInner -%}
+                                            {{ Navbar() }}
+                                        {%- endblock -%}
+                                    </div>
+                                {%- endblock -%}
+                            {% endif %}
                             {%- block contentTop -%}
                                 <div class="site-content__top">
-                                    {%- block heading -%}{%- endblock -%}
+                                    <div class="heading-wrapper">
+                                        <div class="heading-wrapper__container">
+                                            <div class="heading-wrapper__inner">
+                                                {%- block heading -%}{%- endblock -%}
+                                                {%- block filterBlock -%}{%- endblock -%}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             {%- endblock -%}
-                            <div class="site-content__wrapper">
-                                <div class="site-content__main">
-                                    {%- block content -%}{%- endblock -%}
+                            {% if bodyClass !== 'is-about' %}
+                                <div class="site-content__wrapper">
+                                    <div class="site-content__main">
+                                        {%- block content -%}{%- endblock -%}
+                                    </div>
                                 </div>
-                            </div>
-{#                            {%- block contentBottom -%}#}
-{#                                <div class="site-content__bottom">{%- block contentAppend %}{% endblock -%}</div>#}
-{#                            {%- endblock -%}#}
+                            {% endif %}
                         </div>
                     {% endblock %}
+                    {%- block contentBottom -%}{%- endblock -%}
                 </main>
             </div>
             <div class="site-wrapper__footer">

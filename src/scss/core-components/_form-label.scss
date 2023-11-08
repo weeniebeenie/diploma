@@ -17,7 +17,7 @@ legend {
  * Base styles for label component.
  */
 %label {
-    @include font($typo-1, 1.5rem, $medium);
+    @include font($typo-1, 1.5rem, $semibold);
     color: $color-3--5;
     cursor: pointer;
     display: block;

@@ -14,19 +14,23 @@
             <div class="form__wrapper-inner">
                 <div class="form__fields">
                     <div class="form__fields-group">
-                        <div class="form__field-wrapper is-inline col-md-6">
-                            <label for="field-place" class="form__label">
-                                {{ Icon('fas fa-map-marker-alt', title="Направление") }}
-                                <span class="ghost">Направление</span>
-                            </label>
-                            <input name="field-place" id="field-place" type="text" class="form__field" placeholder="Выберите направление" autocomplete="address-level2">
+                        <div class="form__column col-md-6">
+                            <div class="form__field-wrapper is-inline">
+                                <label for="field-place" class="form__label">
+                                    {{ Icon('fas fa-map-marker-alt', title="Направление") }}
+                                    <span class="ghost">Направление</span>
+                                </label>
+                                <input name="field-place" id="field-place" type="text" class="form__field" placeholder="Выберите направление" autocomplete="address-level2">
+                            </div>
                         </div>
-                        <div class="form__field-wrapper is-inline col-md-6">
-                            <label for="field-date" class="form__label">
-                                {{ Icon('far fa-calendar', title="Дата") }}
-                                <span class="ghost">Дата</span>
-                            </label>
-                            <input name="field-date" id="field-date" type="date" class="form__field" title="дд/мм/гггг" min="1000-01-01" max="3000-01-01">
+                        <div class="form__column col-md-6">
+                            <div class="form__field-wrapper is-inline">
+                                <label for="field-date" class="form__label">
+                                    {{ Icon('far fa-calendar', title="Дата") }}
+                                    <span class="ghost">Дата</span>
+                                </label>
+                                <input name="field-date" id="field-date" type="date" class="form__field" title="дд/мм/гггг" min="1000-01-01" max="3000-01-01">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,7 +68,7 @@
                 serviceID: '368'
             }) }}
         </div>
-        <div class="cover-item__content">
+        <div class="cover-item__content appearance-animation from-bottom">
             <div class="cover-item__container">
                 <div class="cover-item__text">
                     <h3 class="cover-item__title">{{ title }}</h3>
@@ -89,7 +93,7 @@
 {%- macro CoverHome(
     type = false
 ) -%}
-    {% call Section(className = 'cover', container = 'cover__container') %}
+    {% call Section(className = 'cover appearance-animation', container = 'cover__container') %}
         <div class="section__content">
             <h2 class="ghost">Обложка сайта</h2>
             {{ CoverItem() }}
