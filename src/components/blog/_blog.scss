@@ -61,6 +61,7 @@
     &__item {
         margin-bottom: 68px;
         padding: 0 23px;
+        opacity: 1;
 
         @include breakpoint(small down) {
             margin-bottom: 20px;

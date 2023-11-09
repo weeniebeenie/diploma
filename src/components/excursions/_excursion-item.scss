@@ -124,6 +124,7 @@
         @include font(null, 2.2rem);
         @include size(50px);
         @include trs();
+        align-items: center;
         background-color: rgba($color-white, 0.1);
         border: {
             radius: 50%;
@@ -131,6 +132,8 @@
         }
         cursor: pointer;
         color: $color-white;
+        display: flex;
+        justify-content: center;
         text-shadow: 0 0 6px rgba($color-black, 0.2);
         z-index: 4;
 

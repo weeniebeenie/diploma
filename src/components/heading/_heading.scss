@@ -53,16 +53,16 @@
 
     &__image-wrapper {
         margin-top: 60px;
+
+        @include breakpoint(small down) {
+            margin-top: 25px;
+        }
     }
 
     &__image {
         border-radius: 20px;
         display: flex;
         overflow: hidden;
-
-        @include breakpoint(small down) {
-            margin-top: 25px;
-        }
 
         img {
             @include size(100%, auto);

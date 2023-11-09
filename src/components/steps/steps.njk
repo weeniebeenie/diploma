@@ -34,10 +34,10 @@
                         <img src="images/mockup.png" alt="{{ lorem(1) }}">
                     </picture>
                 </div>
-                <div class="steps-block__text appearance-animation from-right">
+                <div class="steps-block__text">
                     <ul class="steps-block__list">
                         {% for item in items %}
-                            <li class="steps-block__item">
+                            <li class="steps-block__item appearance-animation from-right">
                                 <h3 class="steps-block__title">{{ item.title }}</h3>
                                 <p class="steps-block__teaser">{{ item.teaser }}</p>
                             </li>

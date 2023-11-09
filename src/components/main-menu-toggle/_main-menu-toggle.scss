@@ -10,23 +10,14 @@
     padding: 10px 0;
 
     @include on-event {
-        #{$this}__bar {
-            &:nth-child(1) {
-                transform: rotate(-45deg) translate(-11px, -3px);
-            }
-
-            &:nth-child(2) {
-                opacity: 0;
-            }
-
-            &:nth-child(3) {
-                transform: rotate(45deg) translate(-11px, 3.2px);
-            }
+        #{$this}__bars {
+            transform: scale(1.1);
         }
     }
 
     &__bars {
         @include size(20px);
+        @include trs();
         pointer-events: none;
         position: relative;
     }

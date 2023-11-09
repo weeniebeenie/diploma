@@ -33,6 +33,7 @@
 
     &__container {
         @extend %container;
+        padding-bottom: 50px;
     }
 
     &__top-components {
@@ -111,5 +112,9 @@
         &[aria-current="page"] {
             background-color: $color-1--1;
         }
+    }
+
+    &__contact-info {
+        margin: 150px 0 50px;
     }
 }
