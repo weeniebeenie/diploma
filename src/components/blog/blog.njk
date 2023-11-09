@@ -64,7 +64,7 @@
 {%- macro BlogCarousel(
     count = 6
 ) -%}
-    {% call CarouselWrapper('blog-carousel', count) %}
+    {% call CarouselWrapper('blog-carousel', 'appearance-animation from-bottom', count) %}
         {{ BlogItem(title = lorem(1)) }}
     {% endcall %}
 {%- endmacro -%}
