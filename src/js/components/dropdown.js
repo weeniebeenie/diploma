@@ -23,26 +23,48 @@ export default function initDropdowns() {
                     showHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
                 });
                 dropdown.addEventListener('mouseout', () => {
-                    hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock)
-                });
-
-                dropdownToggle.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-
-                        if (dropdown.classList.contains('is-open')) {
-                            hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock)
-                        } else {
-                            showHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
-                            dropdownBlock.focus();
-                        }
-                    }
+                    hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
                 });
             } else {
                 dropdownToggle.addEventListener('click', () => {
                     dropdown.classList.toggle('is-open');
                 });
             }
+
+            document.addEventListener('click', (event) => {
+                if (!dropdownToggle.contains(event.target)) {
+                    hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    if (dropdown.classList.contains('is-open')) {
+                        hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
+                    }
+                }
+            });
+
+            document.addEventListener('keyup', (event) => {
+                if (event.key === 'Tab') {
+                    if (!dropdown.contains(event.target)) {
+                        hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
+                    }
+                }
+            });
+
+            dropdownToggle.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+
+                    if (dropdown.classList.contains('is-open')) {
+                        hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
+                    } else {
+                        showHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
+                        dropdownBlock.focus();
+                    }
+                }
+            });
         });
     }
 }
