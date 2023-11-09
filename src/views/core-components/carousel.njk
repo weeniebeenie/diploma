@@ -29,14 +29,18 @@
     Insert carousel element.
     @param {string} wrapperClassName - carousel element class name (parent).
 #}
-{%- macro CarouselWrapper(wrapperClassName) -%}
-    <div class="{{ wrapperClassName }}" role="group" aria-roledescription="carousel">
+{%- macro CarouselWrapper(wrapperClassName, count) -%}
+    <div class="{{ wrapperClassName }}" role="group" aria-roledescription="слайд-шоу">
         <div class="{{ wrapperClassName }}__navigation">
             {{ CarouselNavigation(wrapperClassName) }}
         </div>
         <div class="{{ wrapperClassName }}__container swiper js-swiper">
             <ul class="{{ wrapperClassName }}__wrapper swiper-wrapper">
-                {{ caller() }}
+                {% for item in range(count) %}
+                    <li class="{{ wrapperClassName }}__item swiper-slide appearance-animation from-bottom" aria-label="{{ loop.index + ' из ' + loop.length }}">
+                        {{ caller() }}
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

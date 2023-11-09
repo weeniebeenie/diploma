@@ -33,13 +33,11 @@
     <nav class="header-nav" role="navigation" aria-label="Основная навигация">
         <ul class="header-nav__list">
             {% for item in mainNav %}
-                <li class="header-nav__item {{ 'js-dropdown' if item.dropdown }}" {{ setAttr('aria-haspopup', 'true') }}>
+                <li class="header-nav__item {{ 'js-dropdown' if item.dropdown }}" {{ setAttr('aria-expanded', 'false') if item.dropdown }}>
                     {% if item.dropdown %}
                         <button
                             type="button"
                             class="header-nav__link js-dropdown-toggle"
-                            data-index="{{ loop.index }}"
-                            aria-haspopup="true"
                         >
                             <span class="header-nav__link-text">{{ item.text }}</span>
                             {{ Icon('header-nav__link-icon fas fa-angle-down') }}

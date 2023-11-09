@@ -64,12 +64,8 @@
 {%- macro BlogCarousel(
     count = 6
 ) -%}
-    {% call CarouselWrapper('blog-carousel') %}
-        {% for item in range(count) %}
-            <li class="blog-carousel__item swiper-slide appearance-animation from-bottom">
-                {{ BlogItem(title = 'Resource ' + loop.index) }}
-            </li>
-        {% endfor %}
+    {% call CarouselWrapper('blog-carousel', count) %}
+        {{ BlogItem(title = lorem(1)) }}
     {% endcall %}
 {%- endmacro -%}
 
