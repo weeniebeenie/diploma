@@ -1,0 +1,41 @@
+.event-item {
+    $this: &;
+
+    @extend %link-block-context;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 450px;
+    overflow: hidden;
+    position: relative;
+
+    &__image {
+        border-radius: 30px;
+        display: flex;
+        overflow: hidden;
+
+        img {
+            @include size(100%, auto);
+            display: block;
+            max-width: 100%;
+        }
+    }
+
+    &__content {
+        padding: 20px 0 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    &__title-link {
+        @extend %link-block;
+        @extend %underline-context;
+    }
+
+    &__date {
+        @include absolute(0, null, null, 0);
+        z-index: 2;
+    }
+}

@@ -1,0 +1,83 @@
+{%- from 'views/core-components/helper-components.njk' import Date -%}
+{%- from 'views/core-components/image.njk' import Image -%}
+{%- from 'views/core-components/button.njk' import Button -%}
+{%- from 'views/core-components/section.njk' import Section -%}
+{%- import 'views/core-components/title.njk' as Title -%}
+{%- from 'views/core-components/link.njk' import Link -%}
+
+{#
+    EventItem template.
+#}
+{%- macro EventItem(
+    imageSizes = ['450x318'],
+    title = 'Default title text',
+    date = true
+) -%}
+    <article class="event-item">
+        <div class="event-item__wrap">
+            <div class="event-item__content">
+                <h3 class="item-title event-item__title">
+                    <a href="#" class="event-item__title-link">
+                        <span class="underline">{{ title }}</span>
+                    </a>
+                </h3>
+            </div>
+            {{ Date(
+                className = 'event-item__date',
+                finish = true
+            ) if date }}
+        </div>
+        {{ Image({
+            className: 'event-item__image',
+            sizes: imageSizes,
+            type: 'no-image' if (range(5, 20) | random) > 15 else 'default',
+            serviceID: range(50) | random
+        }) }}
+    </article>
+{%- endmacro -%}
+
+{#
+    EventsList template.
+    @param {number} count - items count.
+#}
+{%- macro EventsList(
+    count = 3
+) -%}
+    <ul class="list is-columns-3 is-columns-md-2 is-columns-sm-1">
+        {% for item in range(count) %}
+            <li class="list__item appearance-animation from-bottom">
+                {{ EventItem() }}
+            </li>
+        {% endfor %}
+    </ul>
+{%- endmacro -%}
+
+{#
+    EventsHome template.
+    Template for events on home page.
+#}
+{%- macro EventsHome(
+    titleText = 'Повестка дня',
+    moreButton = true
+) -%}
+    {% call Section(className = 'events-home', container = 'events-home__container') %}
+        <div class="section__title appearance-animation flip-up">
+            {{ Title.TitleDefault(
+                text = titleText
+            ) }}
+        </div>
+        <div class="section__content">
+            {{ EventsList() }}
+        </div>
+        {% if moreButton %}
+            <div class="section__more-links appearance-animation from-bottom">
+                {{ Link(
+                    href = 'list-events.html',
+                    text = 'Все события',
+                    className = 'btn is-primary',
+                    icon = false
+                ) }}
+            </div>
+        {% endif %}
+    {% endcall %}
+{%- endmacro -%}
