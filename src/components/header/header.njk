@@ -1,6 +1,5 @@
 {%- from 'views/utils/utils.njk' import setAttr -%}
 {%- from 'views/core-components/icon.njk' import Icon -%}
-{%- from 'components/contact-info/contact-info.njk' import ContactInfo -%}
 {%- from 'components/logo/logo.njk' import Logo -%}
 {%- from 'components/main-menu-toggle/main-menu-toggle.njk' import MainMenuToggle -%}
 {%- from 'components/main-menu/main-menu.njk' import MainMenu -%}
@@ -8,22 +7,18 @@
 
 {% set mainNav = [
     {
-        text: 'Направления',
+        text: 'Отделения',
         dropdown: [
-            { text: 'Санкт-Петербург', link: '#' },
-            { text: 'Дубай', link: '#' },
-            { text: 'Стамбул', link: '#' },
-            { text: 'Карелия', link: '#' },
-            { text: 'Калининград', link: '#' },
-            { text: 'Мурманск', link: '#' }
+            { text: 'Вирусология', link: 'detail-page.html' },
+            { text: 'Кардиология', link: 'detail-page.html' },
+            { text: 'Кардиология', link: 'detail-page.html' },
+            { text: 'Кардиология', link: 'detail-page.html' },
+            { text: 'Кардиология', link: 'detail-page.html' },
+            { text: 'Кардиология', link: 'detail-page.html' }
         ]
     },
-    { text: 'О сервисе', link: 'about.html' },
-    { text: 'Блог', link: 'list-blog.html' },
-    {
-        text: 'Помощь клиентам',
-        dropdown: 'contacts-info'
-    }
+    { text: 'Наши врачи', link: 'list-persons.html' },
+    { text: 'О нас', link: 'detail-page.html' }
 ] %}
 
 {#
@@ -33,7 +28,7 @@
     <nav class="header-nav" role="navigation" aria-label="Основная навигация">
         <ul class="header-nav__list">
             {% for item in mainNav %}
-                <li class="header-nav__item {{ 'js-dropdown' if item.dropdown }}" {{ setAttr('aria-expanded', 'false') if item.dropdown }}>
+                <li class="header-nav__item {{ 'js-dropdown' if item.dropdown }}">
                     {% if item.dropdown %}
                         <button
                             type="button"
@@ -43,17 +38,13 @@
                             {{ Icon('header-nav__link-icon fas fa-angle-down') }}
                         </button>
                         <div class="header-nav__dropdown js-dropdown-block">
-                            {% if item.dropdown === 'contacts-info' %}
-                                {{ ContactInfo() }}
-                            {% else %}
-                                <ul class="header-dropdown__list">
-                                    {% for item in item.dropdown %}
-                                        <li class="header-dropdown__item">
-                                            <a href="{{ item.link }}" class="header-dropdown__link">{{ item.text }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
+                            <ul class="header-dropdown__list">
+                                {% for item in item.dropdown %}
+                                    <li class="header-dropdown__item">
+                                        <a href="{{ item.link }}" class="header-dropdown__link">{{ item.text }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     {% else %}
                         <a class="header-nav__link" href="{{ item.link }}">{{ item.text }}</a>
@@ -78,9 +69,6 @@
             <div class="header js-fixed-element">
                 <div class="header__container">
                     <div class="header__inner">
-                        <nav class="header__nav-toggle is-lg-hide" role="navigation" aria-label="Основная навигация">
-                            {{ MainMenuToggle() }}
-                        </nav>
                         <div class="header__logo">
                             {{ Logo(isHome) }}
                         </div>
@@ -96,20 +84,10 @@
                                 ) %}
                                     <span class="btn__text ghost">Перейти на страницу поиска</span>
                                 {% endcall %}
-                                {% call Link(
-                                    href = '#',
-                                    className = 'header__link is-favorite',
-                                    icon = 'far fa-heart'
-                                ) %}
-                                    <span class="btn__text ghost">Перейти на странницу избранного</span>
-                                {% endcall %}
-                                {{ Link(
-                                    href = '#',
-                                    text = 'Войти',
-                                    className = 'header__link is-login',
-                                    icon = false
-                                ) }}
                             </div>
+                            <nav class="header__nav-toggle is-lg-hide" role="navigation" aria-label="Основная навигация">
+                                {{ MainMenuToggle() }}
+                            </nav>
                         </div>
                     </div>
                 </div>

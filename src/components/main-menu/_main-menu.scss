@@ -19,10 +19,10 @@
         @include font(null, 1.3rem);
         @include size(50px);
         @include trs();
-        background-color: $color-3--10;
+        background-color: $color-3--1;
         border: none;
         border-radius: 50%;
-        color: $color-3--13;
+        color: $color-3--4;
         cursor: pointer;
 
         @include on-event() {
@@ -56,7 +56,7 @@
         @include font(null, 1.5rem, $semibold);
         @include trs();
         align-items: center;
-        background-color: $color-3--10;
+        background-color: $color-3--1;
         border-radius: 25px;
         color: $color-3--5;
         display: flex;
@@ -90,7 +90,7 @@
         &:not(:last-child)::after {
             @include absolute(null, null, 0, 0);
             @include size(100%, 1px);
-            background-color: $color-3--16;
+            background-color: $color-3--1;
             content: '';
         }
     }

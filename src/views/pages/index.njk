@@ -1,8 +1,8 @@
 {%- from 'components/cover/cover.njk' import CoverHome -%}
-{%- from 'components/directions/directions.njk' import DirectionsHome -%}
-{%- from 'components/excursions/excursions.njk' import ExcursionsHome -%}
+{%- from 'components/quick-access/quick-access.njk' import QuickAccess -%}
 {%- from 'components/blog/blog.njk' import BlogHome -%}
-{%- from 'components/subscribe/subscribe.njk' import Subscribe -%}
+{%- from 'components/accordion/accordion.njk' import AccordionSection -%}
+{%- from 'components/events/events.njk' import EventsHome -%}
 
 {% set title = 'Домашняя страница' %}
 {% set bodyClass = 'home-page' %}
@@ -12,11 +12,8 @@
 
 {% block main %}
     {{ CoverHome() }}
-    {{ DirectionsHome() }}
-    {{ ExcursionsHome() }}
+    {{ QuickAccess() }}
+    {{ BlogHome() }}
+    {{ AccordionSection() }}
+    {{ EventsHome() }}
 {% endblock %}
-
-{%- block contentBottom -%}
-    {{ BlogHome(isCarousel = true) }}
-    {{ Subscribe() }}
-{%- endblock -%}

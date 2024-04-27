@@ -14,7 +14,7 @@
     &__item.is-open {
         #{$this}__link {
             background-color: $color-1--1;
-            color: $color-3--5;
+            color: $color-white;
         }
 
         #{$this}__link-icon {
@@ -27,9 +27,11 @@
         @include trs();
         align-items: center;
         background: none;
-        border: 0;
-        border-radius: 25px;
-        color: $color-3--5;
+        border: {
+            radius: $border-radius;
+            width: 0;
+        }
+        color: $color-black;
         cursor: pointer;
         display: flex;
         justify-content: center;
@@ -39,12 +41,12 @@
 
         @include on-event {
             background-color: $color-1--1;
-            color: $color-3--5;
+            color: $color-white;
         }
 
         &[aria-current="page"] {
             background-color: $color-1--1;
-            color: $color-3--5;
+            color: $color-white;
         }
     }
 
@@ -59,9 +61,11 @@
 
     &__dropdown {
         background-color: $color-white;
-        border-radius: 15px;
-        min-width: 206px;
+        border-radius: $border-radius;
+        min-width: 150px;
+        overflow: hidden;
         padding: 20px 0 15px;
+        top: calc(100% + 5px);
         z-index: 10;
     }
 }

@@ -1,6 +1,6 @@
-# RocketADS Front-end test project
+# Degree work
 
-Link: https://weeniebeenie.github.io/tenloc/
+Link: https://weeniebeenie.github.io/diploma/
 
 <a name="overview"></a>
 # OVERVIEW

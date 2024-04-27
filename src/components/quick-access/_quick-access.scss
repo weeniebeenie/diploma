@@ -1,0 +1,18 @@
+.quick-access {
+    &__container {
+        @extend %container;
+        position: relative;
+    }
+
+    .section__content {
+        padding: 0 50px;
+
+        @include breakpoint(small down) {
+            padding: 0 20px;
+        }
+    }
+
+    .list__item {
+        margin-bottom: 0;
+    }
+}

@@ -1,0 +1,28 @@
+/*
+ * Info item component.
+ */
+.info-item {
+    @include font($typo-1, 1.8rem, $normal, normal);
+    color: $color-black;
+    line-height: 1.25;
+    margin: 10px 0;
+    padding-left: 30px;
+    position: relative;
+
+    a {
+        display: block;
+        text-decoration: underline;
+
+        @include on-event {
+            text-decoration: none;
+        }
+    }
+
+    @include fa-icon-style(false) {
+        @include absolute(2px, null, null, 0);
+
+        &::before {
+            color: inherit;
+        }
+    }
+}

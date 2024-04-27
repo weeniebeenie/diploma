@@ -29,7 +29,7 @@
     }
 
     &__item {
-        border-radius: 20px;
+        border-radius: $border-radius;
         display: block;
         overflow: hidden;
     }
@@ -50,7 +50,7 @@
     &__caption {
         @include font($typo-1, 1.4rem, $normal, normal);
         caption-side: bottom;
-        color: $color-3--5;
+        color: $color-black;
         display: table-caption;
         line-height: 1.6;
         padding: 10px 0 0 20px;

@@ -1,0 +1,42 @@
+{%- from 'views/core-components/icon.njk' import Icon -%}
+{%- from 'views/core-components/link.njk' import Link -%}
+
+{#
+    Insert date.
+    @param {string} className - custom class name modifier.
+#}
+{% macro Date(
+    className,
+    finish
+) %}
+    <div class="date {{ className }}">
+        <p class="date__wrap">
+            <span class="ghost">Дата:</span>
+            <span class="ghost">с</span>
+            <time class="date__time" datetime="2024-03-04"><span>4</span> марта</time>
+            {% if finish %}
+                <span class="ghost">по</span>
+                {{ Icon('fas fa-arrow-down date__icon') }}
+                <time class="date__time has-arrow" datetime="2024-03-10"><span>10</span> марта</time>
+            {% endif %}
+        </p>
+    </div>
+{% endmacro %}
+
+{#
+    Insert BackLink.
+    @param {string} link - BackLink link.
+    @param {string} text - BackLink inner text.
+#}
+{% macro BackLink(
+    link = 'list-blog.html',
+    text = 'назад'
+) %}
+    {% call Link(
+        href = link,
+        className = 'back-link',
+        icon = 'back-link__icon fas fa-chevron-left'
+    ) %}
+        <span class="back-link__text">{{ text }}</span>
+    {% endcall %}
+{% endmacro %}

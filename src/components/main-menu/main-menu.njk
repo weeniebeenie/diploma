@@ -1,9 +1,5 @@
 {%- from 'components/logo/logo.njk' import Logo -%}
 {%- from 'views/core-components/button.njk' import Button -%}
-{%- from 'components/directions-nav/directions-nav.njk' import DirectionsNav -%}
-{%- from 'views/core-components/link.njk' import Link -%}
-{% from 'components/search/search.njk' import SearchNav %}
-{%- from 'components/contact-info/contact-info.njk' import ContactInfo -%}
 
 {% set mainMenuLinks = [
     {
@@ -40,18 +36,6 @@
                     {{ Logo(isHome) }}
                 </div>
             </div>
-            <div class="main-menu__actions">
-                {{ DirectionsNav() }}
-                {{ Link(
-                    href = '#',
-                    text = 'Войти',
-                    className = 'main-menu__link is-login',
-                    icon = false
-                ) }}
-            </div>
-            <div class="main-menu__search">
-                {{ SearchNav(btnClassName = 'search-nav__btn') }}
-            </div>
             <div class="main-menu__nav">
                 <ul class="main-menu__list">
                     {% for item in menuLinks %}
@@ -60,9 +44,6 @@
                         </li>
                     {% endfor %}
                 </ul>
-            </div>
-            <div class="main-menu__contact-info">
-                {{ ContactInfo() }}
             </div>
         </div>
     </div>

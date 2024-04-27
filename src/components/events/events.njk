@@ -9,6 +9,7 @@
     EventItem template.
 #}
 {%- macro EventItem(
+    link = 'detail-page.html',
     imageSizes = ['450x318'],
     title = 'Default title text',
     date = true
@@ -17,7 +18,7 @@
         <div class="event-item__wrap">
             <div class="event-item__content">
                 <h3 class="item-title event-item__title">
-                    <a href="#" class="event-item__title-link">
+                    <a href="{{ link }}" class="event-item__title-link">
                         <span class="underline">{{ title }}</span>
                     </a>
                 </h3>

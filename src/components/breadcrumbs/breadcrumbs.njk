@@ -1,0 +1,23 @@
+{% macro Breadcrumbs(
+    links = [
+        'Главная',
+        'Родительская',
+        'Текущая страница'
+    ]
+) %}
+    <nav class="breadcrumbs" role="navigation" aria-label="Вернуться к списку записей">
+        <ol class="breadcrumbs__list">
+            {% for link in links %}
+                {% if loop.last %}
+                    <li class="breadcrumbs__item appearance-animation from-left">
+                        <span class="breadcrumbs__link">{{ link }}</span>
+                    </li>
+                {% else %}
+                    <li class="breadcrumbs__item appearance-animation from-left">
+                        <a href="#" class="breadcrumbs__link">{{ link }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </nav>
+{% endmacro %}

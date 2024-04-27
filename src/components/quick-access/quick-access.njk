@@ -1,0 +1,51 @@
+{% from 'views/utils/utils.njk' import svg with context %}
+{%- from 'views/core-components/section.njk' import Section -%}
+
+{#
+    QuickAccessLink template.
+#}
+{%- macro QuickAccessLink(
+    link = '#',
+    icon = 'chat',
+    title = 'Default title text'
+) -%}
+    <div class="quick-access-link">
+        <div class="quick-access-link__svg-wrapper" aria-hidden="true">
+            {{ svg('icons/' + icon) }}
+        </div>
+        <a href="{{ link }}" class="quick-access-link__text">
+            <span class="underline">{{ title }}</span>
+        </a>
+    </div>
+{%- endmacro -%}
+
+{#
+    QuickAccessList template.
+    @param {number} count - items count.
+#}
+{%- macro QuickAccessList(
+    count = 4
+) -%}
+    <ul class="list is-columns-4 is-columns-md-2">
+        {% for item in range(count) %}
+            <li class="list__item appearance-animation from-bottom">
+                {{ QuickAccessLink() }}
+            </li>
+        {% endfor %}
+    </ul>
+{%- endmacro -%}
+
+{#
+    QuickAccess template.
+    Template for quick links on home page.
+#}
+{%- macro QuickAccess(
+    itemCount = 4
+) -%}
+    {% call Section(className = 'quick-access', container = 'quick-access__container') %}
+        <h2 class="ghost">Быстрый доступ</h2>
+        <div class="section__content">
+            {{ QuickAccessList(count = itemCount) }}
+        </div>
+    {% endcall %}
+{%- endmacro -%}

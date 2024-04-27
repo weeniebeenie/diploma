@@ -11,7 +11,8 @@
 }
 
 .js-dropdown-block {
-    @include absolute(calc(100% + 6px), null, null, 0);
+    @include absolute(100%, null, null, 0);
+    display: none;
     list-style: none;
     min-width: 100%;
     opacity: 0;
@@ -23,7 +24,8 @@
     z-index: 5;
 
     .is-open > & {
-        box-shadow: 0 7px 100px 0 rgba($color-black, 0.15);
+        border: 1px solid $color-3--3;
+        display: block;
         opacity: 1;
         transform: translateY(-1px);
         transition: visibility 200ms ease-in-out, transform 200ms ease-in-out, opacity 350ms ease-in-out;

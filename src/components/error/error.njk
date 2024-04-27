@@ -1,0 +1,12 @@
+{%- from 'views/core-components/section.njk' import Section -%}
+
+{% macro Error(
+    title = 'Опаньки!',
+    teaser = 'Извините, но у нас не получается найти запрашиваемую Вами страницу. Возможно она больше не существует или ее никогда не было.'
+) %}
+    {% call Section(className = 'error', container = 'error__container') %}
+        <h2 class="error__title">{{ title }}</h2>
+        <p class="error__teaser">{{ teaser }}</p>
+        <p class="error__teaser">Попробуйте вернуться на <a href="#">главную страницу</a> или воспользоваться <a href="#">поиском</a>.</p>
+    {% endcall %}
+{% endmacro %}

@@ -27,7 +27,7 @@ $list-gap-mobile: 27px;
 }
 
 %list-item {
-    margin-bottom: 68px;
+    margin-bottom: 40px;
     padding-left: #{$list-gap-desktop * 0.5};
     padding-right: #{$list-gap-desktop * 0.5};
     width: 100%;
@@ -38,7 +38,6 @@ $list-gap-mobile: 27px;
     }
 
     @include breakpoint(small down) {
-        margin-bottom: 20px;
         padding-left: #{$list-gap-mobile * 0.5};
         padding-right: #{$list-gap-mobile * 0.5};
     }
@@ -49,6 +48,10 @@ $list-gap-mobile: 27px;
 
     &[class] {
         @extend %list;
+
+        .home-page & {
+            justify-content: center;
+        }
     }
 
     &__item {

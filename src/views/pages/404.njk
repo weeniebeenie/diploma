@@ -1,0 +1,16 @@
+{%- from 'components/heading/heading.njk' import Heading -%}
+{%- from 'components/error/error.njk' import Error -%}
+
+{% set title = 'Ошибка 404' %}
+
+{% extends 'views/layouts/base.njk' %}
+
+{%- block heading -%}
+    {{ Heading(
+        title = title
+    ) }}
+{%- endblock -%}
+
+{%- block content -%}
+    {{ Error() }}
+{% endblock %}

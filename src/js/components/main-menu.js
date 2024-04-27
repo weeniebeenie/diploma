@@ -1,60 +1,72 @@
 import trapFocus from './focus-trap';
 
-export default function initMainMenu() {
-    const documentBody = document.querySelector('body');
-    const mainMenu = document.querySelector('.js-main-menu');
-    const mainMenuToggle = document.querySelector('.js-main-menu-toggle');
-    const mainMenuCloseBtn = mainMenu.querySelector('.js-main-menu-close');
-    const navLinks = document.querySelectorAll('.header-nav__link, .main-menu__item-link');
+export default class MainMenu {
+    constructor() {
+        this.documentBody = document.querySelector('body');
+        this.mainMenuToggle = document.querySelector('.js-main-menu-toggle');
+        this.mainMenu = document.querySelector('.js-main-menu');
+        this.mainMenuCloseBtn = this.mainMenu.querySelector('.js-main-menu-close');
+        this.navLinks = document.querySelectorAll('.header-nav__link, .main-menu__item-link');
+        this.isOpen = false;
 
-    const open = () => {
-        mainMenuToggle.classList.add('is-open');
-        mainMenuToggle.setAttribute('aria-expanded', 'true');
+        if (this.mainMenuToggle) {
+            this.mainMenuToggle.addEventListener('click', () => this.open());
+        }
 
-        mainMenu.classList.add('is-open');
-        mainMenu.removeAttribute('hidden');
-        documentBody.classList.add('is-overflow-hidden');
+        if (this.mainMenuCloseBtn) {
+            this.mainMenuCloseBtn.addEventListener('click', () => this.close());
+        }
 
-        mainMenuToggle.setAttribute('tabindex', '-1');
-        mainMenuCloseBtn.setAttribute('tabindex', '0');
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.close();
+            }
+        });
 
-        mainMenuCloseBtn.focus();
-
-        trapFocus(mainMenu);
-    };
-
-    const close = () => {
-        mainMenuToggle.classList.remove('is-open');
-        mainMenuToggle.setAttribute('aria-expanded', 'false');
-
-        mainMenu.classList.remove('is-open');
-        mainMenu.setAttribute('hidden', '');
-        documentBody.classList.remove('is-overflow-hidden');
-
-        mainMenuToggle.setAttribute('tabindex', '0');
-        mainMenuCloseBtn.setAttribute('tabindex', '-1');
-
-        mainMenuToggle.focus();
-    };
-
-    if (mainMenuToggle) {
-        mainMenuToggle.addEventListener('click', open);
+        // Provide styling for current page anchor tag
+        this.navLinks.forEach(link => {
+            if (link.href === window.location.href) {
+                link.setAttribute('aria-current', 'page');
+            }
+        });
     }
 
-    if (mainMenuCloseBtn) {
-        mainMenuCloseBtn.addEventListener('click', close);
+    open = () => {
+        this.isOpen = !this.isOpen;
+
+        this.mainMenuToggle.classList.add('is-open');
+        this.mainMenu.classList.add('is-open');
+
+        this.mainMenu.removeAttribute('hidden');
+        this.documentBody.classList.add('is-overflow-hidden');
+
+        this.mainMenuToggle.setAttribute('tabindex', '-1');
+        this.mainMenuCloseBtn.setAttribute('tabindex', '0');
+
+        this.setA11yAttributes(this.isOpen);
+        this.mainMenuCloseBtn.focus();
+
+        trapFocus(this.mainMenu);
+    };
+
+    close = () => {
+        this.isOpen = !this.isOpen;
+
+        this.mainMenuToggle.classList.remove('is-open');
+        this.mainMenu.classList.remove('is-open');
+
+        this.mainMenu.setAttribute('hidden', '');
+        this.documentBody.classList.remove('is-overflow-hidden');
+
+        this.mainMenuToggle.setAttribute('tabindex', '0');
+        this.mainMenuCloseBtn.setAttribute('tabindex', '-1');
+
+        this.setA11yAttributes(this.isOpen);
+        this.mainMenuToggle.focus();
+    };
+
+    setA11yAttributes = (isOpen) => {
+        this.mainMenuToggle.setAttribute('aria-expanded', isOpen);
+        this.mainMenu.setAttribute('aria-hidden', String(!isOpen));
     }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            close();
-        }
-    });
-
-    // Provide styling for current page anchor tag
-    navLinks.forEach(link => {
-        if (link.href === window.location.href) {
-            link.setAttribute('aria-current', 'page');
-        }
-    });
 }

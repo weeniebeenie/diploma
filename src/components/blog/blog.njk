@@ -1,7 +1,5 @@
 {% from 'views/core-components/image.njk' import Image %}
 {%- from 'views/core-components/carousel.njk' import CarouselWrapper -%}
-{%- from 'views/core-components/button.njk' import Button -%}
-{% from 'views/core-components/icon.njk' import Icon with context %}
 {%- from 'views/core-components/section.njk' import Section -%}
 {%- import 'views/core-components/title.njk' as Title -%}
 {%- from 'views/core-components/link.njk' import Link -%}
@@ -11,7 +9,7 @@
 #}
 {%- macro BlogItem(
     link = 'detail-page.html',
-    imageSizes = ['323x228'],
+    imageSizes = ['450x318'],
     title = 'Default title text'
 ) -%}
     <article class="blog-item">
@@ -21,17 +19,6 @@
                     <span class="underline">{{ title }}</span>
                 </a>
             </h3>
-            <p class="blog-item__read-more">
-                Читать
-                {{ Icon('fas fa-ellipsis-h') }}
-            </p>
-            <p class="blog-item__publication">
-                {{ Icon('far fa-calendar-alt', title='Время') }}
-                <span class="ghost">Дата публикации:</span>
-                <time datetime="2023-10-30">Сегодня</time>
-                <span class="ghost">в</span>
-                <time datetime="15:25">15:25</time>
-            </p>
         </div>
         {{ Image({
             className: 'blog-item__image',
@@ -49,7 +36,7 @@
 {%- macro BlogList(
     count = 12
 ) -%}
-    <ul class="list is-columns-4 is-columns-md-2 is-columns-sm-2">
+    <ul class="list is-columns-3 is-columns-md-2 is-columns-sm-1">
         {% for item in range(count) %}
             <li class="list__item appearance-animation from-bottom">
                 {{ BlogItem() }}
@@ -74,8 +61,9 @@
     Template for blog on home page.
 #}
 {%- macro BlogHome(
-    titleText = 'Блог',
-    isCarousel = false
+    titleText = 'Новости',
+    isCarousel = false,
+    itemCount = 6
 ) -%}
     {% call Section(className = 'blog', container = 'blog__container') %}
         <div class="section__title appearance-animation flip-up">
@@ -95,8 +83,16 @@
             {% if isCarousel %}
                 {{ BlogCarousel() }}
             {% else %}
-                {{ BlogList(count = 4) }}
+                {{ BlogList(count = itemCount) }}
             {% endif %}
+        </div>
+        <div class="section__more-links appearance-animation from-bottom">
+            {{ Link(
+                href = 'list-blog.html',
+                text = 'Все новости',
+                className = 'btn is-primary',
+                icon = false
+            ) }}
         </div>
     {% endcall %}
 {%- endmacro -%}

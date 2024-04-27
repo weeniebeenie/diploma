@@ -1,0 +1,55 @@
+.sitemap-item {
+    $this: &;
+
+    &__wrapper {
+        border-bottom: 1px solid $color-3--3;
+        margin: 0 0 40px;
+        padding-bottom: 30px;
+    }
+
+    &__title {
+        @extend %link-block-context;
+        @include font($typo-1, 4rem, $bold);
+        line-height: 1.55;
+
+        @include breakpoint(small down) {
+            font-size: 3.2rem;
+        }
+
+        a {
+            @extend %link-block;
+            @extend %underline-context;
+            text-decoration: none;
+        }
+    }
+
+    &__list[class] {
+        list-style: none;
+        margin-bottom: 20px;
+    }
+
+    &__item {
+        @extend %link-block-context;
+
+        #{$this}__list {
+            #{$this}__link {
+                font-weight: $normal;
+            }
+        }
+    }
+
+    &__link {
+        @extend %link-block;
+        @extend %underline-context;
+        @include font($typo-1, 2rem, $bold);
+        color: $color-black;
+        display: inline-block;
+        line-height: 1.55;
+        margin-bottom: 20px;
+        text-decoration: none;
+
+        @include breakpoint(small down) {
+            font-size: 1.4rem;
+        }
+    }
+}

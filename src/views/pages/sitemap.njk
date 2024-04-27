@@ -1,0 +1,19 @@
+{%- from 'components/heading/heading.njk' import Heading -%}
+{%- from 'components/page-list/page-list.njk' import PageList -%}
+{%- from 'components/sitemap/sitemap.njk' import SitemapList -%}
+
+{% set title = 'Карта сайта' %}
+
+{% extends 'views/layouts/base.njk' %}
+
+{%- block heading -%}
+    {{ Heading(
+        title = title
+    ) }}
+{%- endblock -%}
+
+{%- block content -%}
+    {{ PageList(
+        list = SitemapList()
+    ) }}
+{% endblock %}

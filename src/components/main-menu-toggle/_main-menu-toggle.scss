@@ -3,11 +3,14 @@
 
     align-items: center;
     background-color: transparent;
-    border: none;
+    border: {
+        radius: 50%;
+        width: 0;
+    }
     cursor: pointer;
     display: flex;
     justify-content: center;
-    padding: 10px 0;
+    padding: 15px;
 
     @include on-event {
         #{$this}__bars {

@@ -1,0 +1,82 @@
+.accordion-section {
+    &__container {
+        @extend %container;
+    }
+}
+
+.accordion-item {
+    $this: &;
+
+    margin-bottom: 5px;
+
+    &__toggle {
+        @include size(100%, auto);
+        @include trs();
+        background-color: $color-1--1;
+        border: {
+            radius: $border-radius;
+            width: 0;
+        }
+        cursor: pointer;
+        color: $color-white;
+        display: flex;
+        padding: 0 15px 0 40px;
+        text-align: left;
+
+        @include breakpoint(small down) {
+            padding: 0 5px 0 20px;
+        }
+
+        @include on-event() {
+            background-color: $color-black;
+            color: $color-white;
+        }
+    }
+
+    &__toggle-text {
+        @include font($typo-1, 2rem, $bold);
+        flex-grow: 1;
+        line-height: 1.55;
+        min-width: 1%;
+        padding: 20px 0;
+
+        @include breakpoint(small down) {
+            font-size: 1.8rem;
+            padding: 14px 0;
+        }
+    }
+
+    &__toggle-icon {
+        align-items: center;
+        display: flex;
+        flex-shrink: 0;
+        justify-content: center;
+        line-height: 1;
+        padding: 25px 20px;
+
+        @include breakpoint(small down) {
+            font-size: 1.8rem;
+            padding: 18px 15px;
+        }
+    }
+
+    &__block {
+        border-radius: $border-radius;
+        padding: 30px 40px 20px;
+
+        @include breakpoint(small down) {
+            padding: 20px 20px 10px;
+        }
+    }
+
+    &.is-open {
+        #{$this}__toggle {
+            background-color: $color-black;
+            color: $color-white;
+        }
+
+        #{$this}__toggle-icon {
+            transform: rotateX(-180deg);
+        }
+    }
+}

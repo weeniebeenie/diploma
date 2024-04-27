@@ -1,0 +1,39 @@
+.quick-access-link {
+    $this: &;
+
+    @extend %link-block-context;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+
+    &__svg-wrapper {
+        @include size(90px);
+        @include trs();
+        background-color: $color-1--1;
+        border-radius: 50%;
+        flex-shrink: 0;
+        padding: 20px;
+
+        svg {
+            @include size(100%);
+            fill: $color-white;
+        }
+    }
+
+    &__text {
+        @extend %link-block;
+        @extend %underline-context;
+        @include font($typo-1, 1.8rem, $normal);
+        color: $color-black;
+        line-height: 1.25;
+        margin: 20px 0 0;
+        text-align: center;
+    }
+
+    @include on-event() {
+        #{$this}__svg-wrapper {
+            transform: translateY(-10px);
+        }
+    }
+}

@@ -5,7 +5,7 @@
 %input-general-styles {
     @include focus-outline;
     @include font($typo-1, 1.5rem, $normal);
-    background-color: $color-3--10;
+    background-color: $color-3--1;
     border: 0;
     border-radius: 25px;
     color: $color-3--5;
@@ -20,7 +20,7 @@
     &::placeholder {
         @include font($typo-1, 1.5rem, $normal);
         @include trs();
-        color: $color-3--8;
+        color: $color-3--4;
         opacity: 1;
     }
 

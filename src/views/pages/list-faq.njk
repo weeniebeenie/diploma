@@ -1,0 +1,21 @@
+{%- from 'components/heading/heading.njk' import Heading -%}
+{%- from 'components/page-list/page-list.njk' import PageList -%}
+{%- from 'components/accordion/accordion.njk' import AccordionList -%}
+
+{% set title = 'Часто задаваемые вопросы' %}
+
+{% extends 'views/layouts/base.njk' %}
+
+{%- block heading -%}
+    {{ Heading(
+        title = title
+    ) }}
+{%- endblock -%}
+
+{%- block content -%}
+    {{ PageList(
+        itemsCount = 10,
+        list = AccordionList(count = 10),
+        pagerType = 'default'
+    ) }}
+{% endblock %}

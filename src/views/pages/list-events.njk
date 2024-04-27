@@ -1,0 +1,21 @@
+{%- from 'components/heading/heading.njk' import Heading -%}
+{%- from 'components/page-list/page-list.njk' import PageList -%}
+{%- from 'components/events/events.njk' import EventsList -%}
+
+{% set title = 'События' %}
+
+{% extends 'views/layouts/base.njk' %}
+
+{%- block heading -%}
+    {{ Heading(
+        title = title
+    ) }}
+{%- endblock -%}
+
+{%- block content -%}
+    {{ PageList(
+        itemsCount = 6,
+        list = EventsList(count = 6),
+        pagerType = 'default'
+    ) }}
+{% endblock %}

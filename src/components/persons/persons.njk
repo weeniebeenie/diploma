@@ -1,0 +1,89 @@
+{% from 'views/core-components/image.njk' import Image %}
+{%- from 'views/core-components/infos.njk' import InfoItem -%}
+{% from 'views/core-components/icon.njk' import Icon %}
+{%- from 'views/core-components/section.njk' import Section -%}
+{%- import 'views/core-components/title.njk' as Title -%}
+
+{#
+    PersonItem template.
+#}
+{%- macro PersonItem(
+    link = 'detail-page.html',
+    imageSizes = ['250x250'],
+    title = 'ИВАНОВ Иван Иванович'
+) -%}
+    <article class="person-item">
+        {{ Image({
+            className: 'person-item__image',
+            sizes: imageSizes,
+            type: 'no-image' if (range(5, 20) | random) > 15 else 'default',
+            serviceID: range(50) | random
+        }) }}
+        <div class="person-item__content">
+            <h3 class="item-title person-item__title">
+                <a href="{{ link }}" class="person-item__title-link">
+                    <span class="underline">{{ title }}</span>
+                </a>
+            </h3>
+            <p class="person-item__position">Должность</p>
+            <div class="person-item__contacts">
+                {{ InfoItem(
+                    className = 'person-item__contact',
+                    href = 'tel:9909909900',
+                    icon = 'fas fa-phone-flip',
+                    ghost = 'Телефон: ',
+                    text = '990 990 99 00'
+                ) }}
+                {{ InfoItem(
+                    className = 'person-item__contact',
+                    href = 'mailto:name@domain.com',
+                    icon = 'fas fa-at',
+                    ghost = 'Электронная почта: ',
+                    text = 'name@domain.com'
+                ) }}
+            </div>
+        </div>
+    </article>
+{%- endmacro -%}
+
+{#
+    PersonsList template.
+    @param {number} count - items count.
+#}
+{%- macro PersonsList(
+    count = 6
+) -%}
+    <ul class="list is-columns-2 is-columns-md-1">
+        {% for item in range(count) %}
+            <li class="list__item appearance-animation from-bottom">
+                {{ PersonItem() }}
+            </li>
+        {% endfor %}
+    </ul>
+{%- endmacro -%}
+
+{#
+    PersonsSection template.
+    Template for blog on home page.
+#}
+{%- macro PersonsSection(
+    titleText = 'Наши врачи',
+    itemCount = 2
+) -%}
+    {% call Section(className = 'persons', container = 'persons__container') %}
+        <div class="section__title appearance-animation flip-up">
+            {{ Title.TitleDefault(
+                text = titleText
+            ) }}
+        </div>
+        <div class="section__content">
+            <ul class="list is-columns-1">
+                {% for item in range(itemCount) %}
+                    <li class="list__item appearance-animation from-bottom">
+                        {{ PersonItem() }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endcall %}
+{%- endmacro -%}

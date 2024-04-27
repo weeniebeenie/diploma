@@ -71,10 +71,12 @@ $large-padding: (1.2em 1.1em);
     @include trs();
     align-items: center;
     appearance: none;
-    background-color: $color-3--10;
-    border: none;
-    border-radius: 27px;
-    color: $color-3--5;
+    background-color: $color-3--2;
+    border: {
+        radius: $border-radius;
+        width: 0;
+    }
+    color: $color-black;
     cursor: pointer;
     display: inline-flex;
     justify-content: center;
@@ -125,7 +127,7 @@ $large-padding: (1.2em 1.1em);
         }
 
         @include on-event {
-            background-color: $color-3--10;
+            background-color: $color-3--1;
             color: $color-3--5;
             transform: none;
         }
@@ -179,7 +181,7 @@ $large-padding: (1.2em 1.1em);
 // Styles for primary buttons, only colors
 %button-style-primary {
     background-color: $color-1--1;
-    color: $color-black;
+    color: $color-white;
 
     @include on-event {
         background-color: $color-3--5;
@@ -189,7 +191,7 @@ $large-padding: (1.2em 1.1em);
     @include btn-disabled-style {
         @include on-event {
             background-color: $color-1--1;
-            color: $color-black;
+            color: $color-white;
         }
     }
 }
@@ -197,7 +199,7 @@ $large-padding: (1.2em 1.1em);
 // Inverted styles, only colors
 %button-style-inverted {
     background-color: $color-white !important;
-    color: $color-3--11 !important;
+    color: $color-3--4 !important;
 
     @include on-event {
         background-color: $color-3--5 !important;
@@ -207,7 +209,7 @@ $large-padding: (1.2em 1.1em);
     @include btn-disabled-style {
         @include on-event {
             background-color: $color-white !important;
-            color: $color-3--11 !important;
+            color: $color-3--4 !important;
         }
     }
 }

@@ -5,23 +5,10 @@
     display: flex;
     flex-direction: column-reverse;
     margin: 0 auto;
-    max-width: 323px;
-
-    @include on-event() {
-        #{$this}__read-more {
-            background-color: $color-3--5;
-            color: $color-white;
-        }
-    }
-
-    .blog-carousel & {
-        @include breakpoint(small down) {
-            margin: 0;
-        }
-    }
+    max-width: 450px;
 
     &__image {
-        border-radius: 15px;
+        border-radius: $border-radius;
         display: flex;
         overflow: hidden;
 
@@ -33,49 +20,12 @@
     }
 
     &__content {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        padding: 23px 0 0;
-    }
-
-    &__title {
-        @include font(null, 1.6rem, $medium);
-        color: $color-3--5;
-        line-height: 1.55;
-
-        + #{$this}__read-more {
-            margin-top: 20px;
-        }
+        padding: 20px 0 0;
+        text-align: center;
     }
 
     &__title-link {
         @extend %link-block;
         @extend %underline-context;
-    }
-
-    &__read-more {
-        @include font(null, 1.4rem, $normal);
-        @include trs();
-        border: 1px solid $color-3--7;
-        border-radius: 20px;
-        color: $color-3--5;
-        padding: 7px 21px;
-
-        @include fa-icon-style(false) {
-            margin-left: 5px;
-        }
-    }
-
-    &__publication {
-        @include font(null, 1.3rem, $normal);
-        color: $color-3--9;
-        order: -1;
-        margin-bottom: 18px;
-
-        @include fa-icon-style(false) {
-            font-size: 1.5rem;
-            margin-right: 5px;
-        }
     }
 }

@@ -3,10 +3,14 @@
         @extend %container;
         display: flex;
         flex-wrap: wrap;
-        padding-bottom: 0;
-        padding-top: 47px;
+        padding-bottom: 80px;
+        padding-top: 80px;
         position: relative;
         z-index: 0;
+
+        @include breakpoint(small down) {
+            padding-top: 40px;
+        }
 
         .is-detail & {
             @extend %container-sm;

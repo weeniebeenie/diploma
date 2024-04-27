@@ -33,11 +33,14 @@
 @import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
 
 // import core helpers styles
+@import 'core-components/helper-components';
+@import 'core-components/infos';
 @import 'core-components/button';
 @import 'core-components/image';
 @import 'core-components/section';
 @import 'core-components/title';
 @import 'core-components/item-title';
+@import 'core-components/accordion';
 @import 'core-components/dropdown';
 @import 'core-components/pager';
 @import 'core-components/ce-gallery';
@@ -54,16 +57,21 @@
 @import 'layouts/site-content';
 
 // BASE COMPONENTS
+@import '../components/accordion/accordion';
 @import '../components/social-networks/social-networks';
 @import '../components/contact-info/contact-info';
 @import '../components/navbar/navbar';
-@import '../components/back-link/back-link';
+@import '../components/breadcrumbs/breadcrumbs';
 //@import '../components/menu-skip/menu-skip';
-//@import '../components/error-block/error-block';
+@import '../components/error/error';
+
+// ITEMS
+@import '../components/sitemap/sitemap';
 
 //SEARCH COMPONENTS
 @import '../components/search/search-nav';
 @import '../components/search/search-tags';
+@import '../components/search/search-result';
 
 // HEADER COMPONENTS
 @import '../components/header/header';
@@ -82,34 +90,27 @@
 @import '../components/cover/cover-item';
 @import '../components/cover/cover-search';
 
-// POPULAR COMPONENTS
-@import '../components/directions/directions';
-@import '../components/directions/direction-item';
-
-// EXCURSIONS COMPONENTS
-@import '../components/excursions/excursions';
-@import '../components/excursions/excursion-item';
+// QUICK ACCESS
+@import '../components/quick-access/quick-access';
+@import '../components/quick-access/quick-access-link';
 
 // BLOG COMPONENTS
 @import '../components/blog/blog';
 @import '../components/blog/blog-item';
 
-// SUBSCRIBE COMPONENTS
-@import '../components/subscribe/subscribe';
+// EVENTS COMPONENTS
+@import '../components/events/events';
+@import '../components/events/event-item';
 
-// DESCRIPTION COMPONENTS
-@import '../components/description/description';
+// DOWNLOADS COMPONENT
+@import '../components/downloads/downloads';
 
-// ADVANTAGES COMPONENTS
-@import '../components/advantages/advantages';
-@import '../components/advantages/advantage-item';
-
-// STEPS COMPONENTS
-@import '../components/steps/steps';
+// PERSONS COMPONENT
+@import '../components/persons/persons';
+@import '../components/persons/person-item';
 
 // FOOTER COMPONENTS
 @import '../components/footer/footer';
 @import '../components/footer/footer-info';
 @import '../components/footer/footer-nav';
-@import '../components/footer/footer-contacts';
 @import '../components/download-links/download-links';

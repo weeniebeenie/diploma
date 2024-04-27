@@ -47,3 +47,33 @@
         </fieldset>
     </form>
 {%- endmacro -%}
+
+{#
+    SearchResultItem template.
+#}
+{% macro SearchTagsItem(
+    title = 'Search result title default'
+) %}
+    <article class="search-result">
+        <h2 class="item-title search-result__title">
+            <a href="{{ link }}" class="search-result__title-link">
+                <span class="underline">{{ title }}</span>
+            </a>
+        </h2>
+    </article>
+{% endmacro %}
+
+{#
+    SearchResultList template.
+#}
+{% macro SearchTagsList(
+    count = 8
+) %}
+    <ul class="list is-columns-1">
+        {% for item in range(count) %}
+            <li class="list__item appearance-animation from-bottom">
+                {{ SearchTagsItem() }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}

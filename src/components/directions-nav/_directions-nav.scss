@@ -44,7 +44,7 @@
             &::before {
                 @include absolute(0, null, null, 50%);
                 @include size(calc(100% - 56px), 1px);
-                background-color: $color-3--14;
+                background-color: $color-3--1;
                 content: '';
                 transform: translateX(-50%);
             }

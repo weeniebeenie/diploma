@@ -1,14 +1,32 @@
 .footer-info {
     &__logo {
-        @include size(128px, auto);
-        margin-bottom: 45px;
+        margin-bottom: 30px;
 
         @include breakpoint(medium down) {
-            margin: 0 auto 45px;
+            display: table;
+            margin: 0 auto 30px;
+        }
+    }
+
+    &__item {
+        @include font(null, 1.4rem, $normal, normal);
+        color: $color-black;
+        padding: 8px 0 8px 20px;
+        position: relative;
+
+        @include fa-icon-style(false) {
+            @include absolute(11px, null, null, 0);
+            margin-right: 7px;
         }
 
-        img {
-            @include size(100%, auto)
+        a {
+            @include on-event() {
+                text-decoration: none;
+            }
         }
+    }
+
+    &__socials {
+        margin-top: 20px;
     }
 }

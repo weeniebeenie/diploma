@@ -1,0 +1,20 @@
+{%- from 'components/heading/heading.njk' import Heading -%}
+{%- from 'components/page-list/page-list.njk' import PageList -%}
+{%- from 'components/search/search.njk' import SearchTagsList -%}
+
+{% set title = 'Поиск по сайту' %}
+
+{% extends 'views/layouts/base.njk' %}
+
+{%- block heading -%}
+    {{ Heading(
+        title = title,
+        teaser = 'ПОЛЕ ПОИСКА ПОЛЕ ПОИСКА ПОЛЕ ПОИСКА ПОЛЕ ПОИСКА ПОЛЕ ПОИСКА'
+    ) }}
+{%- endblock -%}
+
+{%- block content -%}
+    {{ PageList(
+        list = SearchTagsList()
+    ) }}
+{% endblock %}

@@ -12,7 +12,7 @@
         }
 
         &__field {
-            background-color: $color-3--10;
+            background-color: $color-3--1;
             padding: 0 50px 0 27px;
         }
     }
@@ -21,10 +21,10 @@
         @include absolute(0, 20px, null, null);
         @include font(null, 1.8rem);
         @include trs();
-        background-color: $color-3--10;
+        background-color: $color-3--1;
         border: none;
         border-radius: 25px;
-        color: $color-3--13;
+        color: $color-3--4;
         cursor: pointer;
         padding: 11.5px 28px;
 

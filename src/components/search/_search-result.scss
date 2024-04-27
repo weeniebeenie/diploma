@@ -1,0 +1,10 @@
+.search-result {
+    @extend %link-block-context;
+    border-bottom: 1px solid $color-3--3;
+    padding-bottom: 40px;
+
+    &__title-link {
+        @extend %link-block;
+        @extend %underline-context;
+    }
+}

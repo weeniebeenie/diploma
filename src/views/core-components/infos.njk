@@ -1,0 +1,36 @@
+{% from 'views/utils/utils.njk' import wrapper as _wrapper %}
+{% from 'views/core-components/icon.njk' import Icon %}
+
+{% macro InfoItem(
+    tag = 'p',
+    className = '',
+    href = '',
+    icon = '',
+    ghost = '',
+    text = '',
+    externalLink = false,
+    attrs = {}
+) %}
+    <{{ tag }} class="info-item {{ className }}">
+        {{ caller() if caller }}
+        {%- if not caller -%}
+            {% set newAttrs = Helpers.merge({
+                'aria-label': label if label,
+                'title': label if label,
+                'target': '_blank' if externalLink
+            }, attrs) %}
+            {%- call _wrapper('', href, 'span', attrs = newAttrs) -%}
+                {{ Icon(
+                    className = icon,
+                    title = ghost | replace (':', '') | trim if ghost and not href
+                ) if icon }}
+
+                {%- if ghost -%}
+                    <span class="ghost">{{ ghost }}</span>
+                {%- endif -%}
+
+                {{ text | safe if text }}
+            {%- endcall -%}
+        {%- endif -%}
+    </{{ tag }}>
+{% endmacro %}

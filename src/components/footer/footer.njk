@@ -1,5 +1,5 @@
-{%- from 'components/download-links/download-links.njk' import DownloadLinks -%}
-{%- from 'views/utils/utils.njk' import wrapper -%}
+{#{%- from 'views/utils/utils.njk' import wrapper -%}#}
+{%- from 'components/logo/logo.njk' import Logo -%}
 {% from 'views/core-components/icon.njk' import Icon %}
 {%- from 'components/social-networks/social-networks.njk' import SocialNetworks -%}
 
@@ -14,12 +14,20 @@
     <section class="footer-info">
         <h2 class="ghost">Информация о сайте</h2>
         <div class="footer-info__logo">
-            {% call wrapper(className ='logo', href = '' if isHome else './index.html') %}
-                <img src="{{ logoSrc }}" alt="{{ '' if isHome else siteName + ' (вернуться на главную страницу)' }}">
-            {% endcall %}
+{#            {% call wrapper(className ='logo', href = '' if isHome else './index.html') %}#}
+{#                <img src="{{ logoSrc }}" alt="{{ '' if isHome else siteName + ' (вернуться на главную страницу)' }}">#}
+{#            {% endcall %}#}
+            {{ Logo(isHome) }}
         </div>
-        <div class="footer-info__downloads">
-            {{ DownloadLinks() }}
+        <address class="footer-info__content">
+            <p class="footer-info__item">
+                {{ Icon('fas fa-map-marker-alt') }}
+                <span class="ghost">Адрес:</span>
+                271100, г. Бердянск, пр-т Труда, 6
+            </p>
+        </address>
+        <div class="footer-info__socials">
+            {{ SocialNetworks() }}
         </div>
     </section>
 {%- endmacro -%}
@@ -44,41 +52,12 @@
 {%- endmacro -%}
 
 {#
-    FooterContacts template.
-#}
-{%- macro FooterContacts() -%}
-    <section class="footer-contacts">
-        <h3 class="footer-contacts__title">Поддержка клиентов</h3>
-        <address class="footer-contacts__content">
-            <p class="footer-contacts__item">
-                {{ Icon('fas fa-phone-alt') }}
-                <span>Телефон:</span>
-                <a href="tel:0000000000" title="Позвонить менеджеру по телефону +7 (990) 000-00-00" aria-label="Позвонить менеджеру по телефону +7 (990) 000-00-00">+7 (990) 000-00-00</a>
-            </p>
-            <p class="footer-contacts__item">
-                {{ Icon('fas fa-envelope') }}
-                <span>E-mail:</span>
-                <a href="mailto:hello@travelme.ru">hello@travelme.ru</a>
-            </p>
-            <p class="footer-contacts__item">
-                {{ Icon('fas fa-map-marker-alt') }}
-                <span>Офис:</span>
-                Москва, ул. Название улицы 10, офис 11
-            </p>
-        </address>
-        <div class="footer-contacts__socials">
-            {{ SocialNetworks(modifier = 'has-no-text') }}
-        </div>
-    </section>
-{%- endmacro -%}
-
-{#
     Footer template.
 #}
 {%- macro Footer(
     isHome,
-    authorLink = 'https://rocket-ads.ru/',
-    authorTagline = 'Digital компания с погружением в бизнес',
+    authorLink = '#',
+    authorTagline = 'Разработчик',
     authorLogo = 'images/logos/logo-author.svg'
 ) -%}
     <footer class="footer appearance-animation" role="contentinfo">
@@ -87,35 +66,28 @@
                 <div class="footer__column is-first">
                     {{ FooterInfo(isHome = isHome) }}
                 </div>
-                <div class="footer__column is-middle">
-                    {{ FooterNav(
-                        title = 'Сервис',
-                        linksArr = ['О сервисе', 'Блог', 'Часто задаваемые вопросы', 'Способы оплаты']
-                    ) }}
-                    {{ FooterNav(
-                        title = 'Гидам',
-                        linksArr = ['Стать гидом', 'Правила работы']
-                    ) }}
-                    {{ FooterNav(
-                        title = 'Документы',
-                        linksArr = ['Политика возврата билетов', 'Договор оферты', 'Условия использования сайта', 'Политика обработки персональных данных', 'Реквизиты']
-                    ) }}
-                </div>
                 <div class="footer__column is-last">
-                    {{ FooterContacts() }}
+                    {{ FooterNav(
+                        title = 'ГБУЗ «Бердянская городская больница»',
+                        linksArr = ['Услуги', 'Врачи', 'Контакты', 'Карта сайта']
+                    ) }}
+                    {{ FooterNav(
+                        title = 'Информация',
+                        linksArr = ['Пациентам', 'Правовая информация', 'Лицензии', 'Политика обработки персональных данных', 'Вакансии']
+                    ) }}
                 </div>
             </div>
             <div class="footer__bottom">
-                <p class="footer__copyright">© 2023 «Tenloc».</p>
+                <p class="footer__copyright">© 2024 ГБУЗ «Бердянская городская больница».</p>
                 <p class="footer__author">
-                    Разработка сайта
+                    Разработка сайта:
                     <a href="{{ authorLink }}"
                        class="footer__author-link"
                        target="_blank"
                        rel="noreferrer"
                        title="{{ authorTagline }}"
                     >
-                        <img src="{{ authorLogo }}" alt="RocketAds (перейти на сайт разработчика)">
+                        Башмак Елизавета <span class="ghost">(перейти на сайт разработчика)</span>
                     </a>
                 </p>
             </div>

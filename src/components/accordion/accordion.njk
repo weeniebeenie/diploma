@@ -1,0 +1,74 @@
+{%- from 'views/core-components/icon.njk' import Icon -%}
+{%- from 'views/core-components/section.njk' import Section -%}
+{%- import 'views/core-components/title.njk' as Title -%}
+{%- from 'views/core-components/link.njk' import Link -%}
+
+{#
+    Insert accordion element.
+    @params {object} settings - custom settings for accordion (inherited from dropdown settings).
+#}
+{%- macro AccordionItem(
+    title = 'Accordion title'
+) -%}
+    <div class="accordion-item appearance-animation from-bottom js-accordion">
+        <h3 class="accordion-item__toggle-wrapper">
+            <button type="button" class="accordion-item__toggle js-accordion-toggle">
+                <span class="accordion-item__toggle-text">{{ title }}</span>
+                {{ Icon('accordion-item__toggle-icon fas fa-plus') }}
+            </button>
+        </h3>
+        <div class="accordion-item__block js-accordion-block">
+            <div class="accordion-item__wrapper">
+                <div class="rte">
+                    <p>{{ lorem(5) }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro -%}
+
+{#
+    AccordionList template.
+    Template for accordion on faq page.
+#}
+{%- macro AccordionList(
+    count = 3
+) -%}
+    <ul class="list is-columns-1">
+        {% for item in range(count) %}
+            <li class="list__item">
+                {{ AccordionItem() }}
+            </li>
+        {% endfor %}
+    </ul>
+{%- endmacro -%}
+
+{#
+    AccordionSection template.
+    Template for accordion on home page.
+#}
+{%- macro AccordionSection(
+    titleText = 'Часто задаваемые вопросы',
+    count = 3
+) -%}
+    {% call Section(className = 'accordion-section', container = 'accordion-section__container') %}
+        <div class="section__title appearance-animation flip-up">
+            {{ Title.TitleDefault(
+                text = titleText
+            ) }}
+        </div>
+        <div class="section__content">
+            {% for item in range(count) %}
+                {{ AccordionItem() }}
+            {% endfor %}
+        </div>
+        <div class="section__more-links appearance-animation from-bottom">
+            {{ Link(
+                href = 'list-faq.html',
+                text = 'Другие вопросы',
+                className = 'btn is-primary',
+                icon = false
+            ) }}
+        </div>
+    {% endcall %}
+{%- endmacro -%}

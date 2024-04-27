@@ -7,6 +7,7 @@
 #}
 {% macro SocialNetworks(
     modifier,
+    noText = true,
     links = [
         {
             title: 'telegram',
@@ -28,7 +29,7 @@
                        rel="noopener"
                     >
                         {{ Icon(link.icon) }}
-                        <span class="social-networks__link-text {{ 'ghost' if modifier === 'has-no-text' }}">
+                        <span class="social-networks__link-text {{ 'ghost' if noText }}">
                             {{ link.title | capitalize }}
                         </span>
                     </a>

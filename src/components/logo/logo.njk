@@ -5,7 +5,7 @@
 #}
 {%- macro Logo(
     isHome = false,
-    siteName = 'Tenloc',
+    siteName = 'Бердянская городская больница',
     logoSrc = 'images/logos/logo.svg'
 ) -%}
     {% call wrapper(
@@ -18,9 +18,10 @@
             <img
                 src="{{ logoSrc }}"
                 alt="{{ siteName if isHome else siteName + ' (вернуться на главную страницу)' }}"
-                height="37"
-                width="128"
+                height="65"
+                width="65"
             >
         </span>
+        <span class="logo__text">{{ siteName }}</span>
     {% endcall %}
 {%- endmacro -%}

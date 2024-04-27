@@ -1,0 +1,49 @@
+{% from 'views/utils/utils.njk' import svg %}
+{%- from 'views/core-components/section.njk' import Section -%}
+{%- import 'views/core-components/title.njk' as Title -%}
+
+{#
+    Downloads template.
+#}
+{%- macro Downloads(
+    count = 3
+) -%}
+    <div class="downloads">
+        <ul class="downloads__list">
+            {% for item in range(count) %}
+                <li class="downloads__item appearance-animation from-bottom">
+                    <span class="downloads__icon">
+                        {{ svg('icons/' + 'chat') }}
+                    </span>
+                    <span class="downloads__text">
+                        <span class="downloads__title">
+                            <a href="#" target="_blank" class="downloads__title-link" download>
+                                <span class="underline">{{ lorem(1) }}</span>
+                            </a>
+                        </span>
+                        <span class="downloads__size">PDF - 7.02 MB</span>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{%- endmacro -%}
+
+{#
+    DownloadsSection template.
+    Template for Downloads widget.
+#}
+{%- macro DownloadsSection(
+    titleText = 'Скачать'
+) -%}
+    {% call Section(className = 'downloads-section', container = false) %}
+        <div class="section__title appearance-animation flip-up">
+            {{ Title.TitleDefault(
+                text = titleText
+            ) }}
+        </div>
+        <div class="section__content">
+            {{ Downloads() }}
+        </div>
+    {% endcall %}
+{%- endmacro -%}

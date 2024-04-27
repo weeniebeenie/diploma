@@ -1,70 +1,63 @@
-export default function initDropdowns() {
-    const dropdowns = document.querySelectorAll('.js-dropdown');
+export default class Dropdown {
+    constructor(selector, selectorClass) {
+        this.dropdownWrapper = selector;
+        this.dropdownToggler = selector.querySelector(selectorClass + '-toggle');
+        this.dropdownContent = selector.querySelector(selectorClass + '-block');
+        this.accordionIcon = selector.querySelector('.accordion-item__toggle-icon');
+        this.isOpen = false;
 
-    const showHoverDropdown = (dropdown, toggle, block) => {
-        dropdown.classList.add('is-open');
-        toggle.setAttribute('aria-expanded', 'true');
-        block.setAttribute('aria-hidden', 'false');
-    };
+        if (selectorClass === '.js-accordion') {
+            this.isAccordion = true;
+        }
 
-    const hideHoverDropdown = (dropdown, toggle, block) => {
-        dropdown.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        block.setAttribute('aria-hidden', 'true');
-    };
+        this.dropdownToggler.addEventListener('click', () => this.toggleDropdown());
 
-    if (dropdowns) {
-        dropdowns.forEach(dropdown => {
-            const dropdownToggle = dropdown.querySelector('.js-dropdown-toggle');
-            const dropdownBlock = dropdown.querySelector('.js-dropdown-block');
+        if (!this.isAccordion) {
+            document.addEventListener('click', event => this.handleOutsideClick(event));
+            document.addEventListener('keydown', event => this.handleKeyPress(event));
+            document.addEventListener('keyup', (event) => this.closeDropdown(event));
+        }
+    }
 
-            if (dropdownToggle.classList.contains('header-nav__link')) {
-                dropdown.addEventListener('mouseover', () => {
-                    showHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
-                });
-                dropdown.addEventListener('mouseout', () => {
-                    hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
-                });
-            } else {
-                dropdownToggle.addEventListener('click', () => {
-                    dropdown.classList.toggle('is-open');
-                });
+    toggleDropdown = () => {
+        this.isOpen = !this.isOpen;
+        this.dropdownWrapper.classList.toggle('is-open', this.isOpen);
+        this.setA11yAttributes(this.isOpen);
+
+        if (this.isAccordion) {
+            this.accordionIcon.classList.toggle('fa-plus', !this.isOpen);
+            this.accordionIcon.classList.toggle('fa-minus', this.isOpen);
+        }
+    }
+
+    closeDropdown = (event) => {
+        if (event.key === 'Tab') {
+            if (!this.dropdownWrapper.contains(event.target)) {
+                this.isOpen = !this.isOpen;
+                this.dropdownWrapper.classList.remove('is-open', this.isOpen);
+                this.setA11yAttributes(this.isOpen);
             }
+        }
+    }
 
-            document.addEventListener('click', (event) => {
-                if (!dropdownToggle.contains(event.target)) {
-                    hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
-                }
-            });
+    handleOutsideClick = (event) => {
+        if (!this.dropdownWrapper.contains(event.target)) {
+            this.isOpen = false;
+            this.dropdownWrapper.classList.remove('is-open');
+            this.setA11yAttributes(this.isOpen);
+        }
+    }
 
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                    if (dropdown.classList.contains('is-open')) {
-                        hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
-                    }
-                }
-            });
+    handleKeyPress = (event) => {
+        if (event.key === 'Escape' && this.isOpen) {
+            this.isOpen = false;
+            this.dropdownWrapper.classList.remove('is-open');
+            this.setA11yAttributes(this.isOpen);
+        }
+    }
 
-            document.addEventListener('keyup', (event) => {
-                if (event.key === 'Tab') {
-                    if (!dropdown.contains(event.target)) {
-                        hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
-                    }
-                }
-            });
-
-            dropdownToggle.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-
-                    if (dropdown.classList.contains('is-open')) {
-                        hideHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
-                    } else {
-                        showHoverDropdown(dropdown, dropdownToggle, dropdownBlock);
-                        dropdownBlock.focus();
-                    }
-                }
-            });
-        });
+    setA11yAttributes = (isOpen) => {
+        this.dropdownToggler.setAttribute('aria-expanded', isOpen);
+        this.dropdownContent.setAttribute('aria-hidden', String(!isOpen));
     }
 }

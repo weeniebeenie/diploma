@@ -1,0 +1,56 @@
+.downloads {
+    &__item {
+        @extend %link-block-context;
+        background-color: $color-1--1;
+        border-radius: $border-radius;
+        color: $color-white;
+        display: flex;
+        margin-bottom: 5px;
+        padding: 20px 40px;
+
+        @include breakpoint(small down) {
+            padding: 20px;
+        }
+    }
+
+    &__icon {
+        @include size(50px);
+        display: block;
+        flex-shrink: 0;
+        margin-right: 20px;
+
+        svg {
+            @include size(100%);
+            fill: $color-white;
+        }
+    }
+
+    &__title {
+        @include font($typo-1, 2rem, $normal);
+        line-height: 1.25;
+
+        @include breakpoint(small down) {
+            font-size: 1.6rem;
+        }
+    }
+
+    &__title-link {
+        @extend %link-block;
+        @extend %underline-context;
+
+        .underline {
+            @include multiline-underline($color: $color-white);
+        }
+    }
+
+    &__size {
+        @include font($typo-1, 1.4rem, $normal);
+        display: block;
+        line-height: 1;
+        margin-top: 15px;
+
+        @include breakpoint(small down) {
+            font-size: 1.2rem;
+        }
+    }
+}

@@ -14,45 +14,209 @@
 }
 
 .rte {
+    // @name Title h2
     h2 {
         @extend %rte-heading;
-        @include font($typo-1, 2.6rem, $medium);
-        margin: 38px 0 27px;
+        font-size: 4rem;
+        margin: 60px 0 25px;
 
         @include breakpoint(small down) {
-            font-size: 2rem;
+            font-size: 3.2rem;
+            margin: 50px 0 25px;
         }
     }
 
+    // @name Title h3
     h3 {
         @extend %rte-heading;
-        @include font($typo-1, 2.4rem, $medium);
-        margin: 38px 0 27px;
+        font-size: 3.2rem;
+        margin: 50px 0 25px;
+
+        @include breakpoint(small down) {
+            font-size: 2.8rem;
+            margin: 40px 0 20px;
+        }
+    }
+
+    // @name Title h4
+    h4 {
+        @extend %rte-heading;
+        font-size: 2.5rem;
+        margin: 40px 0 20px;
+
+        @include breakpoint(small down) {
+            font-size: 2.2rem;
+            margin: 30px 0 15px;
+        }
+    }
+
+    // @name Title h5
+    h5 {
+        @extend %rte-heading;
+        font-size: 2.2rem;
+        margin: 30px 0 15px;
 
         @include breakpoint(small down) {
             font-size: 1.8rem;
+            margin: 20px 0 10px;
         }
     }
 
-    h4 {
-        @extend %rte-heading;
-        @include font($typo-1, 2.2rem, $medium);
-        margin: 38px 0 27px;
-
-        @include breakpoint(small down) {
-            font-size: 1.6rem;
-        }
-    }
-
+    // @name Paragraph
     p {
-        @include font($typo-1, 1.6rem, $normal, normal);
-        color: $color-3--5;
-        line-height: 1.6;
-        margin: 0 0 26px;
+        @include font($typo-1, 2rem, $normal, normal);
+        color: $color-black;
+        line-height: 1.7;
+        margin: 0 0 15px;
         word-break: break-word;
 
         @include breakpoint(small down) {
             font-size: 1.4rem;
+        }
+    }
+
+    // @name Link
+    a:not([data-fancybox]):not(.is-wordpress) {
+        text-decoration: underline;
+
+        @include on-event {
+            text-decoration: none;
+        }
+    }
+
+    // @lists
+    ul,
+    ol {
+        @include font($typo-1, 2rem, $normal, normal);
+        color: $color-black;
+        overflow: hidden;
+        line-height: 1.7;
+        margin: 0 0 15px;
+        padding-left: 40px;
+
+        @include breakpoint(small down) {
+            font-size: 1.4rem;
+            padding-left: 30px;
+        }
+
+        > li {
+            position: relative;
+
+            > p {
+                margin-bottom: 0;
+            }
+
+            > ul,
+            > ol {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    ul {
+        list-style-type: none;
+
+        > li::before {
+            @include absolute(13px, null, null, -20px);
+            @include size(8px);
+            background-color: $color-1--1;
+            border-radius: 50%;
+            content: '';
+
+            @include breakpoint(small down) {
+                top: 8px;
+            }
+        }
+
+        > li > ul > li::before {
+            color: $color-black;
+        }
+    }
+
+    // @name Blockquote
+    .blockquote,
+    blockquote {
+        @include font($typo-1, 2rem, $normal, italic);
+        border: {
+            color: $color-3--3;
+            style: solid;
+            width: 1px 0;
+        }
+        color: $color-black;
+        margin: 80px auto;
+        min-height: 115px;
+        overflow: hidden;
+        padding: 30px 30px 30px 140px;
+        position: relative;
+
+        @include breakpoint(small down) {
+            padding: 70px 20px 30px;
+            font-size: 1.4rem;
+        }
+
+        &::before {
+            @extend %icons-font-aliasing;
+            @include absolute(30px, null, null, 40px);
+            @include font(null, 6rem, $black);
+            color: $color-black;
+            content: '\f10d';
+            line-height: 1;
+
+            @include breakpoint(small down) {
+                font-size: 4rem;
+                left: 20px;
+                top: 20px;
+            }
+        }
+
+        p {
+            @extend %font-inherit;
+            color: inherit;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    // @name Highlight
+    .highlight {
+        @include font($typo-1, 2rem, $normal, normal);
+        background-color: $color-1--1;
+        border-radius: $border-radius;
+        color: $color-white;
+        line-height: 1.7;
+        margin: 80px auto;
+        min-height: 105px;
+        overflow: hidden;
+        padding: 30px 30px 30px 140px;
+        position: relative;
+        word-break: break-word;
+
+        @include breakpoint(small down) {
+            font-size: 1.4rem;
+            padding: 70px 20px 30px;
+        }
+        
+        &::before {
+            @extend %icons-font-aliasing;
+            @include absolute(30px, null, null, 40px);
+            @include font(null, 5rem, $black);
+            color: $color-white;
+            content: '\f06a';
+            line-height: 1;
+
+            @include breakpoint(small down) {
+                font-size: 4rem;
+                left: 20px;
+                top: 20px;
+            }
+        }
+    }
+
+    > * {
+        &:first-child {
+            margin-top: 0;
         }
     }
 }

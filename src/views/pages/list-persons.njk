@@ -1,0 +1,21 @@
+{%- from 'components/heading/heading.njk' import Heading -%}
+{%- from 'components/page-list/page-list.njk' import PageList -%}
+{%- from 'components/persons/persons.njk' import PersonsList -%}
+
+{% set title = 'Наши врачи' %}
+
+{% extends 'views/layouts/base.njk' %}
+
+{%- block heading -%}
+    {{ Heading(
+        title = title
+    ) }}
+{%- endblock -%}
+
+{%- block content -%}
+    {{ PageList(
+        itemsCount = 10,
+        list = PersonsList(count = 10),
+        pagerType = 'default'
+    ) }}
+{% endblock %}
