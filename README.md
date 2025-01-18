@@ -44,3 +44,8 @@ If you want to build local project files run:
 ```
 gulp build
 ```
+
+If you want to deploy the project to Github Pages branch:
+```
+gulp deploy
+```
