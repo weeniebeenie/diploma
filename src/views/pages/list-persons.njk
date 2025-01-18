@@ -1,4 +1,6 @@
 {%- from 'components/heading/heading.njk' import Heading -%}
+{%- import 'views/core-components/filter.njk' as Filter -%}
+{%- import 'views/core-components/form.njk' as Form -%}
 {%- from 'components/page-list/page-list.njk' import PageList -%}
 {%- from 'components/persons/persons.njk' import PersonsList -%}
 
@@ -11,6 +13,33 @@
         title = title
     ) }}
 {%- endblock -%}
+
+{% block filterBlock %}
+    {% call Filter.FilterWrapper(legend = 'Фильтровать записи по параметрам:', ariaLabelText = 'Фильтровать записи') %}
+        {% call Filter.FieldsWrapper() %}
+            {% call Filter.FieldsGroup() %}
+                {% call Filter.FilterField('col-md-6 col-xs-12') %}
+                    {{ Form.FormField(
+                        type = 'text',
+                        label = 'Имя и фамилия',
+                        id = 'specialist-name',
+                        name = 'specialist-name'
+                    ) }}
+                {% endcall %}
+                {% call Filter.FilterField('col-md-6 col-xs-12') %}
+                    {{ Form.FormField(
+                        type = 'select',
+                        label = 'Тип специалиста',
+                        id = 'specialist-type',
+                        name = 'specialist-type'
+                    ) }}
+                {% endcall %}
+            {% endcall %}
+        {% endcall %}
+
+        {{ Filter.ButtonsWrapper() }}
+    {% endcall %}
+{% endblock %}
 
 {%- block content -%}
     {{ PageList(

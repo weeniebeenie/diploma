@@ -12,6 +12,7 @@
 
 .js-dropdown-block {
     @include absolute(100%, null, null, 0);
+    border: 1px solid $color-3--3;
     display: none;
     list-style: none;
     min-width: 100%;
@@ -24,7 +25,6 @@
     z-index: 5;
 
     .is-open > & {
-        border: 1px solid $color-3--3;
         display: block;
         opacity: 1;
         transform: translateY(-1px);

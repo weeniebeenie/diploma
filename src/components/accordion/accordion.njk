@@ -34,7 +34,7 @@
 {%- macro AccordionList(
     count = 3
 ) -%}
-    <ul class="list is-columns-1">
+    <ul class="list is-columns-1 is-accordion">
         {% for item in range(count) %}
             <li class="list__item">
                 {{ AccordionItem() }}

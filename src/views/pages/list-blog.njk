@@ -1,6 +1,6 @@
 {%- from 'components/heading/heading.njk' import Heading -%}
 {%- import 'views/core-components/filter.njk' as Filter -%}
-{#{%- import 'views/core-components/form.njk' as Form -%}#}
+{%- import 'views/core-components/form.njk' as Form -%}
 {%- from 'components/page-list/page-list.njk' import PageList -%}
 {%- from 'components/blog/blog.njk' import BlogList -%}
 
@@ -13,18 +13,6 @@
         title = title
     ) }}
 {%- endblock -%}
-
-{#{% block filterBlock %}#}
-{#    {% call Filter.FilterWrapper(legend = 'Сортировать записи блога по:', ariaLabelText = 'Сортировать записи блога') %}#}
-{#        {% call Filter.FieldsWrapper() %}#}
-{#            {% call Filter.FieldsGroup() %}#}
-{#                {% call Filter.FilterField('col-md-12') %}#}
-{#                    {{ Form.FormField(type = 'select', label = 'Сортировать', wrapperModifier = 'is-inline') }}#}
-{#                {% endcall %}#}
-{#            {% endcall %}#}
-{#        {% endcall %}#}
-{#    {% endcall %}#}
-{#{% endblock %}#}
 
 {%- block content -%}
     {{ PageList(

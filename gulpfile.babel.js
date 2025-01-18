@@ -99,6 +99,7 @@ function nunjucksEnv(env) {
 function browsersync() {
     browserSync.init({
         server: { baseDir: 'dist/' },
+        port: 8080,
         notify: false,
         online: true
     });

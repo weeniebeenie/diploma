@@ -217,6 +217,10 @@ $large-padding: (1.2em 1.1em);
 .btn {
     @extend %button;
 
+    &.is-full-width {
+        width: 100%;
+    }
+
     &.is-circle {
         @extend %button-style-circle;
     }

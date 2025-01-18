@@ -1,0 +1,149 @@
+{%- from 'components/heading/heading.njk' import Heading -%}
+{%- import 'views/core-components/form.njk' as Form -%}
+{%- from 'views/core-components/button.njk' import Button -%}
+
+{% set title = 'Записаться на прием' %}
+
+{% extends 'views/layouts/base.njk' %}
+
+{%- block heading -%}
+    {{ Heading(
+        title = title
+    ) }}
+{%- endblock -%}
+
+{%- block content -%}
+    {%- call Form.FormWrapper(
+        legend = false,
+        className = "js-validator-form"
+    ) -%}
+        <fieldset class="form__fieldset">
+            <legend class="form__legend">Информация о Вас :</legend>
+            <div class="form__fields-group">
+                <div class="form__column col-md-6 col-xs-12">
+                    {{ Form.FormField(
+                        label = 'Фамилия',
+                        id = 'family-name',
+                        name = 'family-name',
+                        required = true,
+                        customAttrs = {
+                            'autocomplete' : 'family-name'
+                        }
+                    ) }}
+                </div>
+                <div class="form__column col-md-6 col-xs-12">
+                    {{ Form.FormField(
+                        label = 'Имя',
+                        id = 'given-name',
+                        name = 'given-name',
+                        required = true,
+                        customAttrs = {
+                            'autocomplete' : 'given-name'
+                        }
+                    ) }}
+                </div>
+                <div class="form__column col-md-6 col-xs-12">
+                    {{ Form.FormField(
+                        label = 'Дата рождения',
+                        type = 'date',
+                        id = 'bday',
+                        name = 'birthday',
+                        required = true,
+                        customAttrs = {
+                            'autocomplete' : 'bday'
+                        }
+                    ) }}
+                </div>
+                <div class="form__column col-md-6 col-xs-12">
+                    {{ Form.FormField(
+                        label = 'Номер полиса',
+                        type = 'number',
+                        id = 'policy-number',
+                        name = 'insurance-policy-number',
+                        required = true,
+                        customAttrs = {
+                            'pattern' : '\d+',
+                            'min' : '000000000',
+                            'max' : '9999999999999999'
+                        }
+                    ) }}
+                </div>
+                <div class="form__column col-md-6 col-xs-12">
+                    {{ Form.FormField(
+                        label = 'Телефон',
+                        type = 'tel',
+                        id = 'phone',
+                        name = 'phone',
+                        customAttrs = {
+                            'autocomplete' : 'tel',
+                            'pattern' : '^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$',
+                            'minLength' : '6',
+                            'maxLength' : '16'
+                        }
+                    ) }}
+                </div>
+                <div class="form__column col-md-6 col-xs-12">
+                    {{ Form.FormField(
+                        label = 'Электронная почта',
+                        type = 'email',
+                        id = 'email',
+                        name = 'email',
+                        customAttrs = {
+                            'autocomplete' : 'email'
+                        }
+                    ) }}
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="form__fieldset">
+            <legend class="form__legend">Интересующий специалист : </legend>
+            <div class="form__fields-group">
+                <div class="form__column col-md-6 col-xs-12">
+                    {{ Form.FormField(
+                        label = 'Тип специалиста',
+                        type = 'select',
+                        id = 'specialist',
+                        name = 'specialist'
+                    ) }}
+                </div>
+                <div class="form__column col-md-6 col-xs-12">
+                    {{ Form.FormField(
+                        label = 'Предпочтительная дата записи',
+                        type = 'date',
+                        id = 'appointment-date',
+                        name = 'appointment-date'
+                    ) }}
+                </div>
+                <div class="form__column col-xs-12">
+                    {{ Form.FormField(
+                        label = 'Описание проблемы',
+                        textHelp = 'Если Вы не уверены в выборе специалиста, опишите кратко Вашу проблему и мы подберем специалиста самостоятельно',
+                        type = 'textarea',
+                        id = 'problem',
+                        name = 'problem',
+                        customAttrs = {
+                            'rows': 5,
+                            'cols': 60,
+                            'spellcheck': false
+                        }
+                    ) }}
+                </div>
+                <div class="form__column col-xs-12">
+                    {{ Form.RadioCheckbox(
+                        label = 'Я подтверждаю, что ознакомлен(-а) с политикой конфиденциальности сайта и даю согласие на обработку моих данных. <a href="#">Нажмите здесь, чтобы узнать подробнее.</a>',
+                        required = true,
+                        id = 'confirm',
+                        name = 'confirm'
+                    ) }}
+                </div>
+            </div>
+        </fieldset>
+        {% call Form.FormActions(className = 'is-right') %}
+            {{ Button(
+                className = 'btn is-primary',
+                type = 'submit',
+                text = 'Отправить заявку'
+            ) }}
+        {% endcall %}
+    {%- endcall -%}
+{% endblock %}

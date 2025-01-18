@@ -9,10 +9,7 @@
 
     &__inner {
         display: flex;
-
-        @include breakpoint(small down) {
-            flex-direction: column;
-        }
+        flex-direction: column;
     }
 }
 

@@ -1,5 +1,6 @@
 {%- from 'views/utils/utils.njk' import wrapper as _wrapper with context -%}
 {%- from 'views/core-components/form.njk' import FormWrapper -%}
+{%- from 'views/core-components/button.njk' import Button -%}
 
 {#
     Insert filter fields wrapper.
@@ -8,6 +9,17 @@
 {%- macro FieldsWrapper(className = '') -%}
     <div class="filter__fields {{ className }}">
         {{ caller() if caller }}
+    </div>
+{%- endmacro -%}
+
+{#
+    Insert filter buttons wrapper.
+    @param {string} className - filter wrapper modifier.
+    @param {string[]|object[]} buttons - buttons array. (string for presets or object for custom buttons).
+#}
+{%- macro ButtonsWrapper(className = '') -%}
+    <div class="filter__buttons {{ className }}">
+        {{ Button(text = 'Фильтровать', type = 'submit', className = 'btn is-primary is-full-width filter-submit', icon = false) }}
     </div>
 {%- endmacro -%}
 

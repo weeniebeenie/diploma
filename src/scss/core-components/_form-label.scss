@@ -13,6 +13,18 @@ legend {
     width: 100%;
 }
 
+.required {
+    color: $color-red;
+    margin: 0 4px;
+}
+
+.help-text {
+    @include font(null, 1.4rem, $normal);
+    color: $color-3--5;
+    display: block;
+    margin: 15px 0 0;
+}
+
 /**
  * Base styles for label component.
  */

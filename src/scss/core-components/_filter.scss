@@ -1,19 +1,6 @@
 .filter-wrapper {
     .heading + & {
-        align-items: flex-end;
-        display: flex;
-        flex-shrink: 0;
-        margin: 20px 0 0 240px;
-        width: 309px;
-
-        @include breakpoint(medium down) {
-            margin: 20px 0 0 80px;
-        }
-
-        @include breakpoint(small down) {
-            margin: 20px 0 0;
-            width: 100%;
-        }
+        margin-top: 20px;
     }
 }
 
@@ -22,6 +9,8 @@
     width: 100%;
 
     &__fields-group {
+        display: flex;
+        flex-wrap: wrap;
         margin: 0 -23px;
 
         @include breakpoint(small down) {
@@ -32,8 +21,21 @@
     &__column {
         padding: 0 23px;
 
-        @include breakpoint(small down) {
-            padding: 4px 20px;
+        &.col-xs-12 {
+            flex-basis: 100%;
+            max-width: 100%;
         }
+
+        &.col-md-6 {
+            @include breakpoint(medium) {
+                flex-basis: 50%;
+                max-width: 50%;
+            }
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        flex-wrap: wrap;
     }
 }

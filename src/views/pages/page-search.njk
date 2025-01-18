@@ -2,9 +2,9 @@
 {%- import 'views/core-components/filter.njk' as Filter -%}
 {%- import 'views/core-components/form.njk' as Form -%}
 {%- from 'components/page-list/page-list.njk' import PageList -%}
-{%- from 'components/accordion/accordion.njk' import AccordionList -%}
+{%- from 'components/search/search.njk' import SearchTagsList -%}
 
-{% set title = 'Часто задаваемые вопросы' %}
+{% set title = 'Поиск по сайту' %}
 
 {% extends 'views/layouts/base.njk' %}
 
@@ -15,7 +15,7 @@
 {%- endblock -%}
 
 {% block filterBlock %}
-    {% call Filter.FilterWrapper(legend = 'Фильтровать записи по параметрам:', ariaLabelText = 'Фильтровать записи') %}
+    {% call Filter.FilterWrapper(legend = 'Фильтровать записи по параметрам:', ariaLabelText = 'Фильтровать записи блога') %}
         {% call Filter.FieldsWrapper() %}
             {% call Filter.FieldsGroup() %}
                 {% call Filter.FilterField('col-xs-12') %}
@@ -35,8 +35,6 @@
 
 {%- block content -%}
     {{ PageList(
-        itemsCount = 10,
-        list = AccordionList(count = 10),
-        pagerType = 'default'
+        list = SearchTagsList()
     ) }}
 {% endblock %}

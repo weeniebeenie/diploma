@@ -56,6 +56,10 @@ $list-gap-mobile: 27px;
 
     &__item {
         @extend %list-item;
+
+        .is-accordion & {
+            margin-bottom: 0;
+        }
     }
 
     @for $i from 1 through 6 {

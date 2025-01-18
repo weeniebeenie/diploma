@@ -46,15 +46,20 @@
                 <main role="main" class="site-content" id="main">
                     {% block main %}
                         <div class="site-content__inner">
-                            {% if bodyClass === 'is-detail' %}
-                                {%- block navbar -%}
-                                    <div class="site-content__navbar">
-                                        {%- block navbarInner -%}
-                                            {{ Navbar() }}
-                                        {%- endblock -%}
-                                    </div>
-                                {%- endblock -%}
-                            {% endif %}
+                            {%- block navbar -%}
+
+                                {% if bodyClass === 'is-detail' %}
+                                    {% set links = [ 'Главная', 'Родительская', title ] %}
+                                {% else %}
+                                    {% set links = [ 'Главная', title ] %}
+                                {% endif %}
+
+                                <div class="site-content__navbar">
+                                    {%- block navbarInner -%}
+                                        {{ Navbar(links) }}
+                                    {%- endblock -%}
+                                </div>
+                            {%- endblock -%}
                             {%- block contentTop -%}
                                 <div class="site-content__top">
                                     <div class="heading-wrapper">

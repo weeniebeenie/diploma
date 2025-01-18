@@ -5,20 +5,21 @@
 {%- from 'components/main-menu/main-menu.njk' import MainMenu -%}
 {%- from 'views/core-components/link.njk' import Link -%}
 
-{% set mainNav = [
+{% set headerNavTree = [
     {
         text: 'Отделения',
         dropdown: [
-            { text: 'Вирусология', link: 'detail-page.html' },
-            { text: 'Кардиология', link: 'detail-page.html' },
-            { text: 'Кардиология', link: 'detail-page.html' },
-            { text: 'Кардиология', link: 'detail-page.html' },
-            { text: 'Кардиология', link: 'detail-page.html' },
-            { text: 'Кардиология', link: 'detail-page.html' }
+            { text: 'Вирусология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' }
         ]
     },
     { text: 'Наши врачи', link: 'list-persons.html' },
-    { text: 'О нас', link: 'detail-page.html' }
+    { text: 'Записаться на прием', link: 'page-form.html' },
+    { text: 'О нас', link: 'page-detail.html' }
 ] %}
 
 {#
@@ -27,7 +28,7 @@
 {%- macro HeaderNav() -%}
     <nav class="header-nav" role="navigation" aria-label="Основная навигация">
         <ul class="header-nav__list">
-            {% for item in mainNav %}
+            {% for item in headerNavTree %}
                 <li class="header-nav__item {{ 'js-dropdown' if item.dropdown }}">
                     {% if item.dropdown %}
                         <button
@@ -78,7 +79,7 @@
                             </div>
                             <div class="header__links">
                                 {% call Link(
-                                    href = '#',
+                                    href = 'page-search.html',
                                     className = 'header__link is-search',
                                     icon = 'fas fa-search'
                                 ) %}

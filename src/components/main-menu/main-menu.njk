@@ -1,16 +1,22 @@
 {%- from 'components/logo/logo.njk' import Logo -%}
 {%- from 'views/core-components/button.njk' import Button -%}
+{%- from 'views/core-components/icon.njk' import Icon -%}
 
-{% set mainMenuLinks = [
+{% set mainNavTree = [
     {
-        text: 'О сервисе', link: 'about.html'
+        text: 'Отделения',
+        dropdown: [
+            { text: 'Вирусология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' },
+            { text: 'Кардиология', link: 'page-detail.html' }
+        ]
     },
-    {
-        text: 'Блог', link: 'list-blog.html'
-    },
-    {
-        text: 'Партнерская программа', link: 'partners.html'
-    }
+    { text: 'Наши врачи', link: 'list-persons.html' },
+    { text: 'Записаться на прием', link: 'page-form.html' },
+    { text: 'О нас', link: 'page-detail.html' }
 ] %}
 
 {% macro MainMenu(
@@ -38,9 +44,28 @@
             </div>
             <div class="main-menu__nav">
                 <ul class="main-menu__list">
-                    {% for item in menuLinks %}
-                        <li class="main-menu__item">
-                            <a href="{{ item.link }}" class="main-menu__item-link">{{ item.text }}</a>
+                    {% for item in mainNavTree %}
+                        <li class="main-menu__item {{ 'js-dropdown' if item.dropdown }}">
+                            {% if item.dropdown %}
+                                <button
+                                    type="button"
+                                    class="main-menu__item-link js-dropdown-toggle"
+                                >
+                                    <span class="main-menu__link-text">{{ item.text }}</span>
+                                    {{ Icon('main-menu__link-icon fas fa-angle-down') }}
+                                </button>
+                                <div class="main-menu__dropdown js-dropdown-block">
+                                    <ul class="main-menu__list">
+                                        {% for item in item.dropdown %}
+                                            <li class="main-menu__item">
+                                                <a href="{{ item.link }}" class="main-menu__item-link">{{ item.text }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <a href="{{ item.link }}" class="main-menu__item-link">{{ item.text }}</a>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>

@@ -20,6 +20,7 @@
 {%- macro FormField(
     type = 'text',
     label = 'Field label',
+    textHelp = '',
     required = false,
     disabled = false,
     readonly = false,
@@ -30,7 +31,7 @@
     options = [
         {
             value: '',
-            text: 'По умолчанию'
+            text: '- По умолчанию -'
         },
         {
             value: '1',
@@ -52,25 +53,34 @@
     wrapperAttrs = {},
     customAttrs = {}
 ) -%}
-    {%- set uid = range(1000000 | random) -%}
-    {%- set fid = 'field-' + uid -%}
-    {%- set fieldName = name or 'field_' + type + '_' + uid -%}
-
     <div class="form__field-wrapper {{ wrapperModifier }}" {{ setAttributes(wrapperAttrs) }}>
         {%- if label !== false -%}
-            <label for="{{ id or fid }}" class="form__label {{ labelModifier }}">
+            <label for="{{ 'field-' + id }}" class="form__label {{ labelModifier }}">
                 {{ label | safe }}
-                {{- '<em class="required" aria-hidden="true">(Obligatoire)</em>' | safe if required -}}
-                {{- ('<span class="text-help">' + textHelp + '</span>') | safe if textHelp -}}
-                {{- ('<strong class="text-help is-alert">' + textAlert + '</strong>') | safe if textAlert -}}
+                {{- '<em class="required" aria-hidden="true">(Обязательное поле)</em>' | safe if required -}}
+                {{- ('<span class="help-text">' + textHelp + '</span>') | safe if textHelp -}}
+                {{- ('<strong class="help-text is-alert">' + textAlert + '</strong>') | safe if textAlert -}}
             </label>
         {%- endif -%}
 
-        {%- if type === 'select' -%}
+        {%- if type === 'textarea' -%}
+            {# TEXTAREA #}
+            <textarea
+                name="{{ name }}"
+                id="{{ 'field-' + id }}"
+                class="form__field {{ fieldClass }}"
+                {{ setAttr('placeholder', placeholder if placeholder and not customPlaceholder) }}
+                {{ setAttr('disabled', disabled) }}
+                {{ setAttr('readonly', readonly) }}
+                {{ setAttr('required', required) }}
+                {{ setAttr('title', title) }}
+                {{ setAttributes(customAttrs) }}
+            >{{ value }}</textarea>
+        {%- elif type === 'select' -%}
             {# SELECT #}
             <select
-                name="{{ fieldName }}"
-                id="{{ id or fid }}"
+                name="{{ name }}"
+                id="{{ 'field-' + id }}"
                 class="form__field {{ fieldClass }}"
                 {{ setAttr('value', value) }}
                 {{ setAttr('disabled', disabled) }}
@@ -91,10 +101,10 @@
             {# CUSTOM #}
             <input
                 type="{{ type }}"
-                name="{{ fieldName }}"
-                id="{{ id or fid }}"
+                name="{{ name }}"
+                id="{{ 'field-' + id }}"
                 class="form__field {{ fieldClass }}"
-                {{ setAttr('placeholder', placeholder or 'Indication de saisie' if not customPlaceholder) }}
+                {{ setAttr('placeholder', placeholder if placeholder and not customPlaceholder) }}
                 {{ setAttr('value', value) }}
                 {{ setAttr('disabled', disabled) }}
                 {{ setAttr('readonly', readonly) }}
@@ -103,6 +113,71 @@
                 {{ setAttributes(customAttrs) }}
             >
         {%- endif -%}
+        {{ caller() if caller }}
+    </div>
+{%- endmacro -%}
+
+{#
+    Insert checkbox or radio input.
+    @param {string} className - add class for wrapper.
+    @param {string} fieldClass - add class for input.
+    @param {sting} type - field type (checkbox|radio).
+    @param {string} name - set input name attribute.
+    @param {string|boolean} label - input label text or false if label should be rendered.
+    @param {string} textHelp - help text inside label.
+    @param {string} textAlert - alert text inside label.
+    @param {boolean} required - set input required attribute.
+    @param {boolean} disabled - set input disabled attribute.
+    @param {boolean} checked - set input checked attribute.
+    @param {string} value - set input value attribute.
+    @param {string} wrapperTag - set tag name for wrapper element.
+    @param {boolean} innerCall - insert caller inside wrapper or outside.
+#}
+{%- macro RadioCheckbox(
+    className = '',
+    fieldClass = '',
+    type = 'checkbox',
+    name = '',
+    id = '',
+    label = 'Libellé du champ',
+    textHelp = '',
+    textAlert = '',
+    value = '',
+    required = false,
+    disabled = false,
+    checked = false,
+    wrapperTag = 'div',
+    innerCall = false,
+    groupButton = false
+) -%}
+    <{{ wrapperTag }} class="form__radio-checkbox radio-checkbox {{ className }}">
+        <input
+            type="{{ type }}"
+            id="{{ 'radio-checkbox-' + id }}"
+            name="{{ name }}"
+            class="radio-checkbox__input {{ fieldClass }}"
+            {{ setAttr('required', required) }}
+            {{ setAttr('disabled', disabled) }}
+            {{ setAttr('checked', checked) }}
+            {{ setAttr('value', value) }}
+        >
+        <label for="{{ 'radio-checkbox-' + id }}" class="radio-checkbox__label {{ labelModifier }}">
+            {{ label | safe }}
+            {{- '<em class="required" aria-hidden="true">(Обязательное поле)</em>' | safe if required -}}
+            {{- ('<span class="help-text">' + textHelp + '</span>') | safe if textHelp -}}
+            {{- ('<strong class="help-text is-alert">' + textAlert + '</strong>') | safe if textAlert -}}
+        </label>
+        {{ caller() if caller and innerCall }}
+    </{{ wrapperTag }}>
+    {{ caller() if caller and not innerCall }}
+{%- endmacro -%}
+
+{#
+    Insert form actions.
+    @param {string} className - add custom class name for form actions
+#}
+{%- macro FormActions(className = '') -%}
+    <div class="form__buttons {{ className }}">
         {{ caller() if caller }}
     </div>
 {%- endmacro -%}
@@ -134,7 +209,7 @@
     {% set uid = range(10000000) | random %}
     {% set described = 'generated-' + uid if legendTag !== 'legend' %}
 
-    <{{tag}} class="form {{ className }}" {%- if tag == 'form' -%} {{ setAttr('method', method) }} action="{{ action }}" enctype="multipart/form-data" {%- endif -%} {{ setAttr('id', id) }} {{ setAttributes(attrs) }}>
+    <{{ tag }} class="form {{ className }}" {%- if tag == 'form' -%} {{ setAttr('method', method) }} action="{{ action }}" enctype="multipart/form-data" {%- endif -%} {{ setAttr('id', id) }} {{ setAttributes(attrs) }}>
         {%- if legend -%}
             <{{ fieldsetTag }}
                 class="form__fieldset {{ fieldsetClassName }}"
@@ -147,5 +222,5 @@
         {%- else -%}
             {{ caller() if caller }}
         {%- endif -%}
-    </{{tag}}>
+    </{{ tag }}>
 {% endmacro %}

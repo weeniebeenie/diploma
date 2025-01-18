@@ -5,9 +5,9 @@
 %input-general-styles {
     @include focus-outline;
     @include font($typo-1, 1.5rem, $normal);
-    background-color: $color-3--1;
-    border: 0;
-    border-radius: 25px;
+    background-color: $color-white;
+    border: 1px solid $color-3--5;
+    border-radius: 0;
     color: $color-3--5;
     flex-grow: 1;
     margin: 0;
@@ -62,4 +62,9 @@ textarea {
     &[type='text'] {
         min-height: 50px;
     }
+}
+
+textarea {
+    height: 150px;
+    resize: vertical;
 }

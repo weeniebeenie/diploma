@@ -3,11 +3,11 @@
 {#
     Navbar tempalte.
 #}
-{% macro Navbar() %}
+{% macro Navbar(links) %}
     <div class="navbar">
         <div class="navbar__container">
             <div class="navbar__wrapper">
-                {{ Breadcrumbs() }}
+                {{ Breadcrumbs(links) }}
             </div>
         </div>
     </div>
